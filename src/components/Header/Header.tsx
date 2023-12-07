@@ -1,14 +1,17 @@
-import { personal } from '@content';
+import { allPrivateFields, personal } from '@content';
 import React from 'react';
 import { fullName } from '../../helpers/utils';
 import { Heading } from '../Heading/Heading';
 import PDFDownloadButton from '../PDF/PDFDownloadButton';
+import { ContactInformation } from '../Articles/ContactInformation';
 
 interface HeaderProps {
   secret?: string;
 }
 
 export const Header: React.FC<HeaderProps> = ({ secret }) => {
+  const privateInformation = secret ? [allPrivateFields[1]] : undefined;
+
   return (
     <div className="mb-12 border-b-2 border-neutral-4 py-12">
       <div className="container">
@@ -18,6 +21,7 @@ export const Header: React.FC<HeaderProps> = ({ secret }) => {
             <Heading color="neutralSubtle" level={2}>
               {personal.title}
             </Heading>
+            <ContactInformation privateInformation={privateInformation} />
           </div>
           <PDFDownloadButton secret={secret} />
         </div>

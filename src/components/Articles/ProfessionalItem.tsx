@@ -1,5 +1,8 @@
 import { ProfessionalExperience } from '@content';
-import { faCalendar } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCalendar,
+  faLocationCrosshairs,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { Heading } from '../Heading/Heading';
@@ -11,6 +14,7 @@ const ProfessionalItem: React.FC<ProfessionalExperience> = ({
   organization,
   startDate,
   title,
+  location,
 }) => {
   return (
     <article className="border-t-2 border-neutral-6 py-6 first-of-type:border-none last-of-type:pb-0">
@@ -21,9 +25,19 @@ const ProfessionalItem: React.FC<ProfessionalExperience> = ({
         <span> at {organization}</span>
       </Heading>
 
-      <div className="mt-1 font-medium tracking-wide">
-        <FontAwesomeIcon className="mr-2" icon={faCalendar} />
-        {startDate}–{!endDate ? 'Current' : endDate}
+      <div className="mt-1 flex font-medium tracking-wide">
+        {location ? (
+          <span className="flex-auto">
+            <FontAwesomeIcon className="mr-2" icon={faLocationCrosshairs} />
+            {location}
+          </span>
+        ) : (
+          <span className="flex-auto" />
+        )}
+        <span>
+          <FontAwesomeIcon className="mr-2" icon={faCalendar} />
+          {startDate}–{!endDate ? 'Current' : endDate}
+        </span>
       </div>
 
       <Prose html={body.html} />

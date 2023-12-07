@@ -1,6 +1,8 @@
 import {
   allAchievements,
   allProfessionalExperiences,
+  allEducation,
+  allCertifications,
   personal,
 } from '@content';
 
@@ -15,6 +17,18 @@ export const sortedProfessionalExperiences = allProfessionalExperiences.sort(
 );
 
 export const sortedAchievements = allAchievements.sort((a, b) => {
+  const aOrderNumber = parseInt(a._raw.sourceFileName.replace(/^\D+/g, ''));
+  const bOrderNumber = parseInt(b._raw.sourceFileName.replace(/^\D+/g, ''));
+  return aOrderNumber - bOrderNumber;
+});
+
+export const sortedCertifications = allCertifications.sort((a, b) => {
+  const aOrderNumber = parseInt(a._raw.sourceFileName.replace(/^\D+/g, ''));
+  const bOrderNumber = parseInt(b._raw.sourceFileName.replace(/^\D+/g, ''));
+  return aOrderNumber - bOrderNumber;
+});
+
+export const sortedEducations = allEducation.sort((a, b) => {
   const aOrderNumber = parseInt(a._raw.sourceFileName.replace(/^\D+/g, ''));
   const bOrderNumber = parseInt(b._raw.sourceFileName.replace(/^\D+/g, ''));
   return aOrderNumber - bOrderNumber;

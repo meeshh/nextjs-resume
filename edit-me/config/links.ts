@@ -9,28 +9,18 @@ import { CMSLink } from 'edit-me/types/CMSLink';
 
 export const links: CMSLink[] = [
   {
-    href: 'https://github.com',
+    href: 'https://github.com/meeshh',
     icon: faGithub,
     title: 'GitHub',
   },
   {
-    href: 'https://www.instagram.com',
-    icon: faInstagram,
-    title: 'Instagram',
-  },
-  {
-    href: 'https://www.linkedin.com',
+    href: 'https://www.linkedin.com/in/michel-barakat/',
     icon: faLinkedin,
     title: 'LinkedIn',
   },
   {
-    href: 'https://www.npmjs.com',
+    href: 'https://www.npmjs.com/~meeshh',
     icon: faNpm,
     title: 'NPM',
-  },
-  {
-    href: 'https://twitter.com',
-    icon: faTwitter,
-    title: 'Twitter',
   },
 ];

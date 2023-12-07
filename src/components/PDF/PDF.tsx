@@ -288,7 +288,7 @@ const PDF: React.FC<PDFProps> = ({ privateInformation }) => {
             <View style={styles.section}>
               <View style={styles.sectionHeading}>
                 <CircleCheck size={fontSizes.m} />
-                <Text>Skills &amp; Expertise</Text>
+                <Text>Skills</Text>
               </View>
               {allSkills.map((skill, skillIndex) => (
                 <View key={skill._id}>

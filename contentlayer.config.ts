@@ -43,6 +43,28 @@ export const Skill = defineDocumentType(() => ({
       description: 'A name for the category of skills',
       required: true,
     },
+    stars: {
+      type: 'number',
+      description: 'A rating of your expertise in this skill category',
+      required: false,
+    },
+  },
+}));
+
+export const Language = defineDocumentType(() => ({
+  name: 'Language',
+  filePathPattern: 'languages/*.md',
+  fields: {
+    title: {
+      type: 'string',
+      description: 'The name of the language',
+      required: true,
+    },
+    proficiency: {
+      type: 'number',
+      description: 'A descriptor of your proficiency in this language',
+      required: true,
+    },
   },
 }));
 
@@ -69,6 +91,11 @@ export const ProfessionalExperience = defineDocumentType(() => ({
       type: 'string',
       description:
         'If you no longer work with this organization, provide a descriptor of when you ended the position',
+      required: false,
+    },
+    location: {
+      type: 'string',
+      description: 'The general location of the organization',
       required: false,
     },
   },
@@ -98,6 +125,78 @@ export const Achievement = defineDocumentType(() => ({
   },
 }));
 
+export const Education = defineDocumentType(() => ({
+  name: 'Education',
+  filePathPattern: 'educations/*.md',
+  fields: {
+    degree: {
+      type: 'string',
+      description:
+        'The name of the degree or certification of your achievement',
+      required: true,
+    },
+    organization: {
+      type: 'string',
+      description:
+        'The name of the school, organization, or program you earned your education from',
+      required: true,
+    },
+    startYear: {
+      type: 'string',
+      description: 'The year you started your education',
+      required: true,
+    },
+    endYear: {
+      type: 'string',
+      description: 'The year you earned your degree',
+      required: true,
+    },
+    organizationUrl: {
+      type: 'string',
+      description: 'The url of the organization',
+      required: false,
+    },
+    programUrl: {
+      type: 'string',
+      description: 'The url of the program',
+      required: false,
+    },
+  },
+}));
+
+export const Certification = defineDocumentType(() => ({
+  name: 'Certification',
+  filePathPattern: 'certifications/*.md',
+  fields: {
+    certification: {
+      type: 'string',
+      description: 'The name of the certification',
+      required: true,
+    },
+    issuer: {
+      type: 'string',
+      description:
+        'The name of the organization, or program you earned your certification from',
+      required: true,
+    },
+    completionYear: {
+      type: 'string',
+      description: 'The year you earned your certification',
+      required: true,
+    },
+    url: {
+      type: 'string',
+      description: 'The url of the certification',
+      required: false,
+    },
+    credentialId: {
+      type: 'string',
+      description: 'The credential ID of the certification',
+      required: false,
+    },
+  },
+}));
+
 export const AdditionalInfo = defineDocumentType(() => ({
   name: 'AdditionalInfo',
   filePathPattern: 'additionalInfo.md',
@@ -120,6 +219,16 @@ export const PrivateField = defineDocumentType(() => ({
       description: 'A label to describe the private field',
       required: true,
     },
+    mobile: {
+      type: 'string',
+      description: 'The value of the private field on mobile devices',
+      required: false,
+    },
+    email: {
+      type: 'string',
+      description: 'The value of the private field on email clients',
+      required: false,
+    },
   },
 }));
 
@@ -130,6 +239,8 @@ export default makeSource({
     Skill,
     ProfessionalExperience,
     Achievement,
+    Certification,
+    Education,
     AdditionalInfo,
     PrivateField,
   ],

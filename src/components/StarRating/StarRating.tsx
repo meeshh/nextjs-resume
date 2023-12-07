@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 
 interface StarRatingProps {
-  stars: 1 | 2 | 3;
+  stars: 1 | 2 | 3 | 4 | 5;
 }
 
 const Star: React.FC<{ className?: string }> = () => {
@@ -23,6 +23,8 @@ export const StarRating: React.FC<StarRatingProps> = (props) => {
       {stars >= 1 && <Star />}
       {stars >= 2 && <Star />}
       {stars >= 3 && <Star />}
+      {stars >= 4 && <Star />}
+      {stars >= 5 && <Star />}
     </span>
   );
 };

@@ -1,7 +1,7 @@
 import { PrivateField, personal } from '@content';
-import { faIdCard } from '@fortawesome/free-solid-svg-icons';
+import { faLocationCrosshairs } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
-import { SectionHeading } from '../SectionHeading/SectionHeading';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface ContactInformationProps {
   privateInformation?: PrivateField[];
@@ -12,11 +12,13 @@ export const ContactInformation: React.FC<ContactInformationProps> = ({
 }) => {
   return (
     <article>
-      <SectionHeading icon={faIdCard} level={3} text="Contact Information" />
-
       <ul className="mt-2">
         <li>
-          <strong>Location:</strong> {personal.location}
+          <FontAwesomeIcon
+            className="text-neutral-12"
+            icon={faLocationCrosshairs}
+          />{' '}
+          {personal.location}
         </li>
 
         {/* private access required */}
