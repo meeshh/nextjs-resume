@@ -4,6 +4,7 @@ organization: Arvato Systems Latvia
 startDate: '2020'
 endDate: '2022'
 location: Rīga
+connectTop: true
 ---
 
 - Architecting and developing an Emmy winning ReactJS frontend for a MAM solution that is used by Media and Broadcast market leaders.

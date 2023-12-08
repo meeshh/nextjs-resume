@@ -4,7 +4,11 @@ import { sortedCertifications } from 'src/helpers/utils';
 import { SectionHeading } from '../SectionHeading/SectionHeading';
 import CertificationItem from './CertificationItem';
 
-const Certifications: React.FC = () => {
+type CertificationsProps = {
+  secret?: string;
+};
+
+const Certifications: React.FC<CertificationsProps> = ({ secret }) => {
   return (
     <article className="rounded-xl bg-neutral-3 py-12">
       <div className="container">
@@ -17,7 +21,7 @@ const Certifications: React.FC = () => {
         </div>
 
         {sortedCertifications.map((certification) => (
-          <CertificationItem key={certification._id} {...certification} />
+          <CertificationItem key={certification._id} secret={secret} {...certification} />
         ))}
       </div>
     </article>

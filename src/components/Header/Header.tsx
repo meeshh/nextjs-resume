@@ -21,7 +21,7 @@ export const Header: React.FC<HeaderProps> = ({ secret }) => {
             <Heading color="neutralSubtle" level={2}>
               {personal.title}
             </Heading>
-            <ContactInformation privateInformation={privateInformation} />
+            <ContactInformation secret={secret || undefined} privateInformation={privateInformation} />
           </div>
           <PDFDownloadButton secret={secret} />
         </div>

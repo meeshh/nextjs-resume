@@ -4,6 +4,8 @@ organization: Arvato Systems Latvia
 startDate: '2021'
 endDate: '2022'
 location: Rīga
+connectTop: true
+connectBottom: true
 ---
 
 - Leading a team of 7 frontend developers, creating KPI settings, setting up individual goals and conducting performance reviews to promote both individual and team growth.

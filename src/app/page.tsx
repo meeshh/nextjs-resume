@@ -1,12 +1,12 @@
 import AboutMe from 'src/components/Articles/AboutMe';
-import Achievements from 'src/components/Articles/Achievements';
 import Educations from 'src/components/Articles/Educations';
 import Certifications from 'src/components/Articles/Certifications';
 import { AdditionalInfo } from 'src/components/Articles/AdditionalInfo';
 import Professional from 'src/components/Articles/Professional';
-import Skills from 'src/components/Articles/Skills';
 import { Footer } from 'src/components/Footer/Footer';
 import { Header } from 'src/components/Header/Header';
+import TechSkills from 'src/components/Articles/TechSkills';
+import SoftSkills from 'src/components/Articles/SoftSkills';
 
 const Page: React.FC<PageProps> = () => {
   return (
@@ -18,8 +18,9 @@ const Page: React.FC<PageProps> = () => {
           <AboutMe />
         </div>
 
-        <div className="mt-12">
-          <Skills />
+        <div className="mt-12 grid grid-flow-row gap-6 lg:grid-flow-col">
+          <TechSkills />
+          <SoftSkills />
         </div>
 
         <div className="mt-12">

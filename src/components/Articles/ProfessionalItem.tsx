@@ -15,29 +15,56 @@ const ProfessionalItem: React.FC<ProfessionalExperience> = ({
   startDate,
   title,
   location,
+  connectBottom,
+  connectTop,
 }) => {
-  return (
-    <article className="border-t-2 border-neutral-6 py-6 first-of-type:border-none last-of-type:pb-0">
-      <Heading level={3}>
-        <span className="rounded-md bg-neutral-12 px-2 text-neutral-1">
-          {title}
-        </span>
-        <span> at {organization}</span>
-      </Heading>
+  let height = 'h-5/6';
+  let verticalPosition = 'top-1/2';
+  let translate = '-translate-y-1/2';
+  if (connectBottom && connectTop) {
+    height = 'h-full';
+    verticalPosition = 'top-0';
+    translate = '';
+  } else if (connectTop) {
+    height = 'h-full';
+    verticalPosition = 'top-0';
+    translate = '';
+  } else if (connectBottom) {
+    height = 'h-full';
+    verticalPosition = 'bottom-0';
+    translate = '';
+  }
 
-      <div className="mt-1 flex font-medium tracking-wide">
+  return (
+    <article className="relative border-t-2 border-neutral-6 py-6 first-of-type:border-none last-of-type:pb-0">
+      <div
+        className={`absolute left-0 ${verticalPosition} ${translate} -m-4 ${height} w-1 border-l-4 border-sky-500 `}
+      />
+      <div className="flex">
+        <Heading level={3} className="flex-auto">
+          <span className="rounded-md bg-neutral-12 px-2 text-neutral-1">
+            {title}
+          </span>
+        </Heading>
+        <span>
+          <FontAwesomeIcon className="mr-2" icon={faCalendar} />
+          {startDate}–{!endDate ? 'Current' : endDate}
+        </span>
+      </div>
+
+      <div className="mt-1 space-x-8 flex font-medium tracking-wide">
+        <span className="text-sm">
+          <FontAwesomeIcon className="mr-2" icon={faCalendar} />
+          {organization}
+        </span>
         {location ? (
-          <span className="flex-auto">
+          <span className='text-sm'>
             <FontAwesomeIcon className="mr-2" icon={faLocationCrosshairs} />
             {location}
           </span>
         ) : (
           <span className="flex-auto" />
         )}
-        <span>
-          <FontAwesomeIcon className="mr-2" icon={faCalendar} />
-          {startDate}–{!endDate ? 'Current' : endDate}
-        </span>
       </div>
 
       <Prose html={body.html} />

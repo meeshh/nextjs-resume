@@ -55,14 +55,14 @@ export const Language = defineDocumentType(() => ({
   name: 'Language',
   filePathPattern: 'languages/*.md',
   fields: {
-    title: {
+    language: {
       type: 'string',
       description: 'The name of the language',
       required: true,
     },
-    proficiency: {
+    level: {
       type: 'number',
-      description: 'A descriptor of your proficiency in this language',
+      description: 'A descriptor of your proficiency in this language (1 to 5)',
       required: true,
     },
   },
@@ -98,28 +98,55 @@ export const ProfessionalExperience = defineDocumentType(() => ({
       description: 'The general location of the organization',
       required: false,
     },
+    secret: {
+      type: 'string',
+      description: 'Whether the info should behave as secret or not',
+      required: false,
+    },
+    connectTop: {
+      type: 'boolean',
+      description:
+        'Whether the position is connected to the one that is newer (same company but different role)',
+      required: false,
+    },
+    connectBottom: {
+      type: 'boolean',
+      description:
+        'Whether the position is connected to the one that is older (same company but different role)',
+      required: false,
+    },
   },
 }));
 
-export const Achievement = defineDocumentType(() => ({
-  name: 'Achievement',
-  filePathPattern: 'achievements/*.md',
+export const TechSkill = defineDocumentType(() => ({
+  name: 'TechSkill',
+  filePathPattern: 'techSkills/*.md',
   fields: {
-    achievement: {
+    name: {
       type: 'string',
-      description:
-        'The name of the degree or certification of your achievement',
+      description: 'The name of the skill',
       required: true,
     },
-    organization: {
-      type: 'string',
-      description:
-        'The name of the school, organization, or program you earned your achievement from',
-      required: true,
-    },
-    completionYear: {
+    knowledge: {
       type: 'number',
-      description: 'The year you earned your achievement',
+      description: 'The percentage of knowledge of the skill',
+      required: true,
+    },
+  },
+}));
+
+export const SoftSkill = defineDocumentType(() => ({
+  name: 'SoftSkill',
+  filePathPattern: 'softSkills/*.md',
+  fields: {
+    name: {
+      type: 'string',
+      description: 'The name of the skill',
+      required: true,
+    },
+    knowledge: {
+      type: 'number',
+      description: 'The percentage of knowledge of the skill',
       required: true,
     },
   },
@@ -161,6 +188,11 @@ export const Education = defineDocumentType(() => ({
       description: 'The url of the program',
       required: false,
     },
+    secret: {
+      type: 'string',
+      description: 'Whether the info should behave as secret or not',
+      required: false,
+    },
   },
 }));
 
@@ -192,6 +224,11 @@ export const Certification = defineDocumentType(() => ({
     credentialId: {
       type: 'string',
       description: 'The credential ID of the certification',
+      required: false,
+    },
+    secret: {
+      type: 'string',
+      description: 'Whether the info should behave as secret or not',
       required: false,
     },
   },
@@ -238,10 +275,12 @@ export default makeSource({
     Personal,
     Skill,
     ProfessionalExperience,
-    Achievement,
+    TechSkill,
+    SoftSkill,
     Certification,
     Education,
     AdditionalInfo,
     PrivateField,
+    Language,
   ],
 });

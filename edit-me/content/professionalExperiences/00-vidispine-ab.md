@@ -3,6 +3,7 @@ title: Senior System Developer
 organization: Vidispine AB (An Arvato Systems Brand)
 startDate: '2022'
 location: Stockholm / Gothenburg (remote)
+connectBottom: true
 ---
 
 - Architect and implement Azure DevOps Pipelines for React applications.
