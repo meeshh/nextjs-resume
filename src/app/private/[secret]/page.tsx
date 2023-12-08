@@ -2,7 +2,6 @@ import { notFound } from 'next/navigation';
 import AboutMe from 'src/components/Articles/AboutMe';
 import { AdditionalInfo } from 'src/components/Articles/AdditionalInfo';
 import Professional from 'src/components/Articles/Professional';
-import Skills from 'src/components/Articles/Skills';
 import { Footer } from 'src/components/Footer/Footer';
 import { Header } from '../../../components/Header/Header';
 import Educations from 'src/components/Articles/Educations';

@@ -5,11 +5,11 @@ import { Heading } from '../Heading/Heading';
 
 const Languages: React.FC = () => {
   return (
-    <div className='text-center border-t-2 mt-6'>
+    <div className="mt-6 border-t-2 text-center">
       <Heading level={3} className="mt-4">
         Languages
       </Heading>
-      <div className='grid grid-rows-2 grid-flow-col gap-x-6'>
+      <div className="grid grid-flow-col grid-rows-2 gap-x-6">
         {sortedLanguages.map((language) => (
           <LanguageItem key={language._id} {...language} />
         ))}

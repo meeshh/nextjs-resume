@@ -5,7 +5,7 @@ import {
   allCertifications,
   personal,
   allSoftSkills,
-  allLanguages
+  allLanguages,
 } from '@content';
 
 export const fullName = `${personal.givenName} ${personal.familyName}`;
