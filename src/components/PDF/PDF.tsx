@@ -15,16 +15,10 @@ import resumeConfig from '../../../edit-me/config/resumeConfig';
 import { Theme } from '../../../edit-me/types/Config';
 import { contrastColor } from '../../helpers/colorContrast';
 import { getAccentColor, getNeutralColor } from '../../helpers/colors';
-import {
-  fullName,
-  sortedAchievements,
-  sortedProfessionalExperiences,
-} from '../../helpers/utils';
-import { BuildingColumns } from './Icons/BuildingColumns';
+import { fullName, sortedProfessionalExperiences } from '../../helpers/utils';
 import { Calendar } from './Icons/Calendar';
 import { CircleBriefcase } from './Icons/CircleBriefcase';
 import { CircleCheck } from './Icons/CircleCheck';
-import { CircleGraduationCap } from './Icons/CircleGraduationCap';
 import { CircleIdCard } from './Icons/CircleIdCard';
 import { CirclePaintbrush } from './Icons/CirclePaintbrush';
 import { CircleUser } from './Icons/CircleUser';
@@ -332,26 +326,6 @@ const PDF: React.FC<PDFProps> = ({ privateInformation }) => {
                   </Text>
                 </View>
                 <Html {...htmlProps}>{professionalExperience.body.html}</Html>
-              </View>
-            ))}
-          </View>
-          <View style={styles.section}>
-            <View style={styles.sectionHeading}>
-              <CircleGraduationCap size={fontSizes.m} />
-              <Text>Achievements</Text>
-            </View>
-            {sortedAchievements.map((achievement) => (
-              <View key={achievement._id}>
-                <View style={styles.itemHeading}>
-                  <Text style={styles.bold}>{achievement.achievement}</Text>
-                </View>
-                <View style={styles.itemSubheadingRow}>
-                  <BuildingColumns size={fontSizes.xxs} />
-                  <Text style={styles.itemSubheading}>
-                    {achievement.organization}
-                  </Text>
-                </View>
-                <Html {...htmlProps}>{achievement.body.html}</Html>
               </View>
             ))}
           </View>
