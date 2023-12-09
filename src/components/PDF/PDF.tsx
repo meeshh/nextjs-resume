@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
-import { PrivateField, additionalInfo, allSkills, personal } from '@content';
+import { PrivateField, personal } from '@content';
 import {
   Document,
   Font,
@@ -18,11 +18,8 @@ import { getAccentColor, getNeutralColor } from '../../helpers/colors';
 import { fullName, sortedProfessionalExperiences } from '../../helpers/utils';
 import { Calendar } from './Icons/Calendar';
 import { CircleBriefcase } from './Icons/CircleBriefcase';
-import { CircleCheck } from './Icons/CircleCheck';
 import { CircleIdCard } from './Icons/CircleIdCard';
-import { CirclePaintbrush } from './Icons/CirclePaintbrush';
 import { CircleUser } from './Icons/CircleUser';
-import { Star } from './Icons/Star';
 import { htmlRenderers } from './htmlRenderers';
 
 const theme = resumeConfig.pdfTheme;
@@ -279,27 +276,6 @@ const PDF: React.FC<PDFProps> = ({ privateInformation }) => {
                 </View>
               ))}
             </View>
-            <View style={styles.section}>
-              <View style={styles.sectionHeading}>
-                <CircleCheck size={fontSizes.m} />
-                <Text>Skills</Text>
-              </View>
-              {allSkills.map((skill, skillIndex) => (
-                <View key={skill._id}>
-                  <View style={styles.itemHeading}>
-                    <View style={styles.sectionHeadingStars}>
-                      {Array.from(Array(allSkills.length - skillIndex)).map(
-                        (star, starIndex) => (
-                          <Star key={starIndex} size={fontSizes.xxs} />
-                        ),
-                      )}
-                    </View>
-                    <Text style={styles.bold}>{skill.title}</Text>
-                  </View>
-                  <Html {...htmlProps}>{skill.body.html}</Html>
-                </View>
-              ))}
-            </View>
           </View>
         </View>
         <View style={styles.main}>
@@ -328,21 +304,6 @@ const PDF: React.FC<PDFProps> = ({ privateInformation }) => {
                 <Html {...htmlProps}>{professionalExperience.body.html}</Html>
               </View>
             ))}
-          </View>
-          <View style={styles.section}>
-            <View style={styles.sectionHeading}>
-              <CirclePaintbrush size={fontSizes.m} />
-              <Text>{additionalInfo.title}</Text>
-            </View>
-            <Html
-              {...htmlProps}
-              stylesheet={{
-                ...htmlProps.stylesheet,
-                p: { marginBottom: spacers[1] },
-              }}
-            >
-              {additionalInfo.body.html}
-            </Html>
           </View>
         </View>
       </Page>
