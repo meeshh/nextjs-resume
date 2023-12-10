@@ -42,9 +42,7 @@ const ProfessionalItem: React.FC<ProfessionalExperience> = ({
       />
       <div className="flex">
         <Heading level={3} className="flex-auto">
-          <span className="rounded-md bg-neutral-12 px-2 text-neutral-1">
-            {title}
-          </span>
+          <span className="px-2 text-neutral-1 text-sky-600">{title}</span>
         </Heading>
         <span>
           <FontAwesomeIcon className="mr-2" icon={faCalendar} />
@@ -52,13 +50,13 @@ const ProfessionalItem: React.FC<ProfessionalExperience> = ({
         </span>
       </div>
 
-      <div className="mt-1 space-x-8 flex font-medium tracking-wide">
+      <div className="mt-1 flex space-x-8 font-medium tracking-wide">
         <span className="text-sm">
           <FontAwesomeIcon className="mr-2" icon={faCalendar} />
           {organization}
         </span>
         {location ? (
-          <span className='text-sm'>
+          <span className="text-sm">
             <FontAwesomeIcon className="mr-2" icon={faLocationCrosshairs} />
             {location}
           </span>
