@@ -49,7 +49,7 @@ const Page: React.FC<PageProps> = async ({ params }) => {
         </div>
       </div>
 
-      <Footer />
+      <Footer secret={secret} />
     </>
   );
 };
