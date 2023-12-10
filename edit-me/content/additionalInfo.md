@@ -1,5 +1,5 @@
 ---
-title: Hobbies & Interests
+title: Hobbies
 ---
 
 Hello and welcome to my digital space! I'm a software engineer who finds joy in creating not just for work but for the sheer fun of it. Picture this: using a Raspberry Pi to turn gardening into a tech-infused experience with an automated irrigation system. I believe that technology can add a touch of magic to everyday things.
