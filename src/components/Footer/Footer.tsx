@@ -5,11 +5,15 @@ import React from 'react';
 import { fullName } from 'src/helpers/utils';
 import ButtonLink from '../Button/ButtonLink';
 
-export const Footer: React.FC = () => {
+type FooterProps = {
+  secret?: string | undefined;
+};
+
+export const Footer: React.FC<FooterProps> = ({ secret = undefined }) => {
   return (
     <footer className="mt-12 bg-neutral-3 py-12 text-neutral-12">
       <div className="container text-center">
-        {links && (
+        {secret && links && (
           <div className="flex justify-center">
             <div className="grid grid-flow-col gap-2">
               {links.map((link) => (

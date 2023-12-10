@@ -21,9 +21,12 @@ export const Header: React.FC<HeaderProps> = ({ secret }) => {
             <Heading color="neutralSubtle" level={2}>
               {personal.title}
             </Heading>
-            <ContactInformation secret={secret || undefined} privateInformation={privateInformation} />
+            <ContactInformation
+              secret={secret || undefined}
+              privateInformation={privateInformation}
+            />
           </div>
-          <PDFDownloadButton secret={secret} />
+          {secret && <PDFDownloadButton secret={secret} />}
         </div>
       </div>
     </div>
