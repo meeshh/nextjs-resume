@@ -1,8 +1,9 @@
 import { faCogs } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import { sortedTechSkills } from 'src/helpers/utils';
-import { SectionHeading } from '../SectionHeading/SectionHeading';
-import TechSkillItem from './TechSkillItem';
+import { SectionHeading } from '../../SectionHeading/SectionHeading';
+import TechSkillItem from '../TechSkills/TechSkillItem';
+import { TechSkill } from '@content';
 
 const TechSkills: React.FC = () => {
   return (
@@ -12,7 +13,7 @@ const TechSkills: React.FC = () => {
           <SectionHeading icon={faCogs} level={2} text="Technical Skills" />
         </div>
 
-        {sortedTechSkills.map((skill) => (
+        {sortedTechSkills.map((skill: TechSkill) => (
           <TechSkillItem key={skill._id} {...skill} />
         ))}
       </div>

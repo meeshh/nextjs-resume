@@ -1,12 +1,12 @@
 import AboutMe from 'src/components/Articles/AboutMe';
-import Educations from 'src/components/Articles/Educations';
-import Certifications from 'src/components/Articles/Certifications';
+import Educations from 'src/components/Articles/Education/Educations';
+import Certifications from 'src/components/Articles/Certifications/Certifications';
 import { AdditionalInfo } from 'src/components/Articles/AdditionalInfo';
-import Professional from 'src/components/Articles/Professional';
+import Professional from 'src/components/Articles/Professional/Professional';
 import { Footer } from 'src/components/Footer/Footer';
 import { Header } from 'src/components/Header/Header';
-import TechSkills from 'src/components/Articles/TechSkills';
-import SoftSkills from 'src/components/Articles/SoftSkills';
+import TechSkills from 'src/components/Articles/TechSkills/TechSkills';
+import SoftSkills from 'src/components/Articles/SoftSkills/SoftSkills';
 import Projects from 'src/components/Articles/Projects/Projects';
 
 const Page: React.FC<PageProps> = () => {

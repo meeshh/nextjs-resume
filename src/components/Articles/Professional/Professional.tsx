@@ -1,8 +1,9 @@
 import { faBriefcase } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import { sortedProfessionalExperiences } from 'src/helpers/utils';
-import { SectionHeading } from '../SectionHeading/SectionHeading';
-import ProfessionalItem from './ProfessionalItem';
+import { SectionHeading } from '../../SectionHeading/SectionHeading';
+import ProfessionalItem from '../Professional/ProfessionalItem';
+import { ProfessionalExperience } from '@content';
 
 const Professional: React.FC = () => {
   return (
@@ -12,7 +13,7 @@ const Professional: React.FC = () => {
           <SectionHeading icon={faBriefcase} level={2} text="Work Experience" />
         </div>
 
-        {sortedProfessionalExperiences.map((professional) => (
+        {sortedProfessionalExperiences.map((professional: ProfessionalExperience) => (
           <ProfessionalItem key={professional._id} {...professional} />
         ))}
       </div>

@@ -3,6 +3,7 @@ import React from 'react';
 import { sortedProjects } from 'src/helpers/utils';
 import { SectionHeading } from '../../SectionHeading/SectionHeading';
 import ProjectItem from './ProjectItem';
+import { Project } from '@content';
 
 const Projects: React.FC = () => {
   return (
@@ -12,7 +13,7 @@ const Projects: React.FC = () => {
           <SectionHeading icon={faCode} level={2} text="Projects" />
         </div>
 
-        {sortedProjects.map((project) => (
+        {sortedProjects.map((project: Project) => (
           <ProjectItem key={project._id} {...project} />
         ))}
       </div>

@@ -1,6 +1,6 @@
 import { TechSkill } from '@content';
 import React from 'react';
-import { Heading } from '../Heading/Heading';
+import { Heading } from '../../Heading/Heading';
 
 const TechSkillItem: React.FC<TechSkill> = ({
   name,

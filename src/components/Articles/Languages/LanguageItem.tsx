@@ -1,6 +1,6 @@
 import { Language } from '@content';
 import React from 'react';
-import { Heading } from '../Heading/Heading';
+import { Heading } from '../../Heading/Heading';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
 

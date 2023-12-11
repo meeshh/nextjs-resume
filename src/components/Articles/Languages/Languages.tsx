@@ -1,7 +1,8 @@
 import React from 'react';
 import { sortedLanguages } from 'src/helpers/utils';
 import LanguageItem from './LanguageItem';
-import { Heading } from '../Heading/Heading';
+import { Heading } from '../../Heading/Heading';
+import { Language } from '@content';
 
 const Languages: React.FC = () => {
   return (
@@ -10,7 +11,7 @@ const Languages: React.FC = () => {
         Languages
       </Heading>
       <div className="grid grid-flow-col grid-rows-2 gap-x-6">
-        {sortedLanguages.map((language) => (
+        {sortedLanguages.map((language: Language) => (
           <LanguageItem key={language._id} {...language} />
         ))}
       </div>

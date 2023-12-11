@@ -5,8 +5,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { Heading } from '../Heading/Heading';
-import Prose from '../Prose/Prose';
+import { Heading } from '../../Heading/Heading';
+import Prose from '../../Prose/Prose';
 
 const ProfessionalItem: React.FC<ProfessionalExperience> = ({
   body,

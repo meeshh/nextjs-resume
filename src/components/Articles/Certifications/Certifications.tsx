@@ -1,8 +1,9 @@
 import { faCertificate } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import { sortedCertifications } from 'src/helpers/utils';
-import { SectionHeading } from '../SectionHeading/SectionHeading';
-import CertificationItem from './CertificationItem';
+import { SectionHeading } from '../../SectionHeading/SectionHeading';
+import CertificationItem from '../Certifications/CertificationItem';
+import { Certification } from '@content';
 
 type CertificationsProps = {
   secret?: string;
@@ -20,7 +21,7 @@ const Certifications: React.FC<CertificationsProps> = ({ secret }) => {
           />
         </div>
 
-        {sortedCertifications.map((certification) => (
+        {sortedCertifications.map((certification: Certification) => (
           <CertificationItem key={certification._id} secret={secret} {...certification} />
         ))}
       </div>

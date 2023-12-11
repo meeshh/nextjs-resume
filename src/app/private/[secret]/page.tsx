@@ -1,13 +1,13 @@
 import { notFound } from 'next/navigation';
 import AboutMe from 'src/components/Articles/AboutMe';
 import { AdditionalInfo } from 'src/components/Articles/AdditionalInfo';
-import Professional from 'src/components/Articles/Professional';
+import Professional from 'src/components/Articles/Professional/Professional';
 import { Footer } from 'src/components/Footer/Footer';
 import { Header } from '../../../components/Header/Header';
-import Educations from 'src/components/Articles/Educations';
-import Certifications from 'src/components/Articles/Certifications';
-import TechSkills from 'src/components/Articles/TechSkills';
-import SoftSkills from 'src/components/Articles/SoftSkills';
+import Educations from 'src/components/Articles/Education/Educations';
+import Certifications from 'src/components/Articles/Certifications/Certifications';
+import TechSkills from 'src/components/Articles/TechSkills/TechSkills';
+import SoftSkills from 'src/components/Articles/SoftSkills/SoftSkills';
 import Projects from 'src/components/Articles/Projects/Projects';
 
 const privateKey = process.env.PRIVATE_KEY;

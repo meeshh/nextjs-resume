@@ -1,6 +1,6 @@
 import { SoftSkill } from '@content';
 import React from 'react';
-import { Heading } from '../Heading/Heading';
+import { Heading } from '../../Heading/Heading';
 
 const SoftSkillItem: React.FC<SoftSkill> = ({
   name,

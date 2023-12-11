@@ -1,10 +1,10 @@
 import { faCalendar, faUniversity } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { Heading } from '../Heading/Heading';
+import { Heading } from '../../Heading/Heading';
 import { Education } from '@content';
 import Link from 'next/link';
-import Prose from '../Prose/Prose';
+import Prose from '../../Prose/Prose';
 
 const EducationItem: React.FC<Education> = ({
   degree,
