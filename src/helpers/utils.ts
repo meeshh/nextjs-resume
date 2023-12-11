@@ -6,6 +6,7 @@ import {
   personal,
   allSoftSkills,
   allLanguages,
+  allProjects,
 } from '@content';
 
 export const fullName = `${personal.givenName} ${personal.familyName}`;
@@ -43,6 +44,12 @@ export const sortedSoftSkills = allSoftSkills.sort((a, b) => {
 });
 
 export const sortedLanguages = allLanguages.sort((a, b) => {
+  const aOrderNumber = parseInt(a._raw.sourceFileName.replace(/^\D+/g, ''));
+  const bOrderNumber = parseInt(b._raw.sourceFileName.replace(/^\D+/g, ''));
+  return aOrderNumber - bOrderNumber;
+});
+
+export const sortedProjects = allProjects.sort((a, b) => {
   const aOrderNumber = parseInt(a._raw.sourceFileName.replace(/^\D+/g, ''));
   const bOrderNumber = parseInt(b._raw.sourceFileName.replace(/^\D+/g, ''));
   return aOrderNumber - bOrderNumber;

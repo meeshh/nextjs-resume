@@ -68,6 +68,23 @@ export const Language = defineDocumentType(() => ({
   },
 }));
 
+export const Project = defineDocumentType(() => ({
+  name: 'Project',
+  filePathPattern: 'projects/*.md',
+  fields: {
+    title: {
+      type: 'string',
+      description: 'The name of the project',
+      required: true,
+    },
+    url: {
+      type: 'string',
+      description: 'The url of the project',
+      required: true,
+    },
+  },
+}));
+
 export const ProfessionalExperience = defineDocumentType(() => ({
   name: 'ProfessionalExperience',
   filePathPattern: 'professionalExperiences/*.md',
@@ -281,6 +298,7 @@ export default makeSource({
     Education,
     AdditionalInfo,
     PrivateField,
+    Project,
     Language,
   ],
 });

@@ -8,6 +8,7 @@ import Educations from 'src/components/Articles/Educations';
 import Certifications from 'src/components/Articles/Certifications';
 import TechSkills from 'src/components/Articles/TechSkills';
 import SoftSkills from 'src/components/Articles/SoftSkills';
+import Projects from 'src/components/Articles/Projects/Projects';
 
 const privateKey = process.env.PRIVATE_KEY;
 
@@ -38,6 +39,10 @@ const Page: React.FC<PageProps> = async ({ params }) => {
 
         <div className="mt-12">
           <Certifications secret={secret} />
+        </div>
+
+        <div className="mt-12">
+          <Projects />
         </div>
 
         <div className="mt-12">
