@@ -7,6 +7,7 @@ import { Footer } from 'src/components/Footer/Footer';
 import { Header } from 'src/components/Header/Header';
 import TechSkills from 'src/components/Articles/TechSkills';
 import SoftSkills from 'src/components/Articles/SoftSkills';
+import Projects from 'src/components/Articles/Projects/Projects';
 
 const Page: React.FC<PageProps> = () => {
   return (
@@ -29,6 +30,10 @@ const Page: React.FC<PageProps> = () => {
 
         <div className="mt-12">
           <Certifications />
+        </div>
+
+        <div className="mt-12">
+          <Projects />
         </div>
 
         <div className="mt-12">
