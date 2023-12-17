@@ -3,9 +3,7 @@
   "version": "4.3.2",
   "type": "module",
   "author": {
-    "name": "Colin Hemphill",
-    "email": "colin@colinhemphill.com",
-    "url": "https://colinhemphill.com"
+    "name": "Michel Barakat"
   },
   "keywords": [
     "resume",
@@ -13,7 +11,7 @@
     "nextjs",
     "pdf"
   ],
-  "homepage": "https://github.com/colinhemphill/nextjs-resume-generator",
+  "homepage": "https://github.com/meeshh/nextjs-resume",
   "scripts": {
     "build": "next build",
     "build:content": "contentlayer build",
