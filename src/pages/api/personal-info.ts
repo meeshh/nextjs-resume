@@ -18,11 +18,15 @@ interface Gist {
 }
 
 export const getPrivatePersonalInfo = async () => {
-  const response = await fetch(apiUrl, {
-    headers: {
-      Authorization: `token ${accessToken}`,
-    },
-  });
-  const data = (await response.json()) as Gist;
-  return JSON.parse(data.files[filename].content);
+  try {
+    const response = await fetch(apiUrl, {
+      headers: {
+        Authorization: `token ${accessToken}`,
+      },
+    });
+    const data = (await response.json()) as Gist;
+    return JSON.parse(data.files[filename].content);
+  } catch (error) {
+    return {};
+  }
 };
