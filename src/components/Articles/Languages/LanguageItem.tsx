@@ -1,15 +1,29 @@
 import { Language } from '@content';
 import React from 'react';
 import { Heading } from '../../Heading/Heading';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircle } from '@fortawesome/free-solid-svg-icons';
 
 const PrintLevel = ({ x, y }: { x: number; y: number }) => {
   const filledCircleIcon = (
-    <FontAwesomeIcon className="text-yellow-400" icon={faCircle} />
+    <div
+      className="bg-yellow-500"
+      style={{
+        display: 'inline-block',
+        width: 16,
+        height: 16,
+        borderRadius: '50%',
+      }}
+    ></div>
   );
   const emptyCircleIcon = (
-    <FontAwesomeIcon className="text-gray-400" icon={faCircle} />
+    <div
+      className="bg-slate-300"
+      style={{
+        display: 'inline-block',
+        width: 16,
+        height: 16,
+        borderRadius: '50%',
+      }}
+    ></div>
   );
   const charactersA = Array(x).fill(filledCircleIcon);
   const charactersB = Array(y - x).fill(emptyCircleIcon);
