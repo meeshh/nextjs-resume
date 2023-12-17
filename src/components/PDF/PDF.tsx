@@ -538,7 +538,7 @@ const PDF: React.FC<PDFProps> = ({ privateInformation }) => {
                       }}
                     >
                       <Link
-                        href={certification.url}
+                        src={certification.url || '#'}
                         style={{
                           ...styles.bold,
                           fontSize: 10,
