@@ -1,4 +1,4 @@
-import { faCircle, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { Heading, HeadingProps } from '../Heading/Heading';
@@ -15,17 +15,7 @@ export const SectionHeading: React.FC<SectionHeadingProps> = (props) => {
   return (
     <Heading level={level}>
       <div className="flex items-center gap-2">
-        {icon && (
-          <span className="fa-layers fa-fw hidden md:flex">
-            <FontAwesomeIcon className="text-neutral-12" icon={faCircle} />
-            <FontAwesomeIcon
-              aria-hidden
-              className="text-neutral-1"
-              icon={icon}
-              transform="shrink-8"
-            />
-          </span>
-        )}
+        {icon && <FontAwesomeIcon aria-hidden icon={icon} />}
         <div>{text}</div>
       </div>
     </Heading>
