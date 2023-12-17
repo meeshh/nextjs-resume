@@ -17,6 +17,7 @@ import { fullName } from 'src/helpers/utils';
 import { twMerge } from 'tailwind-merge';
 import { ThemeSetting } from '../../edit-me/types/Config';
 import './globals.css';
+import GoogleAnalytics from '@bradgarropy/next-google-analytics';
 
 const accentColor = resumeConfig.accentColor;
 
@@ -86,6 +87,12 @@ const RootLayout: React.FC<PropsWithChildren> = async ({ children }) => {
       <body className="bg-neutral-2 text-neutral-12 selection:bg-accent-11 selection:text-neutral-1">
         {children}
       </body>
+
+      {process.env.NEXT_PUBLIC_VERCEL_URL && (
+        <GoogleAnalytics
+          measurementId={process.env.G_ANALYTICS_MEASUREMENT_ID || ''}
+        />
+      )}
     </html>
   );
 };
