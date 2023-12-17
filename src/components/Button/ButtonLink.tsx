@@ -15,6 +15,7 @@ export default function ButtonLink({
 }: PropsWithChildren<ButtonLinkProps>) {
   return (
     <Link
+      target="_blank"
       className={twMerge(buttonVariants({ size }), className)}
       {...linkProps}
     >

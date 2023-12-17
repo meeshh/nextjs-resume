@@ -8,7 +8,9 @@ const ProjectItem: React.FC<Project> = ({ title, body, url = '#' }) => {
   return (
     <article className="border-t-2 border-neutral-6 py-6 first-of-type:border-none last-of-type:pb-0">
       <Heading level={3}>
-        <Link href={url}>{title}</Link>
+        <Link target="_blank" href={url}>
+          {title}
+        </Link>
       </Heading>
 
       <Prose html={body.html} />

@@ -12,12 +12,18 @@ const CertificationItem: React.FC<Certification> = ({
   issuer,
   url = '#',
   credentialId,
-  secret
+  secret,
 }) => {
   return (
     <article className="border-t-2 border-neutral-6 py-6 first-of-type:border-none last-of-type:pb-0">
       <Heading level={3}>
-        {secret ? <Link href={url}>{certification}</Link> : certification}
+        {secret ? (
+          <Link target="_blank" href={url}>
+            {certification}
+          </Link>
+        ) : (
+          certification
+        )}
       </Heading>
 
       <div className="mt-1 font-medium tracking-wide">

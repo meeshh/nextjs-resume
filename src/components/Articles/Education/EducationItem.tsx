@@ -19,7 +19,9 @@ const EducationItem: React.FC<Education> = ({
     <article className="border-t-2 border-neutral-6 py-6 first-of-type:border-none last-of-type:pb-0">
       <div>
         <Heading level={3} className="flex-auto">
-          <Link href={programUrl}>{degree}</Link>
+          <Link target="_blank" href={programUrl}>
+            {degree}
+          </Link>
         </Heading>
 
         <div className="mt-1 flex font-medium tracking-wide">
