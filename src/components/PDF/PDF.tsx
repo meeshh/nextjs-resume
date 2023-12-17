@@ -248,11 +248,8 @@ const htmlProps: Omit<HtmlProps, 'children'> = {
   },
 };
 
-interface PDFProps {
-  privateInformation?: PrivateField[];
-}
 
-const PDF: React.FC<PDFProps> = ({ privateInformation }) => {
+const PDF: React.FC = () => {
   const year = new Date().getFullYear();
 
   return (

@@ -19,7 +19,7 @@ const handler: NextApiHandler = async (req, res) => {
   }
 
   const pdfStream = await ReactPDF.renderToStream(
-    <PDF privateInformation={privateInformation} />,
+    <PDF />,
   );
   res.setHeader('Content-Type', 'application/pdf');
   pdfStream.pipe(res);
