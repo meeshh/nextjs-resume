@@ -26,11 +26,11 @@ const ProfessionalItem: React.FC<ProfessionalExperience> = ({
     verticalPosition = 'top-0';
     translate = '';
   } else if (connectTop) {
-    height = 'h-full';
+    height = 'h-5/6';
     verticalPosition = 'top-0';
     translate = '';
   } else if (connectBottom) {
-    height = 'h-full';
+    height = 'h-5/6';
     verticalPosition = 'bottom-0';
     translate = '';
   }
@@ -38,7 +38,7 @@ const ProfessionalItem: React.FC<ProfessionalExperience> = ({
   return (
     <article className="relative border-t-2 border-neutral-6 py-6 first-of-type:border-none last-of-type:pb-0">
       <div
-        className={`absolute left-0 ${verticalPosition} ${translate} -m-4 ${height} w-1 border-l-4 border-sky-500 `}
+        className={`absolute left-0 ${verticalPosition} ${translate} -ml-4 ${height} w-1 border-l-4 border-sky-500 `}
       />
       <div className="flex">
         <Heading level={3} className="flex-auto">
