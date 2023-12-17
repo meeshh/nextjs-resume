@@ -1,8 +1,20 @@
 /* eslint-disable jsx-a11y/alt-text */
-import { PrivateField, personal } from '@content';
+import {
+  Certification,
+  Education,
+  Language,
+  PrivateField,
+  ProfessionalExperience,
+  SoftSkill,
+  TechSkill,
+  personal,
+} from '@content';
+
 import {
   Document,
+  Image,
   Font,
+  Link,
   Page,
   StyleSheet,
   Text,
@@ -15,11 +27,19 @@ import resumeConfig from '../../../edit-me/config/resumeConfig';
 import { Theme } from '../../../edit-me/types/Config';
 import { contrastColor } from '../../helpers/colorContrast';
 import { getAccentColor, getNeutralColor } from '../../helpers/colors';
-import { fullName, sortedProfessionalExperiences } from '../../helpers/utils';
-import { Calendar } from './Icons/Calendar';
-import { CircleBriefcase } from './Icons/CircleBriefcase';
-import { CircleIdCard } from './Icons/CircleIdCard';
-import { CircleUser } from './Icons/CircleUser';
+import {
+  fullName,
+  firstName,
+  lastName,
+  sortedCertifications,
+  sortedEducations,
+  sortedLanguages,
+  sortedProfessionalExperiences,
+  sortedSoftSkills,
+  sortedTechSkills,
+  email,
+  mobile,
+} from '../../helpers/utils';
 import { htmlRenderers } from './htmlRenderers';
 
 const theme = resumeConfig.pdfTheme;
@@ -84,6 +104,7 @@ const fontSizes = {
   s: 13,
   xs: 12,
   xxs: 10,
+  xxxs: 8,
 };
 
 const spacers = {
@@ -110,10 +131,10 @@ const styles = StyleSheet.create({
   },
   sidebar: {
     alignSelf: 'stretch',
-    backgroundColor: getNeutralColor(3, theme),
+    backgroundColor: '#5350a2',
     display: 'flex',
-    color: getNeutralColor(12, theme),
-    flexBasis: '30%',
+    color: 'white',
+    flexBasis: '40%',
     flexDirection: 'column',
     flexGrow: 0,
     flexShrink: 1,
@@ -172,14 +193,9 @@ const styles = StyleSheet.create({
     margin: 0,
   },
   itemHeading: {
-    alignItems: 'center',
-    display: 'flex',
-    flexDirection: 'row',
-    fontSize: fontSizes.s,
+    fontSize: fontSizes.xs,
     fontWeight: 700,
     gap: spacers[1],
-    marginBottom: spacers[1],
-    marginTop: spacers[3],
   },
   itemSubheadingRow: {
     alignItems: 'center',
@@ -193,11 +209,8 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
   },
   professionalTitle: {
-    backgroundColor: getNeutralColor(12, theme),
     borderRadius: '3px',
-    color: getNeutralColor(1, theme),
     fontWeight: 700,
-    paddingHorizontal: spacers[1],
   },
   bold: { fontWeight: 700 },
   flexColumn: { display: 'flex', flexDirection: 'column' },
@@ -225,7 +238,7 @@ const styles = StyleSheet.create({
 
 const htmlProps: Omit<HtmlProps, 'children'> = {
   renderers: htmlRenderers,
-  style: { fontSize: fontSizes.xxs },
+  style: { fontSize: fontSizes.xxxs },
   stylesheet: {
     a: styles.a,
     p: styles.sectionParagraph,
@@ -246,64 +259,400 @@ const PDF: React.FC<PDFProps> = ({ privateInformation }) => {
     // @ts-ignore
     <Document author={fullName} title={`Résume for ${fullName}, ${year}`}>
       {/* @ts-ignore */}
-      <Page size="LETTER" style={styles.page}>
-        <View style={styles.sidebar}>
-          <View style={styles.header}>
-            <Text style={styles.headerTitle}>{fullName}</Text>
-            <Text style={styles.headerSubtitle}>{personal.title}</Text>
-          </View>
-          <View style={styles.sidebarContent}>
-            <View style={styles.section}>
-              <View style={styles.sectionHeadingNonHTML}>
-                <CircleUser size={fontSizes.m} />
-                <Text>About Me</Text>
+      <Page size="A4" style={styles.page}>
+        <View style={styles.main}>
+          <View
+            style={{
+              ...styles.section,
+              textTransform: 'uppercase',
+              display: 'flex',
+              flexDirection: 'row',
+              gap: 8,
+            }}
+          >
+            <View>
+              <Image
+                src="https://avatars.githubusercontent.com/u/620224?v=4"
+                style={{ width: 50, height: 50, borderRadius: '50%' }}
+              />
+            </View>
+            <View
+              style={{
+                flexGrow: 1,
+                display: 'flex',
+                justifyContent: 'center',
+              }}
+            >
+              <View style={{ display: 'flex', flexDirection: 'row', gap: 4 }}>
+                <Text style={{ ...styles.headerTitle, color: '#5350a2' }}>
+                  {firstName}
+                </Text>
+                <Text style={{ ...styles.headerTitle, color: 'gray' }}>
+                  {lastName}
+                </Text>
               </View>
+
+              <Text
+                style={{
+                  ...styles.headerSubtitle,
+                  fontSize: 10,
+                  color: 'gray',
+                }}
+              >
+                {personal.title}
+              </Text>
+            </View>
+            <View
+              style={{
+                fontSize: 6,
+                display: 'flex',
+                justifyContent: 'center',
+                textAlign: 'right',
+              }}
+            >
+              <Text style={{ textAlign: 'right' }}>{personal.location}</Text>
+              <Text style={{ textTransform: 'lowercase' }}>{email}</Text>
+              <Text style={{ textAlign: 'right' }}>{mobile}</Text>
+            </View>
+          </View>
+          <View style={{ ...styles.section }}>
+            <View style={{ ...styles.sectionHeading, marginBottom: 8 }}>
+              <Text style={{ color: '#5350a2' }}>WORK EXPERIENCE</Text>
+            </View>
+            {sortedProfessionalExperiences.map(
+              (professionalExperience: ProfessionalExperience) => (
+                <View
+                  style={{ marginLeft: 20 }}
+                  key={professionalExperience._id}
+                >
+                  {professionalExperience.connectBottom && (
+                    <View
+                      style={{
+                        backgroundColor: '#c1c0ff',
+                        width: 1,
+                        height: '100%',
+                        position: 'absolute',
+                        top: 0,
+                        left: -13.5,
+                      }}
+                    />
+                  )}
+                  <View
+                    style={{
+                      ...styles.itemHeading,
+                      display: 'flex',
+                      flexDirection: 'row',
+                      position: 'relative',
+                    }}
+                  >
+                    <View
+                      style={{
+                        backgroundColor: '#c1c0ff',
+                        width: 10,
+                        height: 10,
+                        borderRadius: '50%',
+                        position: 'absolute',
+                        top: 0,
+                        left: -18,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <View
+                        style={{
+                          width: 5,
+                          height: 5,
+                          borderRadius: '50%',
+                          backgroundColor: '#5350a2',
+                        }}
+                      />
+                    </View>
+                    <Text
+                      style={{
+                        ...styles.professionalTitle,
+                        flexGrow: 1,
+                        fontSize: 9,
+                      }}
+                    >
+                      {professionalExperience.title}
+                    </Text>
+                    <Text style={{ color: 'gray', fontSize: 6 }}>
+                      {professionalExperience.startDate}—
+                      {professionalExperience.endDate
+                        ? professionalExperience.endDate
+                        : 'Current'}
+                    </Text>
+                  </View>
+                  <View>
+                    <Text style={{ fontSize: 8 }}>
+                      {professionalExperience.organization}
+                    </Text>
+                  </View>
+                  <Html {...htmlProps} style={{ fontSize: 7.25 }}>
+                    {professionalExperience.body.html}
+                  </Html>
+                </View>
+              ),
+            )}
+          </View>
+        </View>
+        <View style={styles.sidebar}>
+          <View style={styles.sidebarContent}>
+            <View style={{ fontSize: 8, marginBottom: 24 }}>
               <Html {...htmlProps}>{personal.body.html}</Html>
             </View>
             <View style={styles.section}>
-              <View style={styles.sectionHeadingNonHTML}>
-                <CircleIdCard size={fontSizes.m} />
-                <Text>Contact Information</Text>
+              <Text style={{ ...styles.sectionHeading, marginBottom: 8 }}>
+                SKILLS
+              </Text>
+              <View
+                style={{
+                  borderLeft: `1px solid white`,
+                  marginBottom: 20,
+                }}
+              >
+                {sortedTechSkills.map((techSkill: TechSkill, index: number) => (
+                  <View
+                    key={techSkill._id}
+                    style={{
+                      marginBottom:
+                        index === sortedTechSkills.length - 1 ? '0px' : '8px',
+                    }}
+                  >
+                    <Text
+                      style={{
+                        fontSize: '8px',
+                        padding: '2px 4px',
+                      }}
+                    >
+                      {techSkill.name}
+                    </Text>
+                    <View
+                      style={{
+                        flexGrow: 1,
+                        height: '8px',
+                        backgroundColor: '#c1c0ff',
+                      }}
+                    >
+                      <View
+                        style={{
+                          width: `${techSkill.knowledge}%`,
+                          height: '100%',
+                          backgroundColor: 'white',
+                        }}
+                      />
+                    </View>
+                  </View>
+                ))}
               </View>
-              <View style={styles.flexRow}>
-                <Text style={styles.bold}>Location:</Text>
-                <Text>&nbsp;{personal.location}</Text>
+              <View
+                style={{
+                  borderLeft: `1px solid white`,
+                  marginBottom: 20,
+                }}
+              >
+                {sortedSoftSkills.map((softSkill: SoftSkill, index: number) => (
+                  <View
+                    key={softSkill._id}
+                    style={{
+                      marginBottom:
+                        index === sortedSoftSkills.length - 1 ? '0px' : '8px',
+                    }}
+                  >
+                    <Text
+                      style={{
+                        fontSize: '8px',
+                        padding: '2px 4px',
+                      }}
+                    >
+                      {softSkill.name}
+                    </Text>
+                    <View
+                      style={{
+                        flexGrow: 1,
+                        height: '8px',
+                        backgroundColor: '#c1c0ff',
+                      }}
+                    >
+                      <View
+                        style={{
+                          width: `${softSkill.knowledge}%`,
+                          height: '100%',
+                          backgroundColor: 'white',
+                        }}
+                      />
+                    </View>
+                  </View>
+                ))}
               </View>
-              {privateInformation?.map((privateField) => (
-                <View key={privateField._id}>
-                  <Text style={styles.bold}>{privateField.label}:&nbsp;</Text>
-                  <Html {...htmlProps}>{privateField.body.html}</Html>
-                </View>
-              ))}
             </View>
-          </View>
-        </View>
-        <View style={styles.main}>
-          <View style={styles.section}>
-            <View style={styles.sectionHeading}>
-              <CircleBriefcase size={fontSizes.m} />
-              <Text>Professional Experience</Text>
-            </View>
-            {sortedProfessionalExperiences.map((professionalExperience) => (
-              <View key={professionalExperience._id}>
-                <View style={styles.itemHeading}>
-                  <Text style={styles.professionalTitle}>
-                    {professionalExperience.title}
-                  </Text>
-                  <Text>&nbsp;at {professionalExperience.organization}</Text>
-                </View>
-                <View style={styles.itemSubheadingRow}>
-                  <Calendar size={fontSizes.xxs} />
-                  <Text style={styles.itemSubheading}>
-                    {professionalExperience.startDate}—
-                    {professionalExperience.endDate
-                      ? professionalExperience.endDate
-                      : 'Current'}
-                  </Text>
-                </View>
-                <Html {...htmlProps}>{professionalExperience.body.html}</Html>
+            <View style={styles.section}>
+              <Text style={{ ...styles.sectionHeading, marginBottom: 8 }}>
+                EDUCATION
+              </Text>
+              <View
+                style={{
+                  marginBottom: 20,
+                }}
+              >
+                {sortedEducations.map((education: Education) => (
+                  <View key={education._id}>
+                    <View
+                      style={{
+                        alignItems: 'center',
+                        display: 'flex',
+                        flexDirection: 'row',
+                      }}
+                    >
+                      <Text
+                        style={{ ...styles.bold, fontSize: 10, flexGrow: 1 }}
+                      >
+                        {education.degree}
+                      </Text>
+                      <Text style={{ fontSize: 6 }}>
+                        {education.startYear}&nbsp;-&nbsp;{education.endYear}
+                      </Text>
+                    </View>
+                    <Text>{education.organization}</Text>
+                  </View>
+                ))}
               </View>
-            ))}
+            </View>
+            <View style={styles.section}>
+              <Text style={{ ...styles.sectionHeading, marginBottom: 8 }}>
+                LICENSES & CERTIFICATIONS
+              </Text>
+              <View
+                style={{
+                  marginBottom: 20,
+                }}
+              >
+                {sortedCertifications.map((certification: Certification) => (
+                  <View key={certification._id} style={{ marginBottom: 8 }}>
+                    <View
+                      style={{
+                        alignItems: 'center',
+                        display: 'flex',
+                        flexDirection: 'row',
+                      }}
+                    >
+                      <Link
+                        href={certification.url}
+                        style={{
+                          ...styles.bold,
+                          fontSize: 10,
+                          flexGrow: 1,
+                          color: 'white',
+                        }}
+                      >
+                        {certification.certification}
+                      </Link>
+                      <Text style={{ fontSize: 6 }}>
+                        {certification.completionYear}
+                      </Text>
+                    </View>
+                    <Text>{certification.issuer}</Text>
+                    {certification.credentialId && (
+                      <Text style={{ fontSize: 8 }}>
+                        Credential ID:&nbsp;{certification.credentialId}
+                      </Text>
+                    )}
+                  </View>
+                ))}
+              </View>
+            </View>
+            <View style={styles.section}>
+              <Text style={{ ...styles.sectionHeading, marginBottom: 8 }}>
+                LANGUAGES
+              </Text>
+              <View
+                style={{
+                  flexDirection: 'row',
+                }}
+              >
+                <View style={{ width: '50%', flexGrow: 1 }}>
+                  {sortedLanguages
+                    .slice(0, Math.ceil(sortedLanguages.length / 2))
+                    .map((language: Language) => (
+                      <View key={language._id} style={{ marginBottom: 8 }}>
+                        <>
+                          <Text>{language.language}</Text>
+                          <View
+                            style={{ display: 'flex', flexDirection: 'row' }}
+                          >
+                            {Array.from(Array(5)).map((level, index) =>
+                              index < language.level ? (
+                                <View
+                                  key={index}
+                                  style={{
+                                    backgroundColor: 'white',
+                                    width: 10,
+                                    height: 10,
+                                    marginRight: 4,
+                                    borderRadius: '50%',
+                                  }}
+                                />
+                              ) : (
+                                <View
+                                  key={index}
+                                  style={{
+                                    backgroundColor: '#c1c0ff',
+                                    width: 10,
+                                    height: 10,
+                                    marginRight: 4,
+                                    borderRadius: '50%',
+                                  }}
+                                />
+                              ),
+                            )}
+                          </View>
+                        </>
+                      </View>
+                    ))}
+                </View>
+                <View style={{ width: '50%' }}>
+                  {sortedLanguages
+                    .slice(Math.ceil(sortedLanguages.length / 2))
+                    .map((language: Language) => (
+                      <View key={language._id} style={{ marginBottom: 8 }}>
+                        <>
+                          <Text>{language.language}</Text>
+                          <View
+                            style={{ display: 'flex', flexDirection: 'row' }}
+                          >
+                            {Array.from(Array(5)).map((level, index) =>
+                              index < language.level ? (
+                                <View
+                                  key={index}
+                                  style={{
+                                    backgroundColor: 'white',
+                                    width: 10,
+                                    height: 10,
+                                    marginRight: 4,
+                                    borderRadius: '50%',
+                                  }}
+                                />
+                              ) : (
+                                <View
+                                  key={index}
+                                  style={{
+                                    backgroundColor: '#c1c0ff',
+                                    width: 10,
+                                    height: 10,
+                                    marginRight: 4,
+                                    borderRadius: '50%',
+                                  }}
+                                />
+                              ),
+                            )}
+                          </View>
+                        </>
+                      </View>
+                    ))}
+                </View>
+              </View>
+            </View>
           </View>
         </View>
       </Page>
