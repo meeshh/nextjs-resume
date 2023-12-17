@@ -44,7 +44,7 @@ import { htmlRenderers } from './htmlRenderers';
 
 const theme = resumeConfig.pdfTheme;
 const domain = process.env.NEXT_PUBLIC_VERCEL_URL
-  ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+  ? process.env.NEXT_PUBLIC_VERCEL_URL
   : 'http://localhost:3000';
 const fontPath = `${domain}/fonts`;
 
