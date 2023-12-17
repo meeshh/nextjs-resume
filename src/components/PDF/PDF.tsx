@@ -248,7 +248,6 @@ const htmlProps: Omit<HtmlProps, 'children'> = {
   },
 };
 
-
 const PDF: React.FC = () => {
   const year = new Date().getFullYear();
 
@@ -518,7 +517,7 @@ const PDF: React.FC = () => {
             </View>
             <View style={styles.section}>
               <Text style={{ ...styles.sectionHeading, marginBottom: 8 }}>
-                LICENSES & CERTIFICATIONS
+                CERTIFICATIONS
               </Text>
               <View
                 style={{
