@@ -3,7 +3,6 @@ import {
   Certification,
   Education,
   Language,
-  PrivateField,
   ProfessionalExperience,
   SoftSkill,
   TechSkill,

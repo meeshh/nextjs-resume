@@ -1,5 +1,9 @@
 import { PrivateField, personal } from '@content';
-import { faLocationCrosshairs, faEnvelope, faMobile } from '@fortawesome/free-solid-svg-icons';
+import {
+  faLocationCrosshairs,
+  faEnvelope,
+  faMobile,
+} from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getPrivatePersonalInfo } from 'src/pages/api/personal-info';
@@ -16,30 +20,19 @@ export const ContactInformation: React.FC<ContactInformationProps> = async ({
 
   return (
     <article>
-      <ul className="mt-2">
-        <li className="flex">
-          <FontAwesomeIcon
-            className="text-neutral-12 flex w-4 justify-center items-center mr-4"
-            icon={faLocationCrosshairs}
-          />{' '}
+      <ul className="mt-2 sm:text-center md:text-left">
+        <li>
+          <FontAwesomeIcon className="mr-4" icon={faLocationCrosshairs} />{' '}
           {personal.location}
         </li>
 
         {secret && (
           <>
-            <li className="flex">
-              <FontAwesomeIcon
-                className="text-neutral-12 flex w-4 justify-center items-center mr-4"
-                icon={faEnvelope}
-              />{' '}
-              {email}
+            <li>
+              <FontAwesomeIcon className="mr-4" icon={faEnvelope} /> {email}
             </li>
-            <li className="flex">
-              <FontAwesomeIcon
-                className="text-neutral-12 flex w-4 justify-center items-center mr-4"
-                icon={faMobile}
-              />{' '}
-              {mobile}
+            <li>
+              <FontAwesomeIcon className="mr-4" icon={faMobile} /> {mobile}
             </li>
           </>
         )}

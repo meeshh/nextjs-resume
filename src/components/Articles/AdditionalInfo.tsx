@@ -11,7 +11,10 @@ export const AdditionalInfo: React.FC = () => {
         <SectionHeading icon={faGuitar} level={2} text={additionalInfo.title} />
       </div>
 
-      <Prose html={additionalInfo.body.html} />
+      <Prose
+        className="sm:text-center md:text-left"
+        html={additionalInfo.body.html}
+      />
     </article>
   );
 };
