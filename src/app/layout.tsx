@@ -99,7 +99,7 @@ const RootLayout: React.FC<PropsWithChildren> = async ({ children }) => {
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
    
-            gtag('config', process.env.G_ANALYTICS_MEASUREMENT_ID);
+            gtag('config', '${process.env.G_ANALYTICS_MEASUREMENT_ID}');
           `}
           </Script>
         </>
