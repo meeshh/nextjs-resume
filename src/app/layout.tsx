@@ -3,6 +3,7 @@ import { Metadata, Viewport } from 'next';
 import { Albert_Sans, JetBrains_Mono } from 'next/font/google';
 import { PropsWithChildren } from 'react';
 import resumeConfig from '../../edit-me/config/resumeConfig';
+import Script from 'next/script';
 
 // ICONS CONFIG
 import { config } from '@fortawesome/fontawesome-svg-core';
@@ -17,7 +18,6 @@ import { fullName } from 'src/helpers/utils';
 import { twMerge } from 'tailwind-merge';
 import { ThemeSetting } from '../../edit-me/types/Config';
 import './globals.css';
-import GoogleAnalytics from '@bradgarropy/next-google-analytics';
 
 const accentColor = resumeConfig.accentColor;
 
@@ -89,9 +89,20 @@ const RootLayout: React.FC<PropsWithChildren> = async ({ children }) => {
       </body>
 
       {process.env.NEXT_PUBLIC_VERCEL_URL && (
-        <GoogleAnalytics
-          measurementId={process.env.G_ANALYTICS_MEASUREMENT_ID || ''}
-        />
+        <>
+          <Script
+            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.G_ANALYTICS_MEASUREMENT_ID}`}
+          />
+          <Script id="google-analytics">
+            {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+   
+            gtag('config', process.env.G_ANALYTICS_MEASUREMENT_ID);
+          `}
+          </Script>
+        </>
       )}
     </html>
   );
