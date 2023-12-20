@@ -36,8 +36,6 @@ import {
   sortedProfessionalExperiences,
   sortedSoftSkills,
   sortedTechSkills,
-  email,
-  mobile,
 } from '../../helpers/utils';
 import { htmlRenderers } from './htmlRenderers';
 
@@ -247,8 +245,17 @@ const htmlProps: Omit<HtmlProps, 'children'> = {
   },
 };
 
-const PDF: React.FC = () => {
+type PDFProps = {
+  privateInfo: {
+    email: 'string';
+    mobile: 'string';
+  };
+};
+
+const PDF: React.FC<PDFProps> = ({ privateInfo }) => {
   const year = new Date().getFullYear();
+
+  const { email, mobile } = privateInfo;
 
   return (
     // @ts-ignore

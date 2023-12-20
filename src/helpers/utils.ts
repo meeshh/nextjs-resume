@@ -7,7 +7,6 @@ import {
   allSoftSkills,
   allLanguages,
   allProjects,
-  allPrivateFields,
 } from '@content';
 
 const sortArray = (array: any) => {
@@ -21,9 +20,6 @@ const sortArray = (array: any) => {
 export const fullName = `${personal.givenName} ${personal.familyName}`;
 export const firstName = personal.givenName;
 export const lastName = personal.familyName;
-
-export const email = allPrivateFields[1].email;
-export const mobile = allPrivateFields[1].mobile;
 
 export const sortedProfessionalExperiences = sortArray(
   allProfessionalExperiences,
