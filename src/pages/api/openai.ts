@@ -11,6 +11,9 @@ export default async function handler(
     if (input.length >= 1500) {
       throw new Error('Text too long');
     }
+    if (input.length < 150) {
+      throw new Error('Text too short');
+    }
     const response = await createApiRequest(input);
     res.status(200).json({ keywords: response });
   } catch (error) {

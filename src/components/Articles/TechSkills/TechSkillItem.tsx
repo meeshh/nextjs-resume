@@ -1,19 +1,11 @@
 import { TechSkill } from '@content';
 import React from 'react';
 import { Heading } from '../../Heading/Heading';
-import Highlighter from 'react-highlight-words';
 
 const TechSkillItem: React.FC<TechSkill> = ({ name, knowledge }) => {
   return (
     <article className="py-2 first-of-type:pt-6 last-of-type:pb-0">
-      <Heading level={6}>
-        <Highlighter
-          searchWords={[]}
-          autoEscape={true}
-          textToHighlight={name}
-        />
-        {/* {name} */}
-      </Heading>
+      <Heading level={6}>{name}</Heading>
 
       <div className="relative h-4 w-full	bg-slate-500">
         <div
