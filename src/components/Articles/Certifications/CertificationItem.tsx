@@ -33,7 +33,7 @@ const CertificationItem: React.FC<Certification> = ({
       {secret && credentialId && (
         <div className="mt-1 text-xs tracking-wide">
           <span className="mr-2">Credential ID:</span>
-          <mark className="px-2">{credentialId}</mark>
+          <span className="bg-purple-500 px-2 text-white">{credentialId}</span>
         </div>
       )}
 

@@ -4,6 +4,7 @@ import { firstName, lastName } from '../../helpers/utils';
 import { Heading } from '../Heading/Heading';
 import PDFDownloadButton from '../PDF/PDFDownloadButton';
 import { ContactInformation } from '../Articles/ContactInformation';
+import OfferInput from '../OfferInput/OfferInput';
 
 interface HeaderProps {
   secret?: string;
@@ -29,7 +30,12 @@ export const Header: React.FC<HeaderProps> = ({ secret }) => {
               privateInformation={privateInformation}
             />
           </div>
-          {secret && <PDFDownloadButton secret={secret} />}
+          {secret && (
+            <div>
+              <PDFDownloadButton secret={secret} />
+              <OfferInput />
+            </div>
+          )}
         </div>
       </div>
     </div>
