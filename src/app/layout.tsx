@@ -37,7 +37,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
   const host = headers().get('host');
   const baseURL = `${protocol}://${host || vercelURL}`;
   const siteName = `${fullName} Professional Résumé`;
-  const title = `Résumé | ${fullName} | Somewhere`;
+  const title = `Résumé | ${fullName}`;
   const description = `Professional résumé for ${fullName}.`;
 
   return {
@@ -47,7 +47,15 @@ export const generateMetadata = async (): Promise<Metadata> => {
     creator: fullName,
     description,
     generator: 'Next.js',
-    keywords: ['resume', fullName, 'next.js', 'pdf'],
+    keywords: [
+      'resume',
+      fullName,
+      'next.js',
+      'pdf',
+      'CV',
+      'smart resume',
+      'open ai',
+    ],
     openGraph: {
       type: 'profile',
       firstName: personal.givenName,
@@ -86,24 +94,23 @@ const RootLayout: React.FC<PropsWithChildren> = async ({ children }) => {
     >
       <body className="bg-neutral-2 text-neutral-12 selection:bg-accent-11 selection:text-neutral-1">
         {children}
-      </body>
-
-      {process.env.NEXT_PUBLIC_VERCEL_URL && (
-        <>
-          <Script
-            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.G_ANALYTICS_MEASUREMENT_ID}`}
-          />
-          <Script id="google-analytics">
-            {`
+        {process.env.NEXT_PUBLIC_VERCEL_URL && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.G_ANALYTICS_MEASUREMENT_ID}`}
+            />
+            <Script id="google-analytics">
+              {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
    
             gtag('config', '${process.env.G_ANALYTICS_MEASUREMENT_ID}');
           `}
-          </Script>
-        </>
-      )}
+            </Script>
+          </>
+        )}
+      </body>
     </html>
   );
 };

@@ -31,7 +31,7 @@ export const Header: React.FC<HeaderProps> = ({ secret }) => {
             />
           </div>
           {secret && (
-            <div style={{width: '45%'}}>
+            <div style={{ width: '45%' }}>
               <PDFDownloadButton secret={secret} />
               <OfferInput />
             </div>

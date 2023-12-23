@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { highlightWords } from 'src/helpers/highlighter';
-import toast, {Toaster} from 'react-hot-toast'
+import toast, { Toaster } from 'react-hot-toast';
 
 interface ApiResponse {
   keywords: string;
@@ -34,13 +34,16 @@ const OfferInput: React.FC = () => {
         toast.error(response.error, {
           position: 'top-right',
           duration: 3000,
-        })
+        });
       } else {
         highlightWords(response.keywords.split(', '));
-        toast.success('AI has successfully analyzed your job offer and highlighted matching skills', {
-          position: 'top-right',
-          duration: 4000,
-        })
+        toast.success(
+          'AI has successfully analyzed your job offer and highlighted matching skills',
+          {
+            position: 'top-right',
+            duration: 4000,
+          },
+        );
       }
 
       setLoading(false);
@@ -88,19 +91,26 @@ const OfferInput: React.FC = () => {
           type="button"
           style={{ fontSize: 8, margin: 4 }}
           onClick={() => setModal(true)}
-          className="absolute right-0 top-0 h-4 w-4 cursor-pointer rounded-full bg-slate-400 text-white"
+          className="absolute right-0 top-0 h-4 w-4 cursor-pointer rounded-full bg-slate-400 text-white hover:bg-slate-500"
         >
           i
         </button>
       </div>
       <button
         disabled={offer.trim().length === 0}
-        className={`${offer.trim().length === 0 ? 'opacity-50 pointer-events-none' : null} w-full rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700`}
+        className={`${
+          offer.trim().length === 0 ? 'pointer-events-none opacity-50' : null
+        } w-full rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700`}
         onClick={handleApiRequest}
       >
         Highlight Skills
       </button>
       <div
+        onClick={(e) => {
+          if (e.currentTarget === e.target) {
+            setModal(false);
+          }
+        }}
         className={`${
           !modal && 'hidden'
         } fixed left-0 top-0 z-10 flex h-full w-full items-center justify-center bg-black bg-opacity-50`}
@@ -124,8 +134,8 @@ const OfferInput: React.FC = () => {
             <li className="my-2">
               <strong className="text-sky-500">Paste Job Offer Skills</strong>
               <p>
-                In the text box below, paste the skills/qualifications section
-                of your job offer. Please keep it under 1500 characters.
+                In the text box, paste the skills/qualifications section of your
+                job offer. Please keep it under 1500 characters.
               </p>
             </li>
             <li className="my-2">
@@ -134,10 +144,16 @@ const OfferInput: React.FC = () => {
               </strong>
               <p>
                 After pasting, click the &ldquo;Highlight Skills&rdquo; button.
-                The webpage will dynamically highlight matching skills.
+                AI will analyze your job offer and the webpage will dynamically
+                highlight matching skills.
               </p>
             </li>
           </ul>
+          <br />
+          <p>
+            Please note that the highlights are going to be a rough estimate. A
+            thorough reading of my resume gives the best impression.
+          </p>
           <br />
           <p>
             Your time is valued, and this process ensures a quick overview of my
