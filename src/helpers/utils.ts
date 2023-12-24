@@ -7,6 +7,7 @@ import {
   allSoftSkills,
   allLanguages,
   allProjects,
+  allSkills,
 } from '@content';
 
 const sortArray = (array: any) => {
@@ -32,6 +33,8 @@ export const sortedEducations = sortArray(allEducation);
 export const sortedTechSkills = sortArray(allTechSkills);
 
 export const sortedSoftSkills = sortArray(allSoftSkills);
+
+export const sortedSkills = sortArray(allSkills);
 
 export const sortedLanguages = sortArray(allLanguages);
 

@@ -4,6 +4,7 @@ import {
   Education,
   Language,
   ProfessionalExperience,
+  Skill,
   SoftSkill,
   TechSkill,
   personal,
@@ -36,6 +37,7 @@ import {
   sortedProfessionalExperiences,
   sortedSoftSkills,
   sortedTechSkills,
+  sortedSkills,
 } from '../../helpers/utils';
 import { htmlRenderers } from './htmlRenderers';
 
@@ -411,7 +413,7 @@ const PDF: React.FC<PDFProps> = ({ privateInfo }) => {
               <View
                 style={{
                   borderLeft: `1px solid white`,
-                  marginBottom: 20,
+                  marginBottom: 12,
                 }}
               >
                 {sortedTechSkills.map((techSkill: TechSkill, index: number) => (
@@ -451,7 +453,7 @@ const PDF: React.FC<PDFProps> = ({ privateInfo }) => {
               <View
                 style={{
                   borderLeft: `1px solid white`,
-                  marginBottom: 20,
+                  marginBottom: 12,
                 }}
               >
                 {sortedSoftSkills.map((softSkill: SoftSkill, index: number) => (
@@ -491,11 +493,23 @@ const PDF: React.FC<PDFProps> = ({ privateInfo }) => {
             </View>
             <View style={styles.section}>
               <Text style={{ ...styles.sectionHeading, marginBottom: 8 }}>
+                OTHER SKILLS
+              </Text>
+              <View style={{ marginBottom: 12 }}>
+                {sortedSkills.map((skill: Skill) => (
+                  <Html key={skill._id} {...htmlProps}>
+                    {skill.body.html}
+                  </Html>
+                ))}
+              </View>
+            </View>
+            <View style={styles.section}>
+              <Text style={{ ...styles.sectionHeading, marginBottom: 8 }}>
                 EDUCATION
               </Text>
               <View
                 style={{
-                  marginBottom: 20,
+                  marginBottom: 12,
                 }}
               >
                 {sortedEducations.map((education: Education) => (
@@ -527,7 +541,7 @@ const PDF: React.FC<PDFProps> = ({ privateInfo }) => {
               </Text>
               <View
                 style={{
-                  marginBottom: 20,
+                  marginBottom: 12,
                 }}
               >
                 {sortedCertifications.map((certification: Certification) => (

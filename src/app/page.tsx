@@ -8,6 +8,7 @@ import { Header } from 'src/components/Header/Header';
 import TechSkills from 'src/components/Articles/TechSkills/TechSkills';
 import SoftSkills from 'src/components/Articles/SoftSkills/SoftSkills';
 import Projects from 'src/components/Articles/Projects/Projects';
+import Skills from 'src/components/Articles/Skills';
 
 const Page: React.FC<PageProps> = () => {
   return (
@@ -22,6 +23,10 @@ const Page: React.FC<PageProps> = () => {
         <div className="mt-12 grid grid-flow-row gap-6 lg:grid-flow-col">
           <TechSkills />
           <SoftSkills />
+        </div>
+
+        <div className="mt-12">
+          <Skills />
         </div>
 
         <div className="mt-12">
