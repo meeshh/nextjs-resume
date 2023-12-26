@@ -1,13 +1,30 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { kv } from '@vercel/kv';
 import { createApiRequest } from '../../utils/openai';
+
+type TYPE_HASHUSER = {
+  email: string;
+};
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  const { input } = req.body;
+  const { input, email, id } = req.body;
+
+  console.log('EMAIL', email);
 
   try {
+    // if it does not exist throw an error
+    const user = await kv.hgetall(id as string);
+    const { email: userEmail } = user as TYPE_HASHUSER;
+    if (email !== userEmail) {
+      return res.status(404).json({ error: 'User does not have access' });
+    }
+
+    // if the user exists, handle the rate limiter
+    // TODO rate limit per user per IP
+
     if (input.length >= 1500) {
       throw new Error('Text too long');
     }

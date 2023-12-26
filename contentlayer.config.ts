@@ -37,13 +37,6 @@ export const Personal = defineDocumentType(() => ({
 export const Skill = defineDocumentType(() => ({
   name: 'Skill',
   filePathPattern: 'skills/*.md',
-  // fields: {
-  //   title: {
-  //     type: 'string',
-  //     description: 'A name for the category of skills',
-  //     required: true,
-  //   },
-  // },
 }));
 
 export const Language = defineDocumentType(() => ({

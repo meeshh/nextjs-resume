@@ -3,6 +3,7 @@
 import React from 'react';
 import { highlightWords } from 'src/helpers/highlighter';
 import toast, { Toaster } from 'react-hot-toast';
+import { useSearchParams } from 'next/navigation';
 
 interface ApiResponse {
   keywords: string;
@@ -13,6 +14,11 @@ const OfferInput: React.FC = () => {
   const [offer, setOffer] = React.useState<string>('');
   const [loading, setLoading] = React.useState<boolean>(false);
   const [modal, setModal] = React.useState<boolean>(false);
+
+  const params = useSearchParams();
+  const email = params?.get('email');
+  const id = params?.get('id');
+
   const handleOnChange = (e: React.BaseSyntheticEvent) => {
     setOffer(e.target.value);
   };
@@ -25,7 +31,7 @@ const OfferInput: React.FC = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ input: offer }),
+        body: JSON.stringify({ input: offer, id, email }),
       });
 
       const response = (await apiResponse.json()) as ApiResponse;
