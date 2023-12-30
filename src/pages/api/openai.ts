@@ -10,14 +10,24 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  const { input, email, id } = req.body;
-
-  console.log('EMAIL', email);
+  const { input = '', email = '', id = '' } = req.body;
 
   try {
     // if it does not exist throw an error
+    if (email === '' || id === '') {
+      return res.status(403).json({
+        error:
+          'No permission for this request. Please contact the owner and ask for access to this feature.',
+      });
+    }
+
     const user = await kv.hgetall(id as string);
     const { email: userEmail } = user as TYPE_HASHUSER;
+
+    if (!userEmail) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
     if (email !== userEmail) {
       return res.status(404).json({ error: 'User does not have access' });
     }

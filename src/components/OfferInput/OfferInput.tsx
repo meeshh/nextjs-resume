@@ -25,6 +25,11 @@ const OfferInput: React.FC = () => {
 
   const handleApiRequest = async () => {
     try {
+      if (email === null || id === null) {
+        throw new Error(
+          'No permissions. Ask owner for access to this feature.',
+        );
+      }
       setLoading(true);
       const apiResponse = await fetch('/api/openai', {
         method: 'POST',
@@ -56,9 +61,15 @@ const OfferInput: React.FC = () => {
     } catch (error) {
       setLoading(false);
       if (error instanceof Error) {
-        console.error('Error making API request:', error.message);
+        toast.error(`Error making API request: ${error.message}`, {
+          position: 'top-right',
+          duration: 3000,
+        });
       } else {
-        console.error('An unknown error occurred:', error);
+        toast.error(`An unknown error occurred: ${error}`, {
+          position: 'top-right',
+          duration: 3000,
+        });
       }
     }
   };
