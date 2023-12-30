@@ -144,10 +144,31 @@ const OfferInput: React.FC = () => {
           <p>Dear Recruiter, </p>
           <br />
           <p>
-            Thank you for considering my application. To efficiently match my
-            skills with your job offer, follow these steps:
+            Thank you for considering my application. To ensure a personalized
+            and efficient experience, I have implemented a private access system
+            for the Skill Highlighting feature. Here&apos;s how you can
+            proceed::
           </p>
           <ul>
+            <li className="my-2">
+              <strong className="text-sky-500">
+                Contact me for private access
+              </strong>
+              <p>
+                Please send me an email at expressing your interest in using the
+                Skill Highlighting feature. Kindly include your name, company
+                name, and the position you are hiring for.
+              </p>
+            </li>
+            <li className="my-2">
+              <strong className="text-sky-500">
+                Requesting a Private Link
+              </strong>
+              <p>
+                Once I receive your email, I will promptly generate a private
+                link tailored to you.
+              </p>
+            </li>
             <li className="my-2">
               <strong className="text-sky-500">Paste Job Offer Skills</strong>
               <p>
@@ -170,6 +191,18 @@ const OfferInput: React.FC = () => {
           <p>
             Please note that the highlights are going to be a rough estimate. A
             thorough reading of my resume gives the best impression.
+          </p>
+          <br />
+          <p>
+            The private link will grant you exclusive access to the Skill
+            Highlighting feature, ensuring that the service is not publicly
+            available. This approach is essential to manage the usage of OpenAI
+            tokens effectively.
+          </p>
+          <p>
+            After using the Skill Highlighting feature, feel free to provide any
+            feedback or ask for additional assistance. Your input is valuable
+            and helps me continually enhance the functionality of the service.
           </p>
           <br />
           <p>
