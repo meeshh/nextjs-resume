@@ -155,7 +155,7 @@ const OfferInput: React.FC = () => {
                 Contact me for private access
               </strong>
               <p>
-                Please send me an email at expressing your interest in using the
+                Please send me an email expressing your interest in using the
                 Skill Highlighting feature. Kindly include your name, company
                 name, and the position you are hiring for.
               </p>
