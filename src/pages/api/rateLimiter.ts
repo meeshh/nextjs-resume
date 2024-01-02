@@ -12,7 +12,7 @@ export default async function handler(
 
     const { secret = '' } = req.body;
     if (secret !== process.env.RESET_LIMIT_CODE) {
-      res.status(403).end('No permission for this request.');
+      res.status(403).end('No permission for this request');
     }
     const keys = await kv.keys('*');
 
