@@ -4,6 +4,7 @@ import { createApiRequest } from '../../utils/openai';
 
 type TYPE_HASHUSER = {
   email: string;
+  count?: string;
 };
 
 export default async function handler(
@@ -22,7 +23,17 @@ export default async function handler(
     }
 
     const user = await kv.hgetall(id as string);
-    const { email: userEmail } = user as TYPE_HASHUSER;
+    const { email: userEmail, count } = user as TYPE_HASHUSER;
+
+    const inc = count ? parseInt(count) : 0;
+
+    if (inc > 2)
+      return res.status(403).send({
+        error:
+          'You have exceeded your limit. Please wait for tomorrow to try again.',
+      });
+
+    kv.hset(id, { email, count: inc + 1 });
 
     if (!userEmail) {
       return res.status(404).json({ error: 'User not found' });
@@ -33,7 +44,7 @@ export default async function handler(
     }
 
     // if the user exists, handle the rate limiter
-    // TODO rate limit per user per IP
+    // TODO rate limit per user
 
     if (input.length >= 1500) {
       throw new Error('Text too long');

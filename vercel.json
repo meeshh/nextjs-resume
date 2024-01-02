@@ -1,0 +1,12 @@
+{
+  "crons": [
+    {
+      "path": "/api/rateLimiter",
+      "schedule": "0 00 * * *",
+      "method": "post",
+      "data": {
+        "secret": "@reset-limit-code"
+      }
+    }
+  ]
+}
