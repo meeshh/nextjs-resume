@@ -1,0 +1,22 @@
+name: Reset Rate Limits
+
+on:
+  schedule:
+    - cron: '0 22 * * *' # Schedule the job to run every day at midnight UTC
+
+jobs:
+  periodic-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v2
+
+      - name: Make API Call
+        run: |
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -d '{"secret": "${{ secrets.API_PAYLOAD }}" }' \
+            https://michel-barakat.vercel.com/api/rateLimiter
+        env:
+          API_PAYLOAD: ${{ secrets.RESET_LIMIT_CODE }}
