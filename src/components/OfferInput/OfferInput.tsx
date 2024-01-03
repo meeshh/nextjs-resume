@@ -188,6 +188,12 @@ const OfferInput: React.FC = () => {
             </li>
           </ul>
           <br />
+          <p className="text italic text-red-600">
+            Utilizing the Skill Highlighting feature has a rate limit of 3 times
+            per day, and the limit resets the day after. This ensures fair usage
+            and optimal resource management.
+          </p>
+          <br />
           <p>
             Please note that the highlights are going to be a rough estimate. A
             thorough reading of my resume gives the best impression.
