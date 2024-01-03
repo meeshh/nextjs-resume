@@ -16,7 +16,5 @@ jobs:
         run: |
           curl -X POST \
             -H "Content-Type: application/json" \
-            -d '{"secret": "${{ secrets.API_PAYLOAD }}" }' \
+            -d '{"secret": "${{ secrets.RESET_LIMIT_CODE }}" }' \
             https://michel-barakat.vercel.app/api/rateLimiter
-        env:
-          API_PAYLOAD: ${{ secrets.RESET_LIMIT_CODE }}
