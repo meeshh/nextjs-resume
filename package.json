@@ -1,5 +1,5 @@
 {
-  "name": "next-resume-generator",
+  "name": "michel-barakat-resume",
   "version": "4.3.2",
   "type": "module",
   "author": {
@@ -9,7 +9,9 @@
     "resume",
     "generator",
     "nextjs",
-    "pdf"
+    "pdf",
+    "openai",
+    "rate-limit"
   ],
   "homepage": "https://github.com/meeshh/nextjs-resume",
   "scripts": {
