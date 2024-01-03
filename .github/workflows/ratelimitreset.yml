@@ -2,7 +2,7 @@ name: Reset Rate Limits
 
 on:
   schedule:
-    - cron: '0 22 * * *' # Schedule the job to run every day at midnight UTC
+    - cron: '0 0 * * *' # Schedule the job to run every day at midnight UTC
 
 jobs:
   periodic-job:
