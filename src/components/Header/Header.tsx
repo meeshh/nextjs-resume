@@ -25,10 +25,12 @@ export const Header: React.FC<HeaderProps> = ({ secret }) => {
             <Heading color="neutralSubtle" level={2}>
               {personal.title}
             </Heading>
-            <ContactInformation
-              secret={secret || undefined}
-              privateInformation={privateInformation}
-            />
+            {secret && (
+              <ContactInformation
+                secret={secret || undefined}
+                privateInformation={privateInformation}
+              />
+            )}
           </div>
           {secret && (
             <div style={{ width: '45%' }}>
