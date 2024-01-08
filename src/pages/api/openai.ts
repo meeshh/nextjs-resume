@@ -43,9 +43,6 @@ export default async function handler(
       return res.status(404).json({ error: 'User does not have access' });
     }
 
-    // if the user exists, handle the rate limiter
-    // TODO rate limit per user
-
     if (input.length >= 1500) {
       throw new Error('Text too long');
     }

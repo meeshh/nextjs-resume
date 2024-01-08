@@ -3,3 +3,4 @@
 User-agent: *
 Disallow: /pdf
 Disallow: /private/
+Disallow: /generator
