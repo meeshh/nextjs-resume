@@ -10,14 +10,13 @@ type ApiResponse = {
   error?: string;
 };
 
-export default function GeneratorForm() {
+export default function GeneratorForm({ secret }: { secret: string }) {
   const [response, setResponse] = useState<string | null>(null);
 
   const handleAccess = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const target = e.target as typeof e.target & {
       email: { value: string };
-      secret: { value: string };
     };
     const apiResponse = await fetch('/api/grantAccess', {
       method: 'POST',
@@ -26,7 +25,7 @@ export default function GeneratorForm() {
       },
       body: JSON.stringify({
         email: target.email.value,
-        secret: target.secret.value,
+        secret,
       }),
     });
 
@@ -76,18 +75,6 @@ export default function GeneratorForm() {
           type="email"
           placeholder="Enter email"
         />
-        <label
-          className="mb-2 block text-sm font-bold text-white"
-          htmlFor="secret"
-        >
-          Secret
-        </label>
-        <input
-          className="focus:shadow-outline mb-4 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
-          name="secret"
-          type="password"
-          placeholder="Enter secret"
-        />
 
         <button
           className="focus:shadow-outline rounded bg-sky-500 px-4 py-2 font-bold text-white hover:bg-sky-700 focus:outline-none"
@@ -95,24 +82,24 @@ export default function GeneratorForm() {
         >
           Add user
         </button>
+        {response && (
+          <div className="relative container mt-4 flex px-0">
+            <pre
+              className="rounded bg-slate-500 p-8 w-full overflow-x-auto whitespace-pre"
+            >
+              <code>{response}</code>
+            </pre>
+              <button
+                type="button"
+                title="Copy link"
+                className="absolute right-2 top-2 w-8 rounded bg-slate-600 hover:bg-slate-700 active:bg-slate-800"
+                onClick={handleCopyClick}
+              >
+                <FontAwesomeIcon icon={faCopy} />
+              </button>
+          </div>
+        )}
       </form>
-      {response && (
-        <div className="container flex px-0">
-          <pre
-            className="mr-4 rounded bg-slate-500 p-8"
-            style={{ whiteSpace: 'initial', flexGrow: 1 }}
-          >
-            <code>{response}</code>
-          </pre>
-          <button
-            title="Copy link"
-            className="w-36 rounded bg-slate-600 hover:bg-slate-700 active:bg-slate-800"
-            onClick={handleCopyClick}
-          >
-            <FontAwesomeIcon className="text-3xl" icon={faCopy} />
-          </button>
-        </div>
-      )}
       <Toaster />
     </>
   );

@@ -4,6 +4,7 @@ import React from 'react';
 import { highlightWords } from 'src/helpers/highlighter';
 import toast, { Toaster } from 'react-hot-toast';
 import { useSearchParams } from 'next/navigation';
+import Loader from '../Loader/Loader';
 
 interface ApiResponse {
   keywords: string;
@@ -77,22 +78,23 @@ const OfferInput: React.FC = () => {
   return (
     <>
       {loading && (
-        <div
-          style={{
-            zIndex: 2,
-            position: 'fixed',
-            backgroundColor: 'rgba(0,0,0,0.8)',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-          }}
-        >
-          <div className="h-16 w-16 animate-spin rounded-full border-t-4 border-solid border-sky-500" />
-        </div>
+        <Loader />
+        // <div
+        //   style={{
+        //     zIndex: 2,
+        //     position: 'fixed',
+        //     backgroundColor: 'rgba(0,0,0,0.8)',
+        //     display: 'flex',
+        //     justifyContent: 'center',
+        //     alignItems: 'center',
+        //     top: 0,
+        //     left: 0,
+        //     width: '100%',
+        //     height: '100%',
+        //   }}
+        // >
+        //   <div className="h-16 w-16 animate-spin rounded-full border-t-4 border-solid border-sky-500" />
+        // </div>
       )}
       <div className="relative mt-2">
         <textarea
