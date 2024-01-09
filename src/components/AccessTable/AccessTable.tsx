@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import UserRow, { User } from '../UserRow/UserRow';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDownload } from '@fortawesome/free-solid-svg-icons';
+import { faRefresh } from '@fortawesome/free-solid-svg-icons';
 import { Toaster } from 'react-hot-toast';
 import Loader from '../Loader/Loader';
 
@@ -49,10 +49,11 @@ const AccessTable = ({ secret }: { secret: string }) => {
               <th className="border-b px-4 py-2">Access per day</th>
               <th className="border-b px-4 py-2">
                 <button
+                  title="Refresh Table"
                   onClick={handleRefetch}
                   className="w-10 rounded bg-gray-300 p-2 font-bold text-gray-900 hover:bg-gray-600 hover:text-white active:bg-gray-700"
                 >
-                  <FontAwesomeIcon icon={faDownload}></FontAwesomeIcon>
+                  <FontAwesomeIcon icon={faRefresh}></FontAwesomeIcon>
                 </button>
               </th>
             </tr>
