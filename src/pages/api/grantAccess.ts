@@ -23,6 +23,13 @@ export default async function handler(
 
     const hashId = uuidv4();
 
+    const hashExists = await kv.keys(hashId);
+
+    // recurse if by chance you get a duplicate hash
+    if (hashExists.length > 0) {
+      return handler(req, res);
+    }
+
     await kv.hset(hashId, { email, count: 0 });
 
     const isDevelopment = process.env.NODE_ENV === 'development';
