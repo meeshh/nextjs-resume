@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { v4 as uuidv4 } from 'uuid';
 import { kv } from '@vercel/kv';
+import { protocol } from 'src/helpers/env';
 
 export default async function handler(
   req: NextApiRequest,
@@ -32,11 +33,9 @@ export default async function handler(
 
     await kv.hset(hashId, { email, count: 0 });
 
-    const isDevelopment = process.env.NODE_ENV === 'development';
-    const protocol = isDevelopment ? 'http://' : 'https://';
     const domain = req.headers.host;
 
-    const fullUrl = `${protocol}${domain}/private/${process.env.PRIVATE_KEY}?id=${hashId}&email=${email}`;
+    const fullUrl = `${protocol}://${domain}/private/${process.env.PRIVATE_KEY}?id=${hashId}&email=${email}`;
 
     res.status(200).json({ fullUrl });
   } catch (error) {
