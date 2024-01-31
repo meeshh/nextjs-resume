@@ -3,9 +3,66 @@ const apiKey = process.env.OPENAI_API_KEY;
 
 const openai = new OpenAI({ apiKey, dangerouslyAllowBrowser: true });
 
+const skillVariationsMap: { [key: string]: string[] } = {
+  react: ['React JS', 'React', 'React.js'],
+  angular: ['Angular', 'AngularJS'],
+  vue: ['Vue.js', 'VueJS', 'Vue'],
+  webpack: ['Webpack'],
+  babel: ['Babel'],
+  es6: ['ES6', 'ES2015'],
+  es2015: ['ES6', 'ES2015'],
+  node: ['Node.js', 'NodeJS', 'Node JS'],
+  nodejs: ['Node.js', 'NodeJS', 'Node JS'],
+  'node.js': ['Node.js', 'NodeJS', 'Node JS'],
+  'node js': ['Node.js', 'NodeJS', 'Node JS'],
+  typescript: ['TypeScript', 'TS'],
+  ts: ['TypeScript', 'TS'],
+  javascript: ['JavaScript', 'JS'],
+  js: ['JavaScript', 'JS'],
+  'ci/cd': [
+    'CI / CD',
+    'continuous integration continuous delivery',
+    'continuous integration',
+    'continuous delivery',
+  ],
+  'ci / cd': [
+    'CI / CD',
+    'continuous integration continuous delivery',
+    'continuous integration',
+    'continuous delivery',
+  ],
+  'continuous integration': [
+    'CI / CD',
+    'continuous integration continuous delivery',
+    'continuous integration',
+    'continuous delivery',
+  ],
+  'continuous delivery': [
+    'CI / CD',
+    'continuous integration continuous delivery',
+    'continuous integration',
+    'continuous delivery',
+  ],
+  teamwork: ['teamwork', 'team work', 'team-player', 'team player'],
+  'team work': ['teamwork', 'team work', 'team-player', 'team player'],
+  'team-player': ['teamwork', 'team work', 'team-player', 'team player'],
+  'team player': ['teamwork', 'team work', 'team-player', 'team player'],
+  'version control': ['version control', 'version-control', 'git'],
+  'version-control': ['version control', 'version-control', 'git'],
+  'code quality': ['code quality', 'sonarqube', 'sonar qube', 'sonar-qube'],
+  sonarqube: ['code quality', 'sonarqube', 'sonar qube', 'sonar-qube'],
+  'sonar qube': ['code quality', 'sonarqube', 'sonar qube', 'sonar-qube'],
+  'sonar-qube': ['code quality', 'sonarqube', 'sonar qube', 'sonar-qube'],
+  'mend.io': ['mend.io', 'mendio', 'mend', 'code analysis tools'],
+  mendio: ['mend.io', 'mendio', 'mend', 'code analysis tools'],
+  mend: ['mend.io', 'mendio', 'mend', 'code analysis tools'],
+  'code analysis tools': ['mend.io', 'mendio', 'mend', 'code analysis tools'],
+  scrum: ['scrum', 'agile'],
+  agile: ['scrum', 'agile'],
+};
+
 function generateSkillVariations(skillString: string | null): string {
-  const skills =
-    (skillString && skillString.split(',').map((skill) => skill.trim())) || [];
+  const skills = skillString?.split(',').map((skill) => skill.trim()) || [];
 
   const variations: string[] = [];
 
@@ -13,122 +70,17 @@ function generateSkillVariations(skillString: string | null): string {
     const lowercasedSkill = skill.toLowerCase();
     variations.push(skill);
 
-    // Add variations based on specific rules
-    if (lowercasedSkill.includes('react')) {
-      variations.push('React JS', 'React', 'React.js');
+    const skillVariations = skillVariationsMap[lowercasedSkill];
+    if (skillVariations) {
+      variations.push(...skillVariations);
     }
 
-    if (lowercasedSkill.includes('angular')) {
-      variations.push('Angular', 'AngularJS');
-    }
-
-    if (lowercasedSkill.includes('vue')) {
-      variations.push('Vue.js', 'VueJS', 'Vue');
-    }
-
-    if (lowercasedSkill.includes('webpack')) {
-      variations.push('Webpack');
-    }
-
-    if (lowercasedSkill.includes('babel')) {
-      variations.push('Babel');
-    }
-
-    if (lowercasedSkill.includes('es6') || lowercasedSkill.includes('es2015')) {
-      variations.push('ES6', 'ES2015');
-    }
-
-    if (
-      lowercasedSkill.includes('node') ||
-      lowercasedSkill.includes('nodejs') ||
-      lowercasedSkill.includes('node.js') ||
-      lowercasedSkill.includes('node js')
-    ) {
-      variations.push('Node', 'NodeJS', 'Node.js', 'Node JS');
-    }
-
-    if (
-      lowercasedSkill.includes('typescript') ||
-      lowercasedSkill.includes('ts')
-    ) {
-      variations.push('TypeScript', 'TS');
-    }
-
-    if (
-      lowercasedSkill.includes('javascript') ||
-      lowercasedSkill.includes('js')
-    ) {
-      variations.push('JavaScript', 'JS');
-    }
-
-    if (
-      lowercasedSkill.includes('ci/cd') ||
-      lowercasedSkill.includes('ci / cd') ||
-      lowercasedSkill.includes('continuous integration') ||
-      lowercasedSkill.includes('continuous delivery')
-    ) {
-      variations.push(
-        'CI / CD',
-        'continuous integration continuous delivery',
-        'continuous integration',
-        'continuous delivery',
-      );
-    }
-
-    // Add more variations for other skills as needed
-
-    if (
-      lowercasedSkill.includes('teamwork') ||
-      lowercasedSkill.includes('team work') ||
-      lowercasedSkill.includes('team-player') ||
-      lowercasedSkill.includes('team player')
-    ) {
-      variations.push('teamwork', 'team work', 'team-player', 'team player');
-    }
-
-    if (
-      lowercasedSkill.includes('version control') ||
-      lowercasedSkill.includes('version-control')
-    ) {
-      variations.push('version control', 'version-control', 'git');
-    }
-
-    if (
-      lowercasedSkill.includes('code quality') ||
-      lowercasedSkill.includes('sonarqube') ||
-      lowercasedSkill.includes('sonar qube') ||
-      lowercasedSkill.includes('sonar-qube')
-    ) {
-      variations.push('code quality', 'sonarqube', 'sonar qube', 'sonar-qube');
-    }
-
-    if (
-      lowercasedSkill.includes('mend.io') ||
-      lowercasedSkill.includes('mendio') ||
-      lowercasedSkill.includes('mend') ||
-      lowercasedSkill.includes('code analysis tools') ||
-      lowercasedSkill.includes('security')
-    ) {
-      variations.push('mend.io', 'mendio', 'mend', 'code analysis tools');
-    }
-
-    if (
-      lowercasedSkill.includes('scrum') ||
-      lowercasedSkill.includes('agile')
-    ) {
-      variations.push('scrum', 'agile');
-    }
-
-    // Language-specific variations
     const languageRegex = /^(.*)(?=\s*language)/i;
     const languageMatch = lowercasedSkill.match(languageRegex);
 
     if (languageMatch) {
       variations.push(languageMatch[1].trim());
     }
-
-    // General variations
-    variations.push(skill.replace(/-/g, ' ')); // Replace hyphens with spaces
   });
 
   return variations.join(', ');
