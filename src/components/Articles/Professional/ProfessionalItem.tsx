@@ -21,25 +21,32 @@ const ProfessionalItem: React.FC<ProfessionalExperience> = ({
   let height = 'h-5/6';
   let verticalPosition = 'top-1/2';
   let translate = '-translate-y-1/2';
+  let edge = '';
   if (connectBottom && connectTop) {
     height = 'h-full';
     verticalPosition = 'top-0';
     translate = '';
   } else if (connectTop) {
-    height = 'h-5/6';
     verticalPosition = 'top-0';
     translate = '';
+    edge = 'bottom';
   } else if (connectBottom) {
-    height = 'h-5/6';
     verticalPosition = 'bottom-0';
     translate = '';
+    edge = 'top';
   }
 
   return (
     <article className="relative border-t-2 border-neutral-6 py-6 first-of-type:border-none last-of-type:pb-0">
       <div
         className={`absolute left-0 ${verticalPosition} ${translate} -ml-4 ${height} w-1 border-l-4 border-sky-500 `}
-      />
+      >
+        {!!edge.length && (
+          <div
+            className={`-left-2 h-3 w-3 rounded-full bg-sky-700 -${edge}-2 absolute`}
+          />
+        )}
+      </div>
       <div className="flex">
         <Heading level={3} className="flex-auto">
           <span className="px-2 text-neutral-1 text-sky-600">{title}</span>
