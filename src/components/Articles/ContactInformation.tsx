@@ -21,18 +21,20 @@ export const ContactInformation: React.FC<ContactInformationProps> = async ({
   return (
     <article>
       <ul className="mt-2 sm:text-center md:text-left">
-        <li>
-          <FontAwesomeIcon className="mr-4" icon={faLocationCrosshairs} />{' '}
-          {personal.location}
+        <li className="flex items-center justify-center gap-2">
+          <FontAwesomeIcon className="w-4" icon={faLocationCrosshairs} />
+          <span className="flex-1">{personal.location}</span>
         </li>
 
         {secret && (
           <>
-            <li>
-              <FontAwesomeIcon className="mr-4" icon={faEnvelope} /> {email}
+            <li className="flex items-center justify-center gap-2">
+              <FontAwesomeIcon className="w-4" icon={faEnvelope} />
+              <span className="flex-1">{email}</span>
             </li>
-            <li>
-              <FontAwesomeIcon className="mr-4" icon={faMobile} /> {mobile}
+            <li className="flex items-center justify-center gap-2">
+              <FontAwesomeIcon className="w-4" icon={faMobile} />
+              <span className="flex-1">{mobile}</span>
             </li>
           </>
         )}
