@@ -17,7 +17,7 @@ const ProjectItem: React.FC<Project> = ({
       <div className="mb-2 sm:w-1/3">
         <Image
           className="rounded-lg border-4 border-yellow-500"
-          src={`/images/${slugify(title)}.jpg`}
+          src={`/images/${slugify(title).toLowerCase()}.jpg`}
           alt={title}
           layout="responsive"
           width={200}
