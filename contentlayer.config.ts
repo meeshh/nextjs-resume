@@ -70,6 +70,11 @@ export const Project = defineDocumentType(() => ({
       description: 'The url of the project',
       required: true,
     },
+    tags: {
+      type: 'string',
+      description: 'A list of tags to describe what the project was made with',
+      required: false,
+    },
   },
 }));
 
