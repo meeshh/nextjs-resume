@@ -1,5 +1,4 @@
 import { allPrivateFields, personal } from '@content';
-import React from 'react';
 import { firstName, lastName } from '../../helpers/utils';
 import { Heading } from '../Heading/Heading';
 import PDFDownloadButton from '../PDF/PDFDownloadButton';
@@ -33,7 +32,7 @@ export const Header: React.FC<HeaderProps> = ({ secret }) => {
             )}
           </div>
           {secret && (
-            <div className="w-9/12">
+            <div className="w-full md:w-5/12">
               <PDFDownloadButton secret={secret} />
               <OfferInput />
             </div>
