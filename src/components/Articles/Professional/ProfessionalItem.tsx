@@ -21,7 +21,6 @@ const ProfessionalItem: React.FC<ProfessionalExperience> = ({
   let height = 'h-5/6';
   let verticalPosition = 'top-1/2';
   let translate = '-translate-y-1/2';
-  let edge = '';
   if (connectBottom && connectTop) {
     height = 'h-full';
     verticalPosition = 'top-0';
@@ -29,11 +28,9 @@ const ProfessionalItem: React.FC<ProfessionalExperience> = ({
   } else if (connectTop) {
     verticalPosition = 'top-0';
     translate = '';
-    edge = 'bottom';
   } else if (connectBottom) {
     verticalPosition = 'bottom-0';
     translate = '';
-    edge = 'top';
   }
 
   return (
@@ -41,9 +38,14 @@ const ProfessionalItem: React.FC<ProfessionalExperience> = ({
       <div
         className={`absolute left-0 ${verticalPosition} ${translate} -ml-4 ${height} w-1 border-l-4 border-sky-500 `}
       >
-        {!!edge.length && (
+        {!connectTop && (
           <div
-            className={`-left-2 h-3 w-3 rounded-full bg-sky-700 -${edge}-2 absolute`}
+            className={`absolute -left-2 -top-2 h-3 w-3 rounded-full bg-sky-700`}
+          />
+        )}
+        {!connectBottom && (
+          <div
+            className={`absolute -bottom-2 -left-2  h-3 w-3 rounded-full bg-sky-700`}
           />
         )}
       </div>
