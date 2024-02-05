@@ -33,7 +33,7 @@ const ProjectItem: React.FC<Project> = ({
 
         <Prose html={body.html} />
 
-        <Tags tags={tags.split(',')} />
+        {!!tags.length && <Tags tags={tags.split(',')} />}
       </div>
     </article>
   );
