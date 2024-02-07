@@ -4,7 +4,6 @@ import {
   faLocationCrosshairs,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
 import { Heading } from '../../Heading/Heading';
 import Prose from '../../Prose/Prose';
 
