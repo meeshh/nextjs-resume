@@ -59,7 +59,7 @@ export default function GeneratorForm({ secret }: { secret: string }) {
   return (
     <>
       <form
-        className="container mb-4 rounded bg-slate-4 px-8 pb-8 pt-6 shadow-md"
+        className="container mb-4 rounded bg-slate-800 px-8 pb-8 pt-6 shadow-md"
         onSubmit={handleAccess}
         noValidate
       >

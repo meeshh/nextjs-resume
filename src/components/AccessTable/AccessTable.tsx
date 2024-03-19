@@ -38,12 +38,12 @@ const AccessTable = ({ secret }: { secret: string }) => {
   };
 
   return (
-    <div className="container mb-4 rounded bg-slate-4 px-8 pb-8 pt-6 shadow-md">
+    <div className="container mb-4 rounded bg-slate-800 px-8 pb-8 pt-6 shadow-md">
       {isLoading ? (
         <Loader />
       ) : (
         <table className="min-w-full border border-gray-300">
-          <thead className="bg-slate-500">
+          <thead className="bg-slate-950">
             <tr>
               <th className="border-b px-4 py-2">Email</th>
               <th className="border-b px-4 py-2">Access per day</th>
