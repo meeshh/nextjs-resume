@@ -40,7 +40,7 @@ export function Heading({
   size,
 }: PropsWithChildren<HeadingProps>) {
   const classes = twMerge(
-    headingVariants({ color, size: size || level }),
+    headingVariants({ color, size: size ?? level }),
     className,
   );
 

@@ -8,7 +8,7 @@ import { SoftSkill } from '@content';
 
 const SoftSkills: React.FC = () => {
   return (
-    <article className="rounded-xl bg-neutral-4 py-12">
+    <article className="rounded-xl bg-slate-800 py-12">
       <div className="container">
         <div className="flex justify-center text-center">
           <SectionHeading icon={faPeopleArrows} level={2} text="Soft Skills" />

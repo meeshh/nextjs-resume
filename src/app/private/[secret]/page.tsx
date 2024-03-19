@@ -23,8 +23,7 @@ const Page: React.FC<PageProps> = async ({ params }) => {
   return (
     <>
       <Header secret={secret} />
-
-      <div className="container">
+      <div className="container pt-12">
         <div className="grid grid-cols-1 gap-6">
           <AboutMe />
         </div>
