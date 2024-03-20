@@ -70,6 +70,8 @@ export default function GeneratorForm({ secret }: { secret: string }) {
           Email
         </label>
         <input
+          id="email"
+          autoComplete='on'
           className="focus:shadow-outline mb-4 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
           name="email"
           type="email"
@@ -83,20 +85,18 @@ export default function GeneratorForm({ secret }: { secret: string }) {
           Add user
         </button>
         {response && (
-          <div className="relative container mt-4 flex px-0">
-            <pre
-              className="rounded bg-slate-500 p-8 w-full overflow-x-auto whitespace-pre"
-            >
+          <div className="container relative mt-4 flex px-0">
+            <pre className="w-full overflow-x-auto whitespace-pre rounded bg-slate-500 p-8">
               <code>{response}</code>
             </pre>
-              <button
-                type="button"
-                title="Copy link"
-                className="absolute right-2 top-2 w-8 rounded bg-slate-600 hover:bg-slate-700 active:bg-slate-800"
-                onClick={handleCopyClick}
-              >
-                <FontAwesomeIcon icon={faCopy} />
-              </button>
+            <button
+              type="button"
+              title="Copy link"
+              className="absolute right-2 top-2 w-8 rounded bg-slate-600 hover:bg-slate-700 active:bg-slate-800"
+              onClick={handleCopyClick}
+            >
+              <FontAwesomeIcon icon={faCopy} />
+            </button>
           </div>
         )}
       </form>
