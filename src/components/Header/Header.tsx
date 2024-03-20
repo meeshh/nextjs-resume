@@ -13,7 +13,7 @@ export const Header: React.FC<HeaderProps> = ({ secret }) => {
   const privateInformation = secret ? [allPrivateFields[1]] : undefined;
 
   return (
-    <div className="mb-12 border-b-2 border-neutral-8 bg-slate-950 bg-opacity-60 py-12">
+    <div id="home" className="mb-12 border-b-2 border-neutral-8 bg-slate-950 bg-opacity-60 py-12">
       <div className="container">
         <div className="flex flex-col items-center gap-6 text-center md:flex-row md:text-left">
           <div className="flex flex-1 flex-col gap-2">
@@ -23,7 +23,7 @@ export const Header: React.FC<HeaderProps> = ({ secret }) => {
               <span className="text-sky-500">{firstName}</span>&nbsp;
               <span>{lastName}</span>
             </Heading>
-            <Heading color="neutralSubtle" level={2}>
+            <Heading color="primary" level={2}>
               {personal.title}
             </Heading>
             {secret && (
@@ -35,7 +35,6 @@ export const Header: React.FC<HeaderProps> = ({ secret }) => {
           </div>
           {secret && (
             <div className="w-full md:w-5/12">
-              <PDFDownloadButton secret={secret} />
               <OfferInput />
             </div>
           )}

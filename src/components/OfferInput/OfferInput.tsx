@@ -114,7 +114,7 @@ const OfferInput: React.FC = () => {
         }}
         className={`${
           !modal && 'hidden'
-        } fixed left-0 top-0 z-10 flex h-full w-full items-center justify-center bg-black bg-opacity-50`}
+        } fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black bg-opacity-50`}
       >
         <div className="container relative rounded bg-slate-900 p-8 shadow">
           <button

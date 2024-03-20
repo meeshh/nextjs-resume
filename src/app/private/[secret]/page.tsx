@@ -10,6 +10,7 @@ import TechSkills from 'src/components/Articles/TechSkills/TechSkills';
 import SoftSkills from 'src/components/Articles/SoftSkills/SoftSkills';
 import Projects from 'src/components/Articles/Projects/Projects';
 import Skills from 'src/components/Articles/Skills/Skills';
+import Navbar from 'src/components/Navbar/Navbar';
 
 const privateKey = process.env.PRIVATE_KEY;
 
@@ -23,12 +24,13 @@ const Page: React.FC<PageProps> = async ({ params }) => {
   return (
     <>
       <Header secret={secret} />
+      <Navbar secret={secret} />
       <div className="container pt-12">
         <div className="grid grid-cols-1 gap-6">
           <AboutMe />
         </div>
 
-        <div className="mt-12 grid grid-flow-row gap-6 lg:grid-flow-col">
+        <div id="skills" className="mt-12 grid grid-flow-row gap-6 lg:grid-flow-col">
           <TechSkills />
           <SoftSkills />
         </div>
@@ -37,19 +39,19 @@ const Page: React.FC<PageProps> = async ({ params }) => {
           <Skills />
         </div>
 
-        <div className="mt-12">
+        <div id="experience" className="mt-12">
           <Professional />
         </div>
 
-        <div className="mt-12">
+        <div id="certifications" className="mt-12">
           <Certifications secret={secret} />
         </div>
 
-        <div className="mt-12">
+        <div id="projects" className="mt-12">
           <Projects />
         </div>
 
-        <div className="mt-12">
+        <div id="education" className="mt-12">
           <Educations />
         </div>
 

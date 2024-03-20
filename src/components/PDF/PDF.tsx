@@ -554,7 +554,7 @@ const PDF: React.FC<PDFProps> = ({ privateInfo }) => {
                       }}
                     >
                       <Link
-                        src={certification.url || '#'}
+                        src={certification.url ?? '#'}
                         style={{
                           ...styles.bold,
                           fontSize: 10,
@@ -627,7 +627,7 @@ const PDF: React.FC<PDFProps> = ({ privateInfo }) => {
                       </View>
                     ))}
                 </View>
-                <View style={{ width: '50%' }}>
+                <View style={{ width: '50%', alignItems: 'flex-end' }}>
                   {sortedLanguages
                     .slice(Math.ceil(sortedLanguages.length / 2))
                     .map((language: Language) => (

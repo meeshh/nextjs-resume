@@ -11,10 +11,10 @@ const PDFDownloadButton: React.FC<PDFDownloadButtonProps> = ({ secret }) => {
   return (
     <ButtonLink
       href={secret ? `/api/pdf?secret=${secret}` : '/api/pdf'}
-      size="lg"
+      size="md"
     >
+      Download
       <FontAwesomeIcon icon={faFilePdf} size="lg" />
-      Download PDF
     </ButtonLink>
   );
 };

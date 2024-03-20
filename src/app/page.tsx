@@ -9,13 +9,15 @@ import TechSkills from 'src/components/Articles/TechSkills/TechSkills';
 import SoftSkills from 'src/components/Articles/SoftSkills/SoftSkills';
 import Projects from 'src/components/Articles/Projects/Projects';
 import Skills from 'src/components/Articles/Skills/Skills';
+import Navbar from 'src/components/Navbar/Navbar';
 
 const Page: React.FC<PageProps> = () => {
   return (
     <>
       <Header />
+      <Navbar />
 
-      <div className="container">
+      <div className="container pt-12">
         <div className="grid grid-cols-1 gap-6">
           <AboutMe />
         </div>
