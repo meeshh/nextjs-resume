@@ -71,7 +71,7 @@ export default function GeneratorForm({ secret }: { secret: string }) {
         </label>
         <input
           id="email"
-          autoComplete='on'
+          autoComplete="on"
           className="focus:shadow-outline mb-4 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
           name="email"
           type="email"
