@@ -6,6 +6,7 @@ import { createClient } from 'src/utils/supabase';
 import VisitorsTable, {
   Visitor,
 } from 'src/components/VisitorsTable/VisitorsTable';
+import GeneratorForm from 'src/components/GeneratorForm/GeneratorForm';
 
 const privateKey = process.env.RESET_LIMIT_CODE;
 
@@ -21,11 +22,14 @@ const Dashboard: React.FC<PageProps> = async ({ params }) => {
   return (
     <>
       <Header />
-      <div className="container flex gap-4">
-        <div className="w-2/3">
+      <div className="container">
+        <GeneratorForm secret={secret as string} />
+      </div>
+      <div className="container gap-4 lg:flex">
+        <div className="w-full lg:w-2/3">
           <AccessTable secret={secret as string} />
         </div>
-        <div className="w-1/3">
+        <div className="w-full lg:w-1/3">
           <VisitorsTable visitors={visitors as Visitor[]} />
         </div>
       </div>

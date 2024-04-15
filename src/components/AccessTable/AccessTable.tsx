@@ -39,6 +39,7 @@ const AccessTable = ({ secret }: { secret: string }) => {
 
   return (
     <div className="container mb-4 rounded bg-slate-800 px-8 pb-8 pt-6 shadow-md">
+      <h2 className="mb-4 text-lg">Access</h2>
       {isLoading ? (
         <Loader />
       ) : (

@@ -5,6 +5,8 @@ import {
   faLink,
   faRotateLeft,
   faTrash,
+  faChevronDown,
+  faChevronUp,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
@@ -33,6 +35,7 @@ export default function UserRow({
 }) {
   const { id, email, count } = user;
   const [limitCount, setLimitCount] = useState<string>(count);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     setLimitCount(count);
@@ -136,37 +139,87 @@ export default function UserRow({
         <td className="border px-4 py-2">{email}</td>
         <td className="border px-4 py-2 text-center">{limitCount} / 3</td>
         <td className="border px-4 py-2 text-center">
-          
-          <button
-            title="Copy ID"
-            className="mr-2 w-10 rounded bg-gray-300 p-2 font-bold text-slate-700 hover:bg-gray-400"
-            onClick={() => {
-              copy(id);
-            }}
-          >
-            <FontAwesomeIcon className="text-sm" icon={faCopy} />
-          </button>
           <button
             title="Copy Link"
-            className="mr-2 w-10 rounded bg-gray-500 p-2 font-bold text-white hover:bg-gray-600"
+            className="inline-flex items-center justify-center rounded rounded-r-none bg-gray-500 p-2 font-bold text-white hover:bg-gray-600 "
             onClick={handleGetUrl}
           >
-            <FontAwesomeIcon className="text-sm" icon={faLink} />
+            <FontAwesomeIcon
+              className="mx-1 text-xs lg:text-sm"
+              icon={faLink}
+            />
+            <span className="hidden font-extralight lg:block">Copy Link</span>
           </button>
-          <button
-            title="Reset limit"
-            className="mr-2 w-10 rounded bg-gray-500 p-2 font-bold text-white hover:bg-gray-600"
-            onClick={handleResetLimit}
-          >
-            <FontAwesomeIcon className="text-sm" icon={faRotateLeft} />
-          </button>
-          <button
-            title="Revoke access"
-            className="w-10 rounded bg-red-500 p-2 font-bold text-white hover:bg-red-600"
-            onClick={handleRemoveAccess}
-          >
-            <FontAwesomeIcon className="text-sm" icon={faTrash} />
-          </button>
+
+          <div className="relative inline-block text-left">
+            <button
+              type="button"
+              className={`mr-2 inline-flex items-center justify-center rounded rounded-l-none bg-gray-300 p-2 font-bold hover:bg-gray-400  lg:h-10 ${
+                isOpen
+                  ? 'bg-opacity-100 text-slate-700'
+                  : 'bg-opacity-30 text-white'
+              }`}
+              onClick={() => setIsOpen(!isOpen)}
+              aria-expanded={isOpen}
+              aria-haspopup="true"
+            >
+              <FontAwesomeIcon
+                className="text-xs lg:text-sm"
+                icon={isOpen ? faChevronUp : faChevronDown}
+              />
+            </button>
+
+            {isOpen && (
+              <div
+                className="absolute right-2 z-10 mt-1 w-56 origin-top-right rounded bg-slate-600 shadow-lg"
+                role="menu"
+                aria-orientation="vertical"
+                aria-labelledby="options-menu"
+              >
+                <div className="p-2" role="none">
+                  <button
+                    title="Copy ID"
+                    className="mb-1 inline-flex w-full items-center justify-center rounded bg-gray-300 p-2 font-bold text-slate-700 hover:bg-gray-400"
+                    onClick={() => {
+                      copy(id);
+                    }}
+                  >
+                    <FontAwesomeIcon
+                      className="mr-1 text-xs lg:text-sm"
+                      icon={faCopy}
+                    />
+                    <span className="hidden font-light md:block">Copy ID</span>
+                  </button>
+                  <button
+                    title="Reset limit"
+                    className="mb-1 inline-flex w-full items-center justify-center rounded bg-gray-500 p-2 font-bold text-white hover:bg-gray-600"
+                    onClick={handleResetLimit}
+                  >
+                    <FontAwesomeIcon
+                      className="mr-1 text-xs lg:text-sm"
+                      icon={faRotateLeft}
+                    />
+                    <span className="hidden font-light md:block">
+                      Reset Limit
+                    </span>
+                  </button>
+                  <button
+                    title="Revoke access"
+                    className="inline-flex w-full items-center justify-center rounded bg-red-500 p-2 font-bold text-white hover:bg-red-600"
+                    onClick={handleRemoveAccess}
+                  >
+                    <FontAwesomeIcon
+                      className="mr-1 text-xs lg:text-sm"
+                      icon={faTrash}
+                    />
+                    <span className="hidden font-light md:block">
+                      Revoke Access
+                    </span>
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
         </td>
       </tr>
     </>

@@ -15,6 +15,7 @@ type VisitorsTablePropsType = {
 const VisitorsTable: React.FC<VisitorsTablePropsType> = ({ visitors }) => {
   return (
     <div className="container mb-4 rounded bg-slate-800 px-8 pb-8 pt-6 shadow-md">
+      <h2 className="mb-4 text-lg">Usage</h2>
       <table className="min-w-full border border-gray-300">
         <thead className="bg-slate-950">
           <tr>
