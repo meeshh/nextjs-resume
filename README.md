@@ -32,3 +32,7 @@ Your project can be configured to provide a secret URL that will display more in
 ### OpenAI Integration
 
 The private route includes a unique OpenAI integration. Recruiters can post a job offer in a text box, and OpenAI will analyze the offer and dynamically highlight relevant keywords in the résumé page. To ensure fair usage, the OpenAI API has a rate limiter using Redis, allowing access to the feature three times per day for each user.
+
+### Supabase Integration
+
+The OpenAI feature logs the attempts of users to a supabase database.
