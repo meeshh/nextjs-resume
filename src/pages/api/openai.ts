@@ -1,6 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { kv } from '@vercel/kv';
 import { createApiRequest } from '../../utils/openai';
+// import { createClient } from 'src/utils/supabase';
+import { supabase } from 'src/utils/supabaseClient';
 
 type TYPE_HASHUSER = {
   email: string;
@@ -11,6 +13,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
+  // const supabase = createClient();
   const { input = '', email = '', id = '' } = req.body;
 
   try {
@@ -51,6 +54,29 @@ export default async function handler(
     kv.hset(id, { email, count: inc + 1 });
 
     const response = await createApiRequest(input);
+
+    // increment the visitors count in supabase
+    const { data: visitors, error: fetchError } = await supabase
+      .from('logs')
+      .select('*')
+      .eq('user_id', id);
+
+    if (fetchError) {
+      throw new Error(fetchError.message);
+    }
+
+    //if the visitor does not exist in the log, create a new visitor
+    if (!visitors.length) {
+      await supabase
+        .from('logs')
+        .insert([{ user_id: id, email: email, count: 1 }]);
+    } else {
+      await supabase
+        .from('logs')
+        .update([{ count: visitors[0].count + 1 }])
+        .eq('user_id', id);
+    }
+
     res.status(200).json({ keywords: response });
   } catch (error) {
     if (error instanceof Error) {
