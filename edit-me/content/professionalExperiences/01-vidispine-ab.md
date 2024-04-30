@@ -2,6 +2,7 @@
 title: Senior System Developer
 organization: Vidispine AB (An Arvato Systems Brand)
 startDate: '2022'
+endDate: '2024'
 location: Stockholm / Gothenburg (remote)
 connectBottom: true
 ---

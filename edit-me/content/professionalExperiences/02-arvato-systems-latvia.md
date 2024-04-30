@@ -1,14 +1,17 @@
 ---
-title: Senior Frontend Developer
+title: Development Team Lead
 organization: Arvato Systems Latvia
-startDate: '2020'
+startDate: '2021'
 endDate: '2022'
 location: Rīga
 connectTop: true
+connectBottom: true
 ---
 
-- Architecting and developing an Emmy winning ReactJS frontend for a MAM solution that is used by Media and Broadcast market leaders.
-- Optimizing the development lifecycle of a project by setting up branching strategies, code quality and security analyzers (SonarQube)
-- Creating a web socket NodeJS proxy service that acts as a notification forwarder.
-- Collaborating with other teams to build a frontend development toolkit that includes custom components, utility functions and REST wrapper functions.
-- Creating a graph visual to display a complex hierarchy of items from a Neptune DB instance using the Gremlin query language.
+- Leading a team of 7 frontend developers, creating KPI settings, setting up individual goals and conducting performance reviews to promote both individual and team growth.
+- Optimizing the communication between associates, other coordinators, and managers.
+- Assisting in recruitment by creating and reviewing assignments and interviewing candidates.
+- Standardizing the Frontend development cycle by creating code quality acceptance criteria.
+- Managing a team of software engineers with a focus on quality and customer-centricity
+- Selecting training courses for frontend developers and developing an internship program for trainees.
+- Onboarding and mentoring frontend new joiners of all seniority levels
