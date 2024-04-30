@@ -50,7 +50,7 @@ const ProfessionalItem: React.FC<ProfessionalExperience> = ({
       </div>
       <div className="flex">
         <Heading level={3} className="flex-auto">
-          <span className="px-2 text-neutral-1 text-sky-600">{title}</span>
+          <span className="px-2 text-neutral-1 text-sky-500">{title}</span>
         </Heading>
         <span>
           <FontAwesomeIcon className="mr-2" icon={faCalendar} />
