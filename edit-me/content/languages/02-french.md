@@ -1,4 +1,4 @@
 ---
-language: French
+language: 'French'
 level: 4
 ---

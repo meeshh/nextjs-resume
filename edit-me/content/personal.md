@@ -1,8 +1,8 @@
 ---
-givenName: Michel
-familyName: Barakat
-title: Software Engineer
-location: Gothenburg, Sweden
+givenName: 'Michel'
+familyName: 'Barakat'
+title: 'Frontend Architect & Tech Lead'
+location: 'Gothenburg, Sweden'
 ---
 
-16+ years of experience in software development. Ambitious and communicative. Good mentor and tech lead. Fighting climate change with curly braces and semi columns.
+20+ years of experience in software development. Ambitious, communicative mentor and tech lead. Fighting climate change with curly braces and semicolons.

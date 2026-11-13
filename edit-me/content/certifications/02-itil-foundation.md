@@ -1,7 +1,7 @@
 ---
+certification: 'ITIL Foundation'
+issuer: 'AXELOS Global Best Practice'
 completionYear: '2021'
-certification: ITIL Foundation
-url: https://bda.lv/bda4/en/Catalog/Course/ITIL
-issuer: AXELOS Global Best Practice
-credentialId: GR671303847MB
+url: 'https://bda.lv/bda4/en/Catalog/Course/ITIL'
+credentialId: 'GR671303847MB'
 ---
