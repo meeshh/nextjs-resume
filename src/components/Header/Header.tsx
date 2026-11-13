@@ -1,6 +1,7 @@
 import { personal } from '@content';
 import { fullName } from '../../helpers/utils';
 import { ContactInformation } from '../Articles/ContactInformation';
+import { AtAGlance } from './AtAGlance';
 import { Heading } from '../Heading/Heading';
 import OfferInput, { type OfferAccess } from '../OfferInput/OfferInput';
 import Prose from '../Prose/Prose';
@@ -14,8 +15,8 @@ export const Header: React.FC<HeaderProps> = ({ secret, access = {} }) => {
   return (
     <header id="home" className="border-b border-neutral-6">
       <div className="container py-12 md:py-16">
-        <div className="flex flex-col gap-10 md:flex-row md:items-start">
-          <div className="flex flex-1 flex-col gap-4">
+        <div className="grid gap-10 md:grid-cols-[1fr_17rem] md:items-center md:gap-12">
+          <div className="flex flex-col gap-4">
             <Heading level={1} size={1} className="md:text-6xl">
               {fullName}
             </Heading>
@@ -28,12 +29,13 @@ export const Header: React.FC<HeaderProps> = ({ secret, access = {} }) => {
             />
             {secret && <ContactInformation />}
           </div>
-          {secret && (
-            <div className="w-full md:w-5/12">
-              <OfferInput access={access} />
-            </div>
-          )}
+          <AtAGlance />
         </div>
+        {secret && (
+          <div className="mt-10 md:w-1/2">
+            <OfferInput access={access} />
+          </div>
+        )}
       </div>
     </header>
   );

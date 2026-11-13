@@ -6,8 +6,8 @@ import Resume from 'src/components/Resume/Resume';
 export default function Page() {
   return (
     <>
-      <Header />
       <Navbar />
+      <Header />
       <Resume />
       <Footer />
     </>

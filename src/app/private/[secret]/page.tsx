@@ -27,8 +27,8 @@ export default async function PrivatePage({
 
   return (
     <>
-      <Header secret={secret} access={{ id: first(id), email: first(email) }} />
       <Navbar secret={secret} />
+      <Header secret={secret} access={{ id: first(id), email: first(email) }} />
       <Resume secret={secret} />
       <Footer secret={secret} />
     </>
