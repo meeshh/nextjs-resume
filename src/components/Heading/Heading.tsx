@@ -2,27 +2,30 @@ import { VariantProps, cva } from 'class-variance-authority';
 import { DetailedHTMLProps, HTMLAttributes, PropsWithChildren } from 'react';
 import { twMerge } from 'tailwind-merge';
 
-const headingVariants = cva('font-bold tracking-tight text-balance', {
-  variants: {
-    color: {
-      danger: 'text-danger-11',
-      neutral: 'text-neutral-12',
-      neutralSubtle: 'text-neutral-11',
-      accent: 'text-accent-11',
+const headingVariants = cva(
+  'font-display font-semibold tracking-tight text-balance',
+  {
+    variants: {
+      color: {
+        danger: 'text-danger-11',
+        neutral: 'text-neutral-12',
+        neutralSubtle: 'text-neutral-11',
+        accent: 'text-accent-11',
+      },
+      size: {
+        1: 'text-4xl md:text-5xl',
+        2: 'text-2xl md:text-3xl',
+        3: 'text-xl md:text-2xl',
+        4: 'text-lg md:text-xl',
+        5: 'text-base md:text-lg',
+        6: 'text-sm md:text-base',
+      },
     },
-    size: {
-      1: 'text-4xl md:text-5xl',
-      2: 'text-2xl md:text-3xl',
-      3: 'text-xl md:text-2xl',
-      4: 'text-lg md:text-xl',
-      5: 'text-base md:text-lg',
-      6: 'text-sm md:text-base',
+    defaultVariants: {
+      color: 'neutral',
     },
   },
-  defaultVariants: {
-    color: 'neutral',
-  },
-});
+);
 
 export type HeadingProps = DetailedHTMLProps<
   HTMLAttributes<HTMLHeadingElement>,

@@ -1,12 +1,11 @@
-import { faCog } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import { sortedTechSkills } from 'src/helpers/utils';
-import { Section } from '../../Section/Section';
 import { SkillMeter } from '../../SkillMeter/SkillMeter';
+import { SkillGroup } from '../SkillGroup';
 
 const TechSkills: React.FC = () => {
   return (
-    <Section icon={faCog} title="Technical Skills">
+    <SkillGroup title="Technical">
       <ul className="flex flex-col gap-4">
         {sortedTechSkills.map((skill) => (
           <SkillMeter
@@ -16,7 +15,7 @@ const TechSkills: React.FC = () => {
           />
         ))}
       </ul>
-    </Section>
+    </SkillGroup>
   );
 };
 

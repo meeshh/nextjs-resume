@@ -1,4 +1,3 @@
-import { faCertificate } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import { sortedCertifications } from 'src/helpers/utils';
 import { Section } from '../../Section/Section';
@@ -11,7 +10,7 @@ type CertificationsProps = {
 
 const Certifications: React.FC<CertificationsProps> = ({ id, secret }) => {
   return (
-    <Section icon={faCertificate} id={id} title="Certifications">
+    <Section id={id} title="Certifications">
       <div className="divide-y divide-neutral-6">
         {sortedCertifications.map((certification) => (
           <CertificationItem

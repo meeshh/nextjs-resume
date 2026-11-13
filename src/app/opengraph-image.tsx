@@ -1,5 +1,6 @@
 import resumeConfig from 'edit-me/config/resumeConfig';
 import { ImageResponse } from 'next/og';
+import { LOGO_PATH } from 'src/components/Logo/mark';
 import { getAccentColor, getNeutralColor } from 'src/helpers/colors';
 import { fullName } from 'src/helpers/utils';
 
@@ -17,40 +18,27 @@ export default async function og() {
     <div
       style={{
         backgroundColor: getNeutralColor(1, theme),
+        color: getNeutralColor(12, theme),
       }}
-      tw="flex w-full h-full items-center justify-center"
+      tw="flex flex-col w-full h-full justify-center px-24"
     >
-      <div
-        style={{
-          backgroundColor: getAccentColor(1, theme),
-          color: getAccentColor(11, theme),
-          borderColor: getAccentColor(7, theme),
-        }}
-        tw="flex flex-col items-center justify-center text-center w-9/12 h-8/12 border-2 rounded-xl"
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 64 64"
+        fill="none"
+        stroke={getAccentColor(11, theme)}
+        strokeWidth={5}
+        strokeLinecap="round"
+        width={120}
+        height={120}
       >
-        <div
-          style={{
-            color: getAccentColor(12, theme),
-            fontWeight: 700,
-          }}
-          tw="text-8xl"
-        >
-          {fullName}
-        </div>
-        <div
-          style={{
-            color: getAccentColor(11, theme),
-          }}
-          tw="text-6xl"
-        >
-          Professional Résumé
-        </div>
-        <div
-          style={{ color: getAccentColor(12, theme) }}
-          tw="mt-12 text-4xl rounded-lg"
-        >
-          Available online or as a PDF
-        </div>
+        <path d={LOGO_PATH} />
+      </svg>
+      <div tw="mt-12 text-8xl" style={{ fontWeight: 700 }}>
+        {fullName}
+      </div>
+      <div tw="mt-6 text-4xl" style={{ color: getNeutralColor(11, theme) }}>
+        Professional Résumé
       </div>
     </div>,
   );

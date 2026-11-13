@@ -14,7 +14,7 @@ const ProfessionalItem: React.FC<ProfessionalExperience> = ({
     <li className="relative pb-10 last:pb-0">
       <span
         aria-hidden
-        className="absolute top-1.5 -left-[31px] h-3 w-3 rounded-full bg-accent-9 ring-4 ring-neutral-2"
+        className="absolute top-1.5 -left-[31px] h-3 w-3 rounded-full bg-accent-9 ring-4 ring-neutral-1"
       />
       <article>
         <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">

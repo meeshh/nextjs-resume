@@ -3,7 +3,7 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 import { personal } from '@content';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { Metadata, Viewport } from 'next';
-import { Albert_Sans, JetBrains_Mono } from 'next/font/google';
+import { Albert_Sans, Fraunces, JetBrains_Mono } from 'next/font/google';
 import { PropsWithChildren } from 'react';
 import { getAccentColor } from 'src/helpers/colors';
 import { siteURL } from 'src/helpers/env';
@@ -20,6 +20,13 @@ const albert = Albert_Sans({
   display: 'swap',
   subsets: ['latin'],
   variable: '--font-albert',
+});
+
+const fraunces = Fraunces({
+  axes: ['opsz'],
+  display: 'swap',
+  subsets: ['latin'],
+  variable: '--font-fraunces',
 });
 
 const jetBrainsMono = JetBrains_Mono({
@@ -83,6 +90,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
       lang="en"
       className={twMerge(
         albert.variable,
+        fraunces.variable,
         jetBrainsMono.variable,
         resumeConfig.appTheme === ThemeSetting.Dark && 'dark',
       )}

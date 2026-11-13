@@ -6,6 +6,7 @@
 
 @theme inline {
   --font-sans: var(--font-albert);
+  --font-display: var(--font-fraunces);
   --font-mono: var(--font-jetbrains-mono);
 }
 

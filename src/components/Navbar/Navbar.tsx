@@ -3,7 +3,8 @@
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
-import { initials } from 'src/helpers/utils';
+import { fullName } from 'src/helpers/utils';
+import { Logo } from '../Logo/Logo';
 import PDFDownloadButton from '../PDF/PDFDownloadButton';
 
 const menuItems = [
@@ -36,9 +37,11 @@ const Navbar: React.FC<NavbarProps> = ({ secret }) => {
           <div className="flex shrink-0 items-center">
             <a
               href="#home"
-              className="rounded-md text-lg font-bold text-accent-11 no-underline"
+              className="flex items-center gap-2.5 rounded-md font-display text-lg font-semibold text-neutral-12 no-underline"
             >
-              {initials}
+              <Logo className="h-7 w-7 text-accent-11" strokeWidth={6.5} />
+              <span className="hidden sm:inline">{fullName}</span>
+              <span className="sr-only sm:hidden">{fullName}, back to top</span>
             </a>
           </div>
 
