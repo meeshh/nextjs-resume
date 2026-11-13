@@ -1,25 +1,18 @@
 import { faCertificate } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import { sortedCertifications } from 'src/helpers/utils';
-import { SectionHeading } from '../../SectionHeading/SectionHeading';
+import { Section } from '../../Section/Section';
 import CertificationItem from '../Certifications/CertificationItem';
 
 type CertificationsProps = {
+  id?: string;
   secret?: string;
 };
 
-const Certifications: React.FC<CertificationsProps> = ({ secret }) => {
+const Certifications: React.FC<CertificationsProps> = ({ id, secret }) => {
   return (
-    <article className="rounded-xl bg-slate-800 py-12">
-      <div className="container">
-        <div className="flex justify-center text-center">
-          <SectionHeading
-            icon={faCertificate}
-            level={2}
-            text="Certifications"
-          />
-        </div>
-
+    <Section icon={faCertificate} id={id} title="Certifications">
+      <div className="divide-y divide-neutral-6">
         {sortedCertifications.map((certification) => (
           <CertificationItem
             key={certification._id}
@@ -29,7 +22,7 @@ const Certifications: React.FC<CertificationsProps> = ({ secret }) => {
           />
         ))}
       </div>
-    </article>
+    </Section>
   );
 };
 

@@ -7,15 +7,15 @@ import { initials } from 'src/helpers/utils';
 import PDFDownloadButton from '../PDF/PDFDownloadButton';
 
 const menuItems = [
-  'skills',
-  'experience',
-  'certifications',
-  'projects',
-  'education',
+  { id: 'skills', label: 'Skills' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'certifications', label: 'Certifications' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'education', label: 'Education' },
 ];
 
 const linkClassName =
-  'rounded-md px-3 py-2 text-sm font-medium text-gray-300 no-underline hover:bg-gray-700 hover:text-white';
+  'rounded-md px-3 py-2 text-sm font-medium text-neutral-11 no-underline transition-colors hover:bg-neutral-3 hover:text-neutral-12';
 
 interface NavbarProps {
   secret?: string;
@@ -29,23 +29,23 @@ const Navbar: React.FC<NavbarProps> = ({ secret }) => {
     <nav
       id="navbar"
       aria-label="Résumé sections"
-      className="sticky top-0 z-40 -mt-12 w-full bg-slate-900/80 shadow-lg backdrop-blur-sm"
+      className="sticky top-0 z-40 w-full border-b border-neutral-6 bg-neutral-1/85 backdrop-blur-md"
     >
-      <div className="mx-auto max-w-7xl px-4">
+      <div className="container">
         <div className="flex h-16 justify-between">
           <div className="flex shrink-0 items-center">
             <a
               href="#home"
-              className="text-lg font-semibold text-white no-underline"
+              className="rounded-md text-lg font-bold text-accent-11 no-underline"
             >
               {initials}
             </a>
           </div>
 
-          <div className="hidden items-center space-x-4 md:flex">
-            {menuItems.map((item) => (
-              <a key={item} href={`#${item}`} className={linkClassName}>
-                {item.toUpperCase()}
+          <div className="hidden items-center gap-1 md:flex">
+            {menuItems.map(({ id, label }) => (
+              <a key={id} href={`#${id}`} className={linkClassName}>
+                {label}
               </a>
             ))}
             {secret && <PDFDownloadButton secret={secret} />}
@@ -57,7 +57,7 @@ const Navbar: React.FC<NavbarProps> = ({ secret }) => {
               aria-expanded={isMobileMenuOpen}
               aria-controls="mobile-menu"
               onClick={() => setIsMobileMenuOpen((open) => !open)}
-              className="h-10 rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-slate-700"
+              className="h-10 rounded-md px-3 py-2 text-sm font-medium text-neutral-12 hover:bg-neutral-3"
             >
               <FontAwesomeIcon icon={isMobileMenuOpen ? faXmark : faBars} />
             </button>
@@ -65,15 +65,15 @@ const Navbar: React.FC<NavbarProps> = ({ secret }) => {
         </div>
         {isMobileMenuOpen && (
           <div id="mobile-menu" className="pb-4 md:hidden">
-            <div className="mt-2 flex flex-col space-y-4">
-              {menuItems.map((item) => (
+            <div className="mt-2 flex flex-col gap-1">
+              {menuItems.map(({ id, label }) => (
                 <a
-                  key={item}
-                  href={`#${item}`}
+                  key={id}
+                  href={`#${id}`}
                   className={linkClassName}
                   onClick={closeMobileMenu}
                 >
-                  {item.toUpperCase()}
+                  {label}
                 </a>
               ))}
               {secret && <PDFDownloadButton secret={secret} />}

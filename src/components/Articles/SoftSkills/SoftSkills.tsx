@@ -1,26 +1,25 @@
 import { faPeopleArrows } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import { sortedSoftSkills } from 'src/helpers/utils';
-import { SectionHeading } from '../../SectionHeading/SectionHeading';
-import SoftSkillItem from '../SoftSkills/SoftSkillItem';
+import { Section } from '../../Section/Section';
+import { SkillMeter } from '../../SkillMeter/SkillMeter';
 import Languages from '../Languages/Languages';
-import { SoftSkill } from '@content';
 
 const SoftSkills: React.FC = () => {
   return (
-    <article className="rounded-xl bg-slate-800 py-12">
-      <div className="container">
-        <div className="flex justify-center text-center">
-          <SectionHeading icon={faPeopleArrows} level={2} text="Soft Skills" />
-        </div>
-
-        {sortedSoftSkills.map((skill: SoftSkill) => (
-          <SoftSkillItem key={skill._id} {...skill} />
+    <Section icon={faPeopleArrows} title="Soft Skills">
+      <ul className="flex flex-col gap-4">
+        {sortedSoftSkills.map((skill) => (
+          <SkillMeter
+            key={skill._id}
+            name={skill.name}
+            value={skill.knowledge}
+          />
         ))}
+      </ul>
 
-        <Languages />
-      </div>
-    </article>
+      <Languages />
+    </Section>
   );
 };
 

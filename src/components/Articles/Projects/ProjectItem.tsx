@@ -1,10 +1,10 @@
 import { Project } from '@content';
+import Image from 'next/image';
+import Link from 'next/link';
 import slugify from 'slugify';
+import Tags from 'src/components/Tags/Tags';
 import { Heading } from '../../Heading/Heading';
 import Prose from '../../Prose/Prose';
-import Link from 'next/link';
-import Image from 'next/image';
-import Tags from 'src/components/Tags/Tags';
 
 const ProjectItem: React.FC<Project> = ({
   title,
@@ -18,19 +18,20 @@ const ProjectItem: React.FC<Project> = ({
     .filter(Boolean);
 
   return (
-    <article className="gap-4 border-t-2 border-neutral-6 py-6 first-of-type:border-none last-of-type:pb-0 sm:flex">
-      <div className="mb-2 sm:w-1/3">
+    <article className="flex flex-col gap-6 py-8 first:pt-0 last:pb-0 sm:flex-row">
+      <div className="sm:w-1/3">
         <Image
-          className="w-full rounded-lg border-4 border-yellow-500"
+          className="aspect-square w-full rounded-xl border border-neutral-6 object-cover"
           src={`/images/${slugify(title).toLowerCase()}.jpg`}
-          alt={title}
+          // decorative: the heading beside it names the project
+          alt=""
           width={400}
           height={400}
           sizes="(min-width: 640px) 33vw, 100vw"
         />
       </div>
       <div className="sm:w-2/3">
-        <Heading level={3}>
+        <Heading level={3} size={4}>
           <Link target="_blank" rel="noopener noreferrer" href={url}>
             {title}
           </Link>

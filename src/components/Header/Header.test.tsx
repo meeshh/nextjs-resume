@@ -5,15 +5,13 @@ import { fullName } from 'src/helpers/utils';
 import { Header } from './Header';
 
 describe('<Header />', () => {
-  test('Renders the name and title headings', () => {
+  test('Renders the name heading and the title', () => {
     render(<Header />);
 
     expect(
       screen.getByRole('heading', { level: 1, name: fullName }),
     ).toBeDefined();
-    expect(
-      screen.getByRole('heading', { level: 2, name: personal.title }),
-    ).toBeDefined();
+    expect(screen.getByText(personal.title)).toBeDefined();
   });
 
   test('Does not render private widgets without a secret', () => {

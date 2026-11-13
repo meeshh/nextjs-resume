@@ -1,9 +1,7 @@
-import { faCalendar, faUniversity } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
-import { Heading } from '../../Heading/Heading';
 import { Education } from '@content';
 import Link from 'next/link';
+import React from 'react';
+import { Heading } from '../../Heading/Heading';
 import Prose from '../../Prose/Prose';
 
 const EducationItem: React.FC<Education> = ({
@@ -16,9 +14,9 @@ const EducationItem: React.FC<Education> = ({
   programUrl,
 }) => {
   return (
-    <article className="border-t-2 border-neutral-6 py-6 first-of-type:border-none last-of-type:pb-0">
-      <div>
-        <Heading level={3} className="flex-auto">
+    <article className="py-6 first:pt-0 last:pb-0">
+      <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+        <Heading level={3} size={4}>
           {programUrl ? (
             <Link target="_blank" rel="noopener noreferrer" href={programUrl}>
               {degree}
@@ -27,28 +25,24 @@ const EducationItem: React.FC<Education> = ({
             degree
           )}
         </Heading>
-
-        <div className="mt-1 flex font-medium tracking-wide">
-          <div className="mt-1 flex-auto font-medium tracking-wide">
-            <FontAwesomeIcon className="mr-2" icon={faUniversity} />
-            {organizationUrl ? (
-              <Link
-                href={organizationUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {organization}
-              </Link>
-            ) : (
-              organization
-            )}
-          </div>
-          <div>
-            <FontAwesomeIcon className="mr-2" icon={faCalendar} />
-            {startYear}–{!endYear ? 'Current' : endYear}
-          </div>
-        </div>
+        <p className="shrink-0 text-sm font-medium text-neutral-11 tabular-nums">
+          {startYear} – {endYear || 'Present'}
+        </p>
       </div>
+
+      <p className="mt-1 text-sm font-medium text-accent-11">
+        {organizationUrl ? (
+          <Link
+            href={organizationUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {organization}
+          </Link>
+        ) : (
+          organization
+        )}
+      </p>
 
       <Prose html={body.html} />
     </article>

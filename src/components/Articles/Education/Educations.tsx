@@ -1,23 +1,18 @@
-import { faMortarBoard } from '@fortawesome/free-solid-svg-icons';
+import { faGraduationCap } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import { sortedEducations } from 'src/helpers/utils';
-import { SectionHeading } from '../../SectionHeading/SectionHeading';
+import { Section } from '../../Section/Section';
 import EducationItem from '../Education/EducationItem';
-import { Education } from '@content';
 
-const Educations: React.FC = () => {
+const Educations: React.FC<{ id?: string }> = ({ id }) => {
   return (
-    <article className="rounded-xl bg-slate-800 py-12">
-      <div className="container">
-        <div className="flex justify-center text-center">
-          <SectionHeading icon={faMortarBoard} level={2} text="Education" />
-        </div>
-
-        {sortedEducations.map((education: Education) => (
+    <Section icon={faGraduationCap} id={id} title="Education">
+      <div className="divide-y divide-neutral-6">
+        {sortedEducations.map((education) => (
           <EducationItem key={education._id} {...education} />
         ))}
       </div>
-    </article>
+    </Section>
   );
 };
 

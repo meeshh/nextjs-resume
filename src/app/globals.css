@@ -11,19 +11,11 @@
 
 @utility container {
   margin-inline: auto;
-  padding-inline: 1.25rem;
+  max-width: 64rem;
+  padding-inline: 1rem;
 
   @variant sm {
     padding-inline: 2rem;
-  }
-  @variant lg {
-    padding-inline: 4rem;
-  }
-  @variant xl {
-    padding-inline: 5rem;
-  }
-  @variant 2xl {
-    padding-inline: 6rem;
   }
 }
 
@@ -43,7 +35,11 @@
   }
 
   a {
-    @apply underline decoration-accent-9 decoration-solid decoration-2 underline-offset-2 transition-colors duration-300 hocus:decoration-inherit;
+    @apply underline decoration-accent-8 decoration-solid decoration-2 underline-offset-4 transition-colors duration-200 hocus:decoration-accent-11;
+  }
+
+  :focus-visible {
+    @apply rounded-sm outline-2 outline-offset-2 outline-accent-9;
   }
 
   html {
@@ -54,14 +50,20 @@
 }
 
 @layer components {
+  .prose {
+    @apply leading-relaxed;
+  }
+  .prose p + p {
+    @apply mt-3;
+  }
   .prose code {
     @apply rounded-md bg-neutral-1 px-2 font-mono font-medium;
   }
   .prose ul {
-    @apply mt-4 list-disc pl-4 marker:text-neutral-9;
+    @apply mt-3 list-disc pl-5 marker:text-accent-9;
   }
   .prose li {
-    @apply my-2 pl-2;
+    @apply my-1.5 pl-1;
   }
 }
 

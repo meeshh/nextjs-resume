@@ -1,23 +1,22 @@
 import { faCog } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import { sortedTechSkills } from 'src/helpers/utils';
-import { SectionHeading } from '../../SectionHeading/SectionHeading';
-import TechSkillItem from '../TechSkills/TechSkillItem';
-import { TechSkill } from '@content';
+import { Section } from '../../Section/Section';
+import { SkillMeter } from '../../SkillMeter/SkillMeter';
 
 const TechSkills: React.FC = () => {
   return (
-    <article className="rounded-xl bg-slate-800 py-12">
-      <div className="container">
-        <div className="flex justify-center text-center">
-          <SectionHeading icon={faCog} level={2} text="Technical Skills" />
-        </div>
-
-        {sortedTechSkills.map((skill: TechSkill) => (
-          <TechSkillItem key={skill._id} {...skill} />
+    <Section icon={faCog} title="Technical Skills">
+      <ul className="flex flex-col gap-4">
+        {sortedTechSkills.map((skill) => (
+          <SkillMeter
+            key={skill._id}
+            name={skill.name}
+            value={skill.knowledge}
+          />
         ))}
-      </div>
-    </article>
+      </ul>
+    </Section>
   );
 };
 

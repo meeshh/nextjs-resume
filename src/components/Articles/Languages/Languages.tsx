@@ -1,20 +1,19 @@
 import React from 'react';
 import { sortedLanguages } from 'src/helpers/utils';
-import LanguageItem from './LanguageItem';
 import { Heading } from '../../Heading/Heading';
-import { Language } from '@content';
+import LanguageItem from './LanguageItem';
 
 const Languages: React.FC = () => {
   return (
-    <div className="mt-6 border-t-2 text-center">
-      <Heading level={3} className="mt-4">
+    <div className="mt-8 border-t border-neutral-6 pt-6">
+      <Heading level={3} size={5}>
         Languages
       </Heading>
-      <div className="grid grid-flow-col grid-rows-2 gap-x-6">
-        {sortedLanguages.map((language: Language) => (
+      <ul className="mt-4 grid grid-cols-2 gap-x-6 gap-y-4">
+        {sortedLanguages.map((language) => (
           <LanguageItem key={language._id} {...language} />
         ))}
-      </div>
+      </ul>
     </div>
   );
 };

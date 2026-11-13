@@ -7,11 +7,11 @@ type TagsProps = {
 const Tags: React.FC<TagsProps> = ({ tags }) => {
   if (tags.length > 0) {
     return (
-      <div className="mt-4">
+      <ul aria-label="Technologies" className="mt-4 flex flex-wrap gap-2">
         {tags.map((tag) => (
           <SingleTag tag={tag} key={tag} />
         ))}
-      </div>
+      </ul>
     );
   }
   return null;

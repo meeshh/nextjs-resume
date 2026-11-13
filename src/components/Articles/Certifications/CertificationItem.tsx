@@ -1,10 +1,8 @@
 import { Certification } from '@content';
-import { faCertificate } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Link from 'next/link';
 import React from 'react';
 import { Heading } from '../../Heading/Heading';
 import Prose from '../../Prose/Prose';
-import Link from 'next/link';
 
 const CertificationItem: React.FC<Certification> = ({
   certification,
@@ -15,8 +13,8 @@ const CertificationItem: React.FC<Certification> = ({
   secret,
 }) => {
   return (
-    <article className="border-t-2 border-neutral-6 py-6 first-of-type:border-none last-of-type:pb-0">
-      <Heading level={3}>
+    <article className="py-6 first:pt-0 last:pb-0">
+      <Heading level={3} size={4}>
         {secret && url ? (
           <Link target="_blank" rel="noopener noreferrer" href={url}>
             {certification}
@@ -26,15 +24,14 @@ const CertificationItem: React.FC<Certification> = ({
         )}
       </Heading>
 
-      <div className="mt-1 font-medium tracking-wide">
-        <FontAwesomeIcon className="mr-2" icon={faCertificate} />
-        {issuer}
-      </div>
+      <p className="mt-1 text-sm font-medium text-accent-11">{issuer}</p>
       {secret && credentialId && (
-        <div className="mt-1 text-xs tracking-wide">
-          <span className="mr-2">Credential ID:</span>
-          <span className="bg-purple-500 px-2 text-white">{credentialId}</span>
-        </div>
+        <p className="mt-2 text-xs text-neutral-11">
+          Credential ID{' '}
+          <code className="rounded bg-neutral-4 px-1.5 py-0.5 font-mono text-neutral-12">
+            {credentialId}
+          </code>
+        </p>
       )}
 
       <Prose html={body.html} />

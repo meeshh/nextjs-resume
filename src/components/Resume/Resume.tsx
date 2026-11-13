@@ -1,4 +1,3 @@
-import AboutMe from 'src/components/Articles/AboutMe';
 import { AdditionalInfo } from 'src/components/Articles/AdditionalInfo';
 import Certifications from 'src/components/Articles/Certifications/Certifications';
 import Educations from 'src/components/Articles/Education/Educations';
@@ -14,42 +13,20 @@ interface ResumeProps {
 
 /** The résumé body shared by the public and the private page. Section ids are the navbar anchors. */
 const Resume: React.FC<ResumeProps> = ({ secret }) => (
-  <main id="resume" className="container pt-12">
-    <div className="grid grid-cols-1 gap-6">
-      <AboutMe />
-    </div>
-
-    <div
-      id="skills"
-      className="mt-12 grid grid-flow-row gap-6 lg:grid-flow-col"
-    >
-      <TechSkills />
-      <SoftSkills />
-    </div>
-
-    <div className="mt-12">
+  <main id="resume" className="container flex flex-col gap-16 pt-16">
+    <div id="skills" className="flex flex-col gap-16">
+      <div className="grid gap-16 lg:grid-cols-2 lg:gap-8">
+        <TechSkills />
+        <SoftSkills />
+      </div>
       <Skills />
     </div>
 
-    <div id="experience" className="mt-12">
-      <Professional />
-    </div>
-
-    <div id="certifications" className="mt-12">
-      <Certifications secret={secret} />
-    </div>
-
-    <div id="projects" className="mt-12">
-      <Projects />
-    </div>
-
-    <div id="education" className="mt-12">
-      <Educations />
-    </div>
-
-    <div className="mt-12">
-      <AdditionalInfo />
-    </div>
+    <Professional id="experience" />
+    <Certifications id="certifications" secret={secret} />
+    <Projects id="projects" />
+    <Educations id="education" />
+    <AdditionalInfo />
   </main>
 );
 

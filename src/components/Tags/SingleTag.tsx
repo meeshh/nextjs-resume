@@ -4,9 +4,9 @@ type TagProps = {
 
 const SingleTag: React.FC<TagProps> = ({ tag }) => {
   return (
-    <div className="m-2 inline-block rounded-2xl bg-sky-600 px-2 py-1 text-sm">
+    <li className="rounded-full border border-accent-6 bg-accent-3 px-2.5 py-0.5 text-xs font-medium text-accent-11">
       {tag}
-    </div>
+    </li>
   );
 };
 

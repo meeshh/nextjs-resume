@@ -5,7 +5,6 @@ import { GoogleAnalytics } from '@next/third-parties/google';
 import { Metadata, Viewport } from 'next';
 import { Albert_Sans, JetBrains_Mono } from 'next/font/google';
 import { PropsWithChildren } from 'react';
-import Moon from 'src/components/Moon/Moon';
 import { getAccentColor } from 'src/helpers/colors';
 import { siteURL } from 'src/helpers/env';
 import { fullName } from 'src/helpers/utils';
@@ -88,8 +87,13 @@ export default function RootLayout({ children }: PropsWithChildren) {
         resumeConfig.appTheme === ThemeSetting.Dark && 'dark',
       )}
     >
-      <body className="min-h-dvh bg-slate-900 font-sans text-neutral-12 selection:bg-accent-11 selection:text-neutral-1">
-        <Moon />
+      <body className="min-h-dvh bg-neutral-1 font-sans text-neutral-12 antialiased selection:bg-accent-9 selection:text-accentContrast">
+        <a
+          href="#resume"
+          className="sr-only z-50 rounded-md bg-accent-9 px-4 py-2 font-medium text-accentContrast no-underline focus:not-sr-only focus:fixed focus:top-4 focus:left-4"
+        >
+          Skip to résumé
+        </a>
         {children}
       </body>
       {isDeployed && gaId && <GoogleAnalytics gaId={gaId} />}

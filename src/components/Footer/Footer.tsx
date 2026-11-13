@@ -11,7 +11,7 @@ type FooterProps = {
 
 export const Footer: React.FC<FooterProps> = ({ secret = undefined }) => {
   return (
-    <footer className="mt-12 border-t-2 border-neutral-8 bg-slate-950 py-12 text-neutral-12">
+    <footer className="mt-20 border-t border-neutral-6 py-10 text-sm text-neutral-11">
       <div className="container text-center">
         {secret && links && (
           <div className="flex justify-center">
@@ -32,9 +32,9 @@ export const Footer: React.FC<FooterProps> = ({ secret = undefined }) => {
           </div>
         )}
 
-        <div className="mt-6">
-          Copyright ©{new Date().getFullYear()} {fullName}
-        </div>
+        <p className="mt-6">
+          © {new Date().getFullYear()} {fullName}
+        </p>
       </div>
     </footer>
   );

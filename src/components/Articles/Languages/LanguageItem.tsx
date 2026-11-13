@@ -1,6 +1,5 @@
 import { Language } from '@content';
 import React from 'react';
-import { Heading } from '../../Heading/Heading';
 
 const MAX_LEVEL = 5;
 
@@ -9,15 +8,15 @@ const LevelIndicator: React.FC<{ level: number }> = ({ level }) => {
 
   return (
     <div
-      className="flex gap-2"
+      className="flex gap-1.5"
       role="img"
       aria-label={`Proficiency ${filled} out of ${MAX_LEVEL}`}
     >
       {Array.from({ length: MAX_LEVEL }, (_, index) => (
         <span
           key={index}
-          className={`inline-block h-4 w-4 rounded-full ${
-            index < filled ? 'bg-yellow-500' : 'bg-slate-300'
+          className={`inline-block h-2.5 w-2.5 rounded-full ${
+            index < filled ? 'bg-accent-9' : 'bg-neutral-6'
           }`}
         />
       ))}
@@ -27,11 +26,10 @@ const LevelIndicator: React.FC<{ level: number }> = ({ level }) => {
 
 const LanguageItem: React.FC<Language> = ({ language, level }) => {
   return (
-    <article className="py-2">
-      <Heading level={6}>{language}</Heading>
-
+    <li className="flex flex-col gap-2">
+      <span className="text-sm font-medium text-neutral-12">{language}</span>
       <LevelIndicator level={level} />
-    </article>
+    </li>
   );
 };
 

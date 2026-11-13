@@ -1,23 +1,18 @@
 import { faCode } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import { sortedProjects } from 'src/helpers/utils';
-import { SectionHeading } from '../../SectionHeading/SectionHeading';
+import { Section } from '../../Section/Section';
 import ProjectItem from './ProjectItem';
-import { Project } from '@content';
 
-const Projects: React.FC = () => {
+const Projects: React.FC<{ id?: string }> = ({ id }) => {
   return (
-    <article className="rounded-xl bg-slate-800 py-12">
-      <div className="container">
-        <div className="flex justify-center text-center">
-          <SectionHeading icon={faCode} level={2} text="Projects" />
-        </div>
-
-        {sortedProjects.map((project: Project) => (
+    <Section icon={faCode} id={id} title="Projects">
+      <div className="divide-y divide-neutral-6">
+        {sortedProjects.map((project) => (
           <ProjectItem key={project._id} {...project} />
         ))}
       </div>
-    </article>
+    </Section>
   );
 };
 
