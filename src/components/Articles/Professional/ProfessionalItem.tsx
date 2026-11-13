@@ -1,6 +1,7 @@
 import { ProfessionalExperience } from '@content';
 import { Heading } from '../../Heading/Heading';
 import Prose from '../../Prose/Prose';
+import { twMerge } from 'tailwind-merge';
 
 const ProfessionalItem: React.FC<ProfessionalExperience> = ({
   body,
@@ -10,30 +11,26 @@ const ProfessionalItem: React.FC<ProfessionalExperience> = ({
   title,
   location,
   connectBottom,
+  connectTop,
 }) => {
   return (
-    <li className="relative pb-10 last:pb-0">
-      {/* same company as the older role below: the rail between them turns accent */}
-      {connectBottom && (
-        <span
-          aria-hidden
-          className="absolute top-3 -bottom-3 -left-[26px] w-0.5 bg-accent-9"
-        />
-      )}
-      {/* points up, toward the present */}
-      <svg
+    <li className="group relative pb-10 last:pb-0">
+      {/* rail down to the next (older) role: accent within one company, fading out after the first job */}
+      <span
         aria-hidden
-        viewBox="0 0 14 12"
-        className="absolute top-1.5 -left-[32px] h-3 w-3.5 overflow-visible"
-      >
-        <path
-          d="M7 0.5L13.5 11.5H0.5Z"
-          strokeLinejoin="round"
-          className="fill-accent-9 stroke-neutral-1"
-          strokeWidth={3}
-          paintOrder="stroke"
-        />
-      </svg>
+        className={twMerge(
+          'absolute top-3 -bottom-3 -left-[19px] w-0.5 bg-neutral-6 group-last:bottom-0 group-last:bg-transparent group-last:bg-linear-to-b group-last:from-neutral-6',
+          connectBottom && 'bg-accent-9',
+        )}
+      />
+      <span
+        aria-hidden
+        className={twMerge(
+          'absolute top-1.5 -left-6 h-3 w-3 rounded-full border-2 border-neutral-8 bg-neutral-1',
+          (connectTop || connectBottom) && 'border-accent-9',
+          !endDate && 'border-accent-9 bg-accent-9 ring-4 ring-accent-4',
+        )}
+      />
       <article>
         <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
           <Heading level={3} size={4}>

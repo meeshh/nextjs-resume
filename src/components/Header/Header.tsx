@@ -12,7 +12,7 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ secret, access = {} }) => {
   return (
-    <header id="home" className="border-b border-neutral-6">
+    <header id="home">
       <div className="container py-12 md:py-16">
         <div className="flex flex-col gap-4">
           <Heading level={1} size={1} className="md:text-6xl">
