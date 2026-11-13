@@ -8,8 +8,8 @@ import { Logo } from '../Logo/Logo';
 import PDFDownloadButton from '../PDF/PDFDownloadButton';
 
 const menuItems = [
-  { id: 'skills', label: 'Skills' },
   { id: 'experience', label: 'Experience' },
+  { id: 'skills', label: 'Skills' },
   { id: 'certifications', label: 'Certifications' },
   { id: 'education', label: 'Education' },
 ];

@@ -14,17 +14,18 @@ interface ResumeProps {
 /** The résumé body shared by the public and the private page. Section ids are the navbar anchors. */
 const Resume: React.FC<ResumeProps> = ({ secret }) => (
   <main id="resume" className="container flex flex-col gap-16 pt-12">
+    <Professional id="experience" />
+
     <Section id="skills" title="Skills">
-      <div className="flex flex-col gap-12">
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+      <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className="flex flex-col gap-12">
           <TechSkills />
-          <SoftSkills />
+          <Skills />
         </div>
-        <Skills />
+        <SoftSkills />
       </div>
     </Section>
 
-    <Professional id="experience" />
     <Certifications id="certifications" secret={secret} />
     <Educations id="education" />
     <AdditionalInfo />
