@@ -44,7 +44,7 @@ const EducationItem: React.FC<Education> = ({
         )}
       </p>
 
-      <Prose html={body.html} />
+      <Prose className="text-justify hyphens-auto" html={body.html} />
     </article>
   );
 };
