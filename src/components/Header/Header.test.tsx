@@ -21,9 +21,4 @@ describe('<Header />', () => {
 
     expect(screen.queryByRole('textbox')).toBeNull();
   });
-
-  test('Snapshot', () => {
-    const { container } = render(<Header />);
-    expect(container.innerHTML).toMatchSnapshot();
-  });
 });

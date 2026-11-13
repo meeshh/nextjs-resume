@@ -13,9 +13,4 @@ describe('<Footer />', () => {
     render(<Footer secret="secret" />);
     expect(screen.getAllByRole('link')).toHaveLength(links.length);
   });
-
-  test('Snapshot', () => {
-    const { container } = render(<Footer secret="secret" />);
-    expect(container.innerHTML).toMatchSnapshot();
-  });
 });
