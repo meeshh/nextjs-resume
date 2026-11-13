@@ -5,7 +5,7 @@ import { fullName } from 'src/helpers/utils';
 import { Header } from './Header';
 
 describe('<Header />', () => {
-  test('Renders headings and PDF button', () => {
+  test('Renders the name and title headings', () => {
     render(<Header />);
 
     expect(
@@ -14,13 +14,16 @@ describe('<Header />', () => {
     expect(
       screen.getByRole('heading', { level: 2, name: personal.title }),
     ).toBeDefined();
-    expect(
-      screen.getByRole('link', { name: /download pdf/i }),
-    ).toBeDefined();
+  });
+
+  test('Does not render private widgets without a secret', () => {
+    render(<Header />);
+
+    expect(screen.queryByRole('textbox')).toBeNull();
   });
 
   test('Snapshot', () => {
-    const { asFragment } = render(<Header />);
-    expect(asFragment).toMatchSnapshot();
+    const { container } = render(<Header />);
+    expect(container.innerHTML).toMatchSnapshot();
   });
 });

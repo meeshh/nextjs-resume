@@ -15,7 +15,7 @@ describe('<Heading />', () => {
   });
 
   test('Snapshot', () => {
-    const { asFragment } = render(
+    const { container } = render(
       <>
         <Heading color="neutral" level={1}>
           Heading 1
@@ -23,7 +23,7 @@ describe('<Heading />', () => {
         <Heading color="neutralSubtle" level={2}>
           Heading 2
         </Heading>
-        <Heading color="primary" level={3}>
+        <Heading color="accent" level={3}>
           Heading 3
         </Heading>
         <Heading color="danger" level={4}>
@@ -33,6 +33,6 @@ describe('<Heading />', () => {
         <Heading level={6}>Heading 6</Heading>
       </>,
     );
-    expect(asFragment).toMatchSnapshot();
+    expect(container.innerHTML).toMatchSnapshot();
   });
 });

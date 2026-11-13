@@ -1,11 +1,59 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-@layer components {
+@plugin '../styles/radixPalette.ts';
+
+@custom-variant hocus (&:hover, &:focus);
+
+@theme inline {
+  --font-sans: var(--font-albert);
+  --font-mono: var(--font-jetbrains-mono);
+}
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+
+  @variant sm {
+    padding-inline: 2rem;
+  }
+  @variant lg {
+    padding-inline: 4rem;
+  }
+  @variant xl {
+    padding-inline: 5rem;
+  }
+  @variant 2xl {
+    padding-inline: 6rem;
+  }
+}
+
+@layer base {
+  /* keep Tailwind v3 defaults that the design relies on */
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+
   a {
     @apply underline decoration-accent-9 decoration-solid decoration-2 underline-offset-2 transition-colors duration-300 hocus:decoration-inherit;
   }
+
+  html {
+    scroll-behavior: smooth;
+    /* keep anchored sections clear of the sticky navbar */
+    scroll-padding-top: 5rem;
+  }
+}
+
+@layer components {
   .prose code {
     @apply rounded-md bg-neutral-1 px-2 font-mono font-medium;
   }
@@ -14,5 +62,17 @@
   }
   .prose li {
     @apply my-2 pl-2;
+  }
+}
+
+/* job-offer keyword matches, painted via the CSS Custom Highlight API */
+::highlight(skill-match) {
+  background-color: var(--color-yellow-300);
+  color: var(--color-black);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }

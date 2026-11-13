@@ -15,7 +15,7 @@ describe('<SectionHeading />', () => {
   });
 
   test('Snapshot', async () => {
-    const { asFragment } = render(<SectionHeading text="Section Heading" />);
-    expect(asFragment).toMatchSnapshot();
+    const { container } = render(<SectionHeading text="Section Heading" />);
+    expect(container.innerHTML).toMatchSnapshot();
   });
 });

@@ -8,7 +8,7 @@ const headingVariants = cva('font-bold', {
       danger: 'text-danger-11',
       neutral: 'text-neutral-12',
       neutralSubtle: 'text-neutral-11',
-      primary: 'text-primary-11',
+      accent: 'text-accent-11',
     },
     size: {
       1: 'text-4xl md:text-5xl',

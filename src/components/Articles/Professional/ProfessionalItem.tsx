@@ -1,5 +1,6 @@
 import { ProfessionalExperience } from '@content';
 import {
+  faBuilding,
   faCalendar,
   faLocationCrosshairs,
 } from '@fortawesome/free-solid-svg-icons';
@@ -35,22 +36,18 @@ const ProfessionalItem: React.FC<ProfessionalExperience> = ({
   return (
     <article className="relative border-t-2 border-neutral-6 py-6 first-of-type:border-none last-of-type:pb-0">
       <div
-        className={`absolute left-0 ${verticalPosition} ${translate} -ml-4 ${height} w-1 border-l-4 border-sky-500 `}
+        className={`absolute left-0 ${verticalPosition} ${translate} -ml-4 ${height} w-1 border-l-4 border-sky-500`}
       >
         {!connectTop && (
-          <div
-            className={`absolute -left-2 -top-2 h-3 w-3 rounded-full bg-sky-700`}
-          />
+          <div className="absolute -top-2 -left-2 h-3 w-3 rounded-full bg-sky-700" />
         )}
         {!connectBottom && (
-          <div
-            className={`absolute -bottom-2 -left-2  h-3 w-3 rounded-full bg-sky-700`}
-          />
+          <div className="absolute -bottom-2 -left-2 h-3 w-3 rounded-full bg-sky-700" />
         )}
       </div>
       <div className="flex">
         <Heading level={3} className="flex-auto">
-          <span className="px-2 text-neutral-1 text-sky-500">{title}</span>
+          <span className="px-2 text-sky-500">{title}</span>
         </Heading>
         <span>
           <FontAwesomeIcon className="mr-2" icon={faCalendar} />
@@ -60,7 +57,7 @@ const ProfessionalItem: React.FC<ProfessionalExperience> = ({
 
       <div className="mt-1 flex space-x-8 font-medium tracking-wide">
         <span className="text-sm">
-          <FontAwesomeIcon className="mr-2" icon={faCalendar} />
+          <FontAwesomeIcon className="mr-2" icon={faBuilding} />
           {organization}
         </span>
         {location ? (

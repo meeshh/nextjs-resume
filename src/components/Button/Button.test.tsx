@@ -11,7 +11,7 @@ describe('<Button />', () => {
   });
 
   test('Snapshot', async () => {
-    const { asFragment } = render(
+    const { container } = render(
       <>
         <Button>Button</Button>
         <Button size="sm">Button</Button>
@@ -19,6 +19,6 @@ describe('<Button />', () => {
         <Button size="lg">Button</Button>
       </>,
     );
-    expect(asFragment).toMatchSnapshot();
+    expect(container.innerHTML).toMatchSnapshot();
   });
 });

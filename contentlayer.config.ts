@@ -1,4 +1,4 @@
-import { defineDocumentType, makeSource } from 'contentlayer/source-files';
+import { defineDocumentType, makeSource } from 'contentlayer2/source-files';
 
 export const Personal = defineDocumentType(() => ({
   name: 'Personal',
@@ -281,6 +281,8 @@ export const PrivateField = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: 'edit-me/content',
+  // generated content is imported through the `@content` tsconfig alias
+  disableImportAliasWarning: true,
   documentTypes: [
     Personal,
     Skill,

@@ -1,12 +1,7 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "target": "esnext",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "target": "ES2022",
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -17,36 +12,26 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
-    "allowImportingTsExtensions": true,
     "moduleDetection": "force",
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
-    "strictNullChecks": true,
+    "plugins": [{ "name": "next" }],
     "paths": {
-      "@content": [
-        "./.contentlayer/generated"
-      ],
-      "@test-utils": [
-        "./src/test-utils.tsx"
-      ]
+      "@content": ["./.contentlayer/generated"],
+      "@test-utils": ["./src/test-utils.tsx"],
+      "src/*": ["./src/*"],
+      "edit-me/*": ["./edit-me/*"]
     },
-    "types": [
-      "bun-types"
-    ]
+    "types": ["bun"]
   },
-  "exclude": [
-    "node_modules"
-  ],
+  "exclude": ["node_modules"],
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
+    "**/*.mjs",
     ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts",
     ".contentlayer/generated"
   ]
 }

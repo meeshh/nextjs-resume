@@ -8,8 +8,8 @@ const Tags: React.FC<TagsProps> = ({ tags }) => {
   if (tags.length > 0) {
     return (
       <div className="mt-4">
-        {tags.map((tag, index) => (
-          <SingleTag tag={tag} key={index} />
+        {tags.map((tag) => (
+          <SingleTag tag={tag} key={tag} />
         ))}
       </div>
     );

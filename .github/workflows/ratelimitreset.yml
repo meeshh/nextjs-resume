@@ -2,19 +2,20 @@ name: Reset Rate Limits
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Schedule the job to run every day at midnight UTC
+    - cron: '0 0 * * *' # every day at midnight UTC
+  workflow_dispatch:
 
 jobs:
-  periodic-job:
+  reset:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Set up Git repository
-        uses: actions/checkout@v2
-
-      - name: Make API Call
+      - name: Reset all skill-highlighting limits
+        env:
+          # passed via env (not inlined into the script) so it can't break or inject into the shell command
+          RESET_LIMIT_CODE: ${{ secrets.RESET_LIMIT_CODE }}
         run: |
-          curl -X POST \
+          curl --fail-with-body -sS -X POST \
             -H "Content-Type: application/json" \
-            -d '{"secret": "${{ secrets.RESET_LIMIT_CODE }}" }' \
+            -d "{\"secret\": \"${RESET_LIMIT_CODE}\"}" \
             https://michel-barakat.vercel.app/api/rateLimiter

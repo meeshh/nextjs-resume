@@ -12,24 +12,36 @@ const EducationItem: React.FC<Education> = ({
   endYear,
   organization,
   body,
-  organizationUrl = '#',
-  programUrl = '#',
+  organizationUrl,
+  programUrl,
 }) => {
   return (
     <article className="border-t-2 border-neutral-6 py-6 first-of-type:border-none last-of-type:pb-0">
       <div>
         <Heading level={3} className="flex-auto">
-          <Link target="_blank" href={programUrl}>
-            {degree}
-          </Link>
+          {programUrl ? (
+            <Link target="_blank" rel="noopener noreferrer" href={programUrl}>
+              {degree}
+            </Link>
+          ) : (
+            degree
+          )}
         </Heading>
 
         <div className="mt-1 flex font-medium tracking-wide">
           <div className="mt-1 flex-auto font-medium tracking-wide">
             <FontAwesomeIcon className="mr-2" icon={faUniversity} />
-            <Link href={organizationUrl} target="_blank">
-              {organization}
-            </Link>
+            {organizationUrl ? (
+              <Link
+                href={organizationUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {organization}
+              </Link>
+            ) : (
+              organization
+            )}
           </div>
           <div>
             <FontAwesomeIcon className="mr-2" icon={faCalendar} />

@@ -2,39 +2,24 @@ import { Language } from '@content';
 import React from 'react';
 import { Heading } from '../../Heading/Heading';
 
-const PrintLevel = ({ x, y }: { x: number; y: number }) => {
-  const filledCircleIcon = (
-    <div
-      className="bg-yellow-500"
-      style={{
-        display: 'inline-block',
-        width: 16,
-        height: 16,
-        borderRadius: '50%',
-      }}
-    ></div>
-  );
-  const emptyCircleIcon = (
-    <div
-      className="bg-slate-300"
-      style={{
-        display: 'inline-block',
-        width: 16,
-        height: 16,
-        borderRadius: '50%',
-      }}
-    ></div>
-  );
-  const charactersA = Array(x).fill(filledCircleIcon);
-  const charactersB = Array(y - x).fill(emptyCircleIcon);
-  const resultIcons = charactersA.concat(charactersB);
+const MAX_LEVEL = 5;
+
+const LevelIndicator: React.FC<{ level: number }> = ({ level }) => {
+  const filled = Math.min(Math.max(Math.round(level), 0), MAX_LEVEL);
 
   return (
-    <div>
-      {resultIcons.map((icon, index) => (
-        <span className="mr-2" key={index}>
-          {icon}
-        </span>
+    <div
+      className="flex gap-2"
+      role="img"
+      aria-label={`Proficiency ${filled} out of ${MAX_LEVEL}`}
+    >
+      {Array.from({ length: MAX_LEVEL }, (_, index) => (
+        <span
+          key={index}
+          className={`inline-block h-4 w-4 rounded-full ${
+            index < filled ? 'bg-yellow-500' : 'bg-slate-300'
+          }`}
+        />
       ))}
     </div>
   );
@@ -45,7 +30,7 @@ const LanguageItem: React.FC<Language> = ({ language, level }) => {
     <article className="py-2">
       <Heading level={6}>{language}</Heading>
 
-      <PrintLevel x={level} y={5} />
+      <LevelIndicator level={level} />
     </article>
   );
 };

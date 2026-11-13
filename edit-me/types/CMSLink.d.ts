@@ -1,6 +1,6 @@
-import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 
-interface CMSLink {
+export interface CMSLink {
   href: string;
   icon: IconDefinition;
   title: string;

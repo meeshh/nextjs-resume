@@ -4,7 +4,7 @@ import ButtonLink from './ButtonLink';
 
 describe('<ButtonLink />', () => {
   test('Snapshot', async () => {
-    const { asFragment } = render(
+    const { container } = render(
       <>
         <ButtonLink href="/">Button</ButtonLink>
         <ButtonLink href="/" size="sm">
@@ -18,7 +18,7 @@ describe('<ButtonLink />', () => {
         </ButtonLink>
       </>,
     );
-    expect(asFragment).toMatchSnapshot();
+    expect(container.innerHTML).toMatchSnapshot();
   });
 
   test('Renders an accessible link element', async () => {

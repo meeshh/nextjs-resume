@@ -1,54 +1,55 @@
-// @ts-nocheck
-export function highlightWords(words: string[]): void {
-  // Remove existing highlights
-  removeHighlights();
+const HIGHLIGHT_NAME = 'skill-match';
+const SKIPPED_TAGS = new Set(['SCRIPT', 'STYLE', 'NOSCRIPT', 'TEXTAREA']);
 
-  const textNodes = getAllTextNodes(document.body);
+const escapeRegExp = (value: string) =>
+  value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
-  textNodes.forEach((textNode: Text) => {
-    let modifiedText = textNode.nodeValue || '';
+export const supportsHighlights = () =>
+  typeof CSS !== 'undefined' && 'highlights' in CSS;
 
-    words.forEach((word: string) => {
-      const regex = new RegExp(`\\b(${word})\\b`, 'gi'); // Capture the word in a group, case-insensitive
-      modifiedText = modifiedText.replace(regex, (match: string, capturedWord: string) => {
-        // Use the captured word to preserve its case
-        return `<mark>${capturedWord}</mark>`;
-      });
-    });
+/**
+ * Highlights every occurrence of `words` inside `root` using the CSS Custom
+ * Highlight API. Unlike wrapping matches in `<mark>` elements this never
+ * mutates the DOM, so React stays in control of its nodes and repeated runs
+ * don't accumulate wrapper elements.
+ */
+export function highlightWords(words: string[], root: Node = document.body) {
+  clearHighlights();
+  if (!supportsHighlights()) return 0;
 
-    if (textNode.nodeValue !== modifiedText) {
-      const span = document.createElement('span');
-      span.innerHTML = modifiedText;
-      textNode.replaceWith(span);
-    }
-  });
-}
+  const terms = words.map((word) => word.trim()).filter(Boolean);
+  if (!terms.length) return 0;
 
-// Helper function to get all text nodes in a given element
-function getAllTextNodes(element: Node): Text[] {
-  const walker = document.createTreeWalker(
-    element,
-    NodeFilter.SHOW_TEXT,
-    null,
-    false,
+  // longest first so "Node.js" wins over "Node"; lookarounds act as \b that also works next to "." or "+"
+  const pattern = new RegExp(
+    `(?<![\\w])(?:${terms
+      .sort((a, b) => b.length - a.length)
+      .map(escapeRegExp)
+      .join('|')})(?![\\w])`,
+    'gi',
   );
-  const textNodes: Text[] = [];
 
-  while (walker.nextNode()) {
-    textNodes.push(walker.currentNode as Text);
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+    acceptNode: (node) =>
+      node.parentElement && !SKIPPED_TAGS.has(node.parentElement.tagName)
+        ? NodeFilter.FILTER_ACCEPT
+        : NodeFilter.FILTER_REJECT,
+  });
+
+  const ranges: Range[] = [];
+  for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+    for (const match of (node.nodeValue ?? '').matchAll(pattern)) {
+      const range = new Range();
+      range.setStart(node, match.index);
+      range.setEnd(node, match.index + match[0].length);
+      ranges.push(range);
+    }
   }
 
-  return textNodes;
+  CSS.highlights.set(HIGHLIGHT_NAME, new Highlight(...ranges));
+  return ranges.length;
 }
 
-// Helper function to remove existing highlights
-function removeHighlights() {
-  const markElements = document.querySelectorAll('mark');
-  markElements.forEach((markElement) => {
-    const parentNode = markElement.parentNode;
-    parentNode.replaceChild(
-      document.createTextNode(markElement.textContent),
-      markElement,
-    );
-  });
+export function clearHighlights() {
+  if (supportsHighlights()) CSS.highlights.delete(HIGHLIGHT_NAME);
 }

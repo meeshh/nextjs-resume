@@ -11,7 +11,7 @@ type FooterProps = {
 
 export const Footer: React.FC<FooterProps> = ({ secret = undefined }) => {
   return (
-    <footer className="mt-12 bg-slate-950 py-12 text-neutral-12 border-t-2 border-neutral-8">
+    <footer className="mt-12 border-t-2 border-neutral-8 bg-slate-950 py-12 text-neutral-12">
       <div className="container text-center">
         {secret && links && (
           <div className="flex justify-center">

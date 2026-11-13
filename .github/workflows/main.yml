@@ -2,7 +2,13 @@ name: CI
 
 on:
   pull_request:
+  push:
+    branches: [main]
   workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -10,11 +16,17 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v1
+      - uses: oven-sh/setup-bun@v2
 
       - name: Install
-        run: bun install
-      - name: Build
+        run: bun install --frozen-lockfile
+      - name: Generate content
         run: bun run build:content
+      - name: Lint
+        run: bun run lint
+      - name: Type check
+        run: bunx next typegen && bunx tsc -p tsconfig.json --noEmit
       - name: Unit tests
         run: bun test
+      - name: Build
+        run: bunx next build

@@ -10,10 +10,13 @@ interface PDFDownloadButtonProps {
 const PDFDownloadButton: React.FC<PDFDownloadButtonProps> = ({ secret }) => {
   return (
     <ButtonLink
-      href={secret ? `/api/pdf?secret=${secret}` : '/api/pdf'}
+      href={
+        secret ? `/api/pdf?secret=${encodeURIComponent(secret)}` : '/api/pdf'
+      }
+      prefetch={false}
       size="md"
     >
-      Download
+      Download PDF
       <FontAwesomeIcon icon={faFilePdf} size="lg" />
     </ButtonLink>
   );

@@ -1,68 +1,36 @@
 import { notFound } from 'next/navigation';
-import AboutMe from 'src/components/Articles/AboutMe';
-import { AdditionalInfo } from 'src/components/Articles/AdditionalInfo';
-import Professional from 'src/components/Articles/Professional/Professional';
 import { Footer } from 'src/components/Footer/Footer';
-import { Header } from '../../../components/Header/Header';
-import Educations from 'src/components/Articles/Education/Educations';
-import Certifications from 'src/components/Articles/Certifications/Certifications';
-import TechSkills from 'src/components/Articles/TechSkills/TechSkills';
-import SoftSkills from 'src/components/Articles/SoftSkills/SoftSkills';
-import Projects from 'src/components/Articles/Projects/Projects';
-import Skills from 'src/components/Articles/Skills/Skills';
+import { Header } from 'src/components/Header/Header';
 import Navbar from 'src/components/Navbar/Navbar';
+import Resume from 'src/components/Resume/Resume';
+import { isPrivateKey } from 'src/lib/auth';
 
-const privateKey = process.env.PRIVATE_KEY;
+type PrivatePageProps = {
+  params: Promise<{ secret: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+};
 
-const Page: React.FC<PageProps> = async ({ params }) => {
-  const { secret } = params;
+const first = (value: string | string[] | undefined) =>
+  Array.isArray(value) ? value[0] : value;
 
-  if (secret !== privateKey) {
-    return notFound();
+export default async function PrivatePage({
+  params,
+  searchParams,
+}: PrivatePageProps) {
+  const { secret } = await params;
+
+  if (!isPrivateKey(secret)) {
+    notFound();
   }
+
+  const { id, email } = await searchParams;
 
   return (
     <>
-      <Header secret={secret} />
+      <Header secret={secret} access={{ id: first(id), email: first(email) }} />
       <Navbar secret={secret} />
-      <div className="container pt-12">
-        <div className="grid grid-cols-1 gap-6">
-          <AboutMe />
-        </div>
-
-        <div id="skills" className="mt-12 grid grid-flow-row gap-6 lg:grid-flow-col">
-          <TechSkills />
-          <SoftSkills />
-        </div>
-
-        <div className="mt-12">
-          <Skills />
-        </div>
-
-        <div id="experience" className="mt-12">
-          <Professional />
-        </div>
-
-        <div id="certifications" className="mt-12">
-          <Certifications secret={secret} />
-        </div>
-
-        <div id="projects" className="mt-12">
-          <Projects />
-        </div>
-
-        <div id="education" className="mt-12">
-          <Educations />
-        </div>
-
-        <div className="mt-12">
-          <AdditionalInfo />
-        </div>
-      </div>
-
+      <Resume secret={secret} />
       <Footer secret={secret} />
     </>
   );
-};
-
-export default Page;
+}

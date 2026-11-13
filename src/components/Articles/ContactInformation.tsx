@@ -1,44 +1,40 @@
-import { PrivateField, personal } from '@content';
+import { personal } from '@content';
 import {
-  faLocationCrosshairs,
   faEnvelope,
+  faLocationCrosshairs,
   faMobile,
 } from '@fortawesome/free-solid-svg-icons';
-import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { getPrivatePersonalInfo } from 'src/pages/api/personal-info';
+import { getPrivatePersonalInfo } from 'src/lib/personalInfo';
 
-interface ContactInformationProps {
-  privateInformation?: PrivateField[];
-  secret?: string;
-}
-
-export const ContactInformation: React.FC<ContactInformationProps> = async ({
-  secret,
-}) => {
-  const { email = '', mobile = '' } = await getPrivatePersonalInfo();
+/** Only rendered on the private page; the details come from a private gist. */
+export async function ContactInformation() {
+  const { email, mobile } = await getPrivatePersonalInfo();
 
   return (
-    <article>
+    <address className="not-italic">
       <ul className="mt-2 sm:text-center md:text-left">
         <li className="flex items-center justify-center gap-2">
           <FontAwesomeIcon className="w-4" icon={faLocationCrosshairs} />
           <span className="flex-1">{personal.location}</span>
         </li>
-
-        {secret && (
-          <>
-            <li className="flex items-center justify-center gap-2">
-              <FontAwesomeIcon className="w-4" icon={faEnvelope} />
-              <span className="flex-1">{email}</span>
-            </li>
-            <li className="flex items-center justify-center gap-2">
-              <FontAwesomeIcon className="w-4" icon={faMobile} />
-              <span className="flex-1">{mobile}</span>
-            </li>
-          </>
+        {email && (
+          <li className="flex items-center justify-center gap-2">
+            <FontAwesomeIcon className="w-4" icon={faEnvelope} />
+            <a className="flex-1" href={`mailto:${email}`}>
+              {email}
+            </a>
+          </li>
+        )}
+        {mobile && (
+          <li className="flex items-center justify-center gap-2">
+            <FontAwesomeIcon className="w-4" icon={faMobile} />
+            <a className="flex-1" href={`tel:${mobile.replace(/\s+/g, '')}`}>
+              {mobile}
+            </a>
+          </li>
         )}
       </ul>
-    </article>
+    </address>
   );
-};
+}

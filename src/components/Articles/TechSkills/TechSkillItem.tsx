@@ -7,9 +7,9 @@ const TechSkillItem: React.FC<TechSkill> = ({ name, knowledge }) => {
     <article className="py-2 first-of-type:pt-6 last-of-type:pb-0">
       <Heading level={6}>{name}</Heading>
 
-      <div className="relative h-4 w-full	bg-slate-500">
+      <div className="relative h-4 w-full bg-slate-500">
         <div
-          className="absolute left-0 top-0 h-full bg-sky-500"
+          className="absolute top-0 left-0 h-full bg-sky-500"
           style={{ width: `${knowledge}%` }}
         />
       </div>

@@ -1,106 +1,98 @@
 'use client';
-import React, { useState } from 'react';
-import toast, { Toaster } from 'react-hot-toast';
-import copy from 'clipboard-copy';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import { faCopy } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useState } from 'react';
+import toast from 'react-hot-toast';
+import { copyToClipboard } from 'src/helpers/clipboard';
 
 type ApiResponse = {
-  fullUrl: string;
+  fullUrl?: string;
   error?: string;
 };
 
 export default function GeneratorForm({ secret }: { secret: string }) {
   const [response, setResponse] = useState<string | null>(null);
+  const [pending, setPending] = useState(false);
 
   const handleAccess = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const target = e.target as typeof e.target & {
-      email: { value: string };
-    };
-    const apiResponse = await fetch('/api/grantAccess', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: target.email.value,
-        secret,
-      }),
-    });
+    const form = e.currentTarget;
+    const email = new FormData(form).get('email');
 
-    const returnResponse = (await apiResponse.json()) as ApiResponse;
-
-    if (returnResponse.error) {
-      return toast.error(returnResponse.error, {
-        position: 'top-right',
-        duration: 3000,
-      });
-    }
-
-    setResponse(returnResponse.fullUrl);
-    toast.success('Email granted access. Copy the link and share it.', {
-      position: 'top-right',
-      duration: 4000,
-    });
-  };
-
-  const handleCopyClick = async () => {
+    setPending(true);
     try {
-      if (response) await copy(response);
-    } catch (error) {
-      toast.error('Error copying to clipboard', {
-        position: 'top-right',
-        duration: 3000,
+      const apiResponse = await fetch('/api/grantAccess', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, secret }),
       });
+      const result = (await apiResponse.json()) as ApiResponse;
+
+      if (result.error || !result.fullUrl) {
+        toast.error(result.error ?? 'Could not grant access');
+        return;
+      }
+
+      setResponse(result.fullUrl);
+      form.reset();
+      toast.success('Email granted access. Copy the link and share it.', {
+        duration: 4000,
+      });
+    } catch {
+      toast.error('Could not reach the server');
+    } finally {
+      setPending(false);
     }
   };
 
   return (
-    <>
-      <form
-        className="container mb-4 rounded bg-slate-800 px-8 pb-8 pt-6 shadow-md"
-        onSubmit={handleAccess}
-        noValidate
+    <form
+      className="container mb-4 rounded-sm bg-slate-800 px-8 pt-6 pb-8 shadow-md"
+      onSubmit={handleAccess}
+      noValidate
+    >
+      <label
+        className="mb-2 block text-sm font-bold text-white"
+        htmlFor="email"
       >
-        <label
-          className="mb-2 block text-sm font-bold text-white"
-          htmlFor="email"
-        >
-          Email
-        </label>
-        <input
-          id="email"
-          autoComplete="on"
-          className="focus:shadow-outline mb-4 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
-          name="email"
-          type="email"
-          placeholder="Enter email"
-        />
+        Email
+      </label>
+      <input
+        id="email"
+        autoComplete="off"
+        className="mb-4 w-full appearance-none rounded-sm border bg-white px-3 py-2 leading-tight text-gray-700 shadow-sm focus:ring-2 focus:ring-sky-500 focus:outline-hidden"
+        name="email"
+        type="email"
+        placeholder="Enter email"
+        required
+      />
 
-        <button
-          className="focus:shadow-outline rounded bg-sky-500 px-4 py-2 font-bold text-white hover:bg-sky-700 focus:outline-none"
-          type="submit"
-        >
-          Add user
-        </button>
-        {response && (
-          <div className="container relative mt-4 flex px-0">
-            <pre className="w-full overflow-x-auto whitespace-pre rounded bg-slate-500 p-8">
-              <code>{response}</code>
-            </pre>
-            <button
-              type="button"
-              title="Copy link"
-              className="absolute right-2 top-2 w-8 rounded bg-slate-600 hover:bg-slate-700 active:bg-slate-800"
-              onClick={handleCopyClick}
-            >
-              <FontAwesomeIcon icon={faCopy} />
-            </button>
-          </div>
-        )}
-      </form>
-      <Toaster />
-    </>
+      <button
+        className="rounded-sm bg-sky-500 px-4 py-2 font-bold text-white hover:bg-sky-700 focus:ring-2 focus:ring-sky-300 focus:outline-hidden disabled:opacity-50"
+        type="submit"
+        disabled={pending}
+      >
+        Add user
+      </button>
+      {response && (
+        <div className="relative container mt-4 flex px-0">
+          <pre className="w-full overflow-x-auto rounded-sm bg-slate-500 p-8 whitespace-pre">
+            <code>{response}</code>
+          </pre>
+          <button
+            type="button"
+            title="Copy link"
+            aria-label="Copy link"
+            className="absolute top-2 right-2 w-8 rounded-sm bg-slate-600 hover:bg-slate-700 active:bg-slate-800"
+            onClick={() =>
+              copyToClipboard(response, 'Link copied to clipboard')
+            }
+          >
+            <FontAwesomeIcon icon={faCopy} />
+          </button>
+        </div>
+      )}
+    </form>
   );
 }

@@ -1,41 +1,51 @@
-import { Footer } from 'src/components/Footer/Footer';
-import { Header } from 'src/components/Header/Header';
 import { notFound } from 'next/navigation';
 import AccessTable from 'src/components/AccessTable/AccessTable';
-import { createClient } from 'src/utils/supabase';
-import VisitorsTable, {
-  Visitor,
-} from 'src/components/VisitorsTable/VisitorsTable';
+import { Footer } from 'src/components/Footer/Footer';
 import GeneratorForm from 'src/components/GeneratorForm/GeneratorForm';
+import { Header } from 'src/components/Header/Header';
+import VisitorsTable from 'src/components/VisitorsTable/VisitorsTable';
+import { isAdminKey } from 'src/lib/auth';
+import { getUsers, type User } from 'src/lib/redis';
+import { getVisitors, type Visitor } from 'src/lib/supabase';
 
-const privateKey = process.env.RESET_LIMIT_CODE;
+type DashboardProps = {
+  params: Promise<{ secret: string }>;
+};
 
-const Dashboard: React.FC<PageProps> = async ({ params }) => {
-  const supabase = createClient();
-  const { data: visitors } = await supabase.from('logs').select('*');
+export default async function Dashboard({ params }: DashboardProps) {
+  const { secret } = await params;
 
-  const { secret } = params;
-
-  if (secret !== privateKey) {
-    return notFound();
+  // authorize before touching any data source
+  if (!isAdminKey(secret)) {
+    notFound();
   }
+
+  const [users, visitors] = await Promise.all([
+    getUsers().catch((error): User[] => {
+      console.error('Failed to load users:', error);
+      return [];
+    }),
+    getVisitors().catch((error): Visitor[] => {
+      console.error('Failed to load visitors:', error);
+      return [];
+    }),
+  ]);
+
   return (
     <>
       <Header />
       <div className="container">
-        <GeneratorForm secret={secret as string} />
+        <GeneratorForm secret={secret} />
       </div>
       <div className="container gap-4 lg:flex">
         <div className="w-full lg:w-2/3">
-          <AccessTable secret={secret as string} />
+          <AccessTable secret={secret} initialUsers={users} />
         </div>
         <div className="w-full lg:w-1/3">
-          <VisitorsTable visitors={visitors as Visitor[]} />
+          <VisitorsTable visitors={visitors} />
         </div>
       </div>
       <Footer />
     </>
   );
-};
-
-export default Dashboard;
+}

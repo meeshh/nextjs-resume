@@ -10,15 +10,15 @@ const CertificationItem: React.FC<Certification> = ({
   certification,
   body,
   issuer,
-  url = '#',
+  url,
   credentialId,
   secret,
 }) => {
   return (
     <article className="border-t-2 border-neutral-6 py-6 first-of-type:border-none last-of-type:pb-0">
       <Heading level={3}>
-        {secret ? (
-          <Link target="_blank" href={url}>
+        {secret && url ? (
+          <Link target="_blank" rel="noopener noreferrer" href={url}>
             {certification}
           </Link>
         ) : (

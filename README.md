@@ -9,7 +9,7 @@ Your résumé can also generate a secure URL that will display information not a
 ## Features
 
 - Update your résumé with simple Markdown files
-  - Type safe content management using [Contentlayer](https://www.contentlayer.dev/)
+  - Type safe content management using [Contentlayer2](https://github.com/timlrx/contentlayer2)
   - Integration with external CMS systems will be possible in the future
 - Beautiful and accessible web app to view your résumé, link on social media, and send to potential employers
 - **Private Data Fetching:** Fetch personal data from a private gist
@@ -36,3 +36,28 @@ The private route includes a unique OpenAI integration. Recruiters can post a jo
 ### Supabase Integration
 
 The OpenAI feature logs the attempts of users to a supabase database.
+
+## Development
+
+Requires Node.js 20.9+ and [Bun](https://bun.sh) (1.2+ recommended).
+
+```sh
+bun install
+bun run dev            # generates content, then starts Next.js on http://localhost:3001
+bun run content:watch  # (optional, second terminal) regenerate content when Markdown changes
+bun run lint && bun run types && bun test
+bun run build
+```
+
+### Environment variables
+
+| Variable                                                           | Purpose                                                                        |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `PRIVATE_KEY`                                                      | Unlocks `/private/<key>` and contact details in the PDF                        |
+| `RESET_LIMIT_CODE`                                                 | Unlocks the admin dashboard (`/private/<code>/dashboard`) and admin API routes |
+| `GITHUB_ACCESS_TOKEN`                                              | Reads private contact info from the secret gist                                |
+| `OPENAI_API_KEY`, `OPENAI_MODEL` (optional)                        | Job-offer keyword extraction                                                   |
+| `KV_REST_API_URL`, `KV_REST_API_TOKEN` (or `UPSTASH_REDIS_REST_*`) | Upstash Redis for access links and rate limits                                 |
+| `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`        | Usage logs                                                                     |
+| `G_ANALYTICS_MEASUREMENT_ID`                                       | Google Analytics (only on Vercel deployments)                                  |
+| `NEXT_PUBLIC_SITE_URL` (optional)                                  | Canonical URL; defaults to Vercel's production domain                          |

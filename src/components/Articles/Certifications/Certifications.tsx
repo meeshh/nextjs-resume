@@ -3,7 +3,6 @@ import React from 'react';
 import { sortedCertifications } from 'src/helpers/utils';
 import { SectionHeading } from '../../SectionHeading/SectionHeading';
 import CertificationItem from '../Certifications/CertificationItem';
-import { Certification } from '@content';
 
 type CertificationsProps = {
   secret?: string;
@@ -21,8 +20,13 @@ const Certifications: React.FC<CertificationsProps> = ({ secret }) => {
           />
         </div>
 
-        {sortedCertifications.map((certification: Certification) => (
-          <CertificationItem key={certification._id} secret={secret} {...certification} />
+        {sortedCertifications.map((certification) => (
+          <CertificationItem
+            key={certification._id}
+            {...certification}
+            // pass the page secret last so it isn't shadowed by the document's own `secret` field
+            secret={secret}
+          />
         ))}
       </div>
     </article>

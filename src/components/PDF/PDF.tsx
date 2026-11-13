@@ -20,9 +20,10 @@ import {
   Text,
   View,
 } from '@react-pdf/renderer';
+import path from 'node:path';
 import React from 'react';
 import Html from 'react-pdf-html';
-import { HtmlProps } from 'react-pdf-html/dist/Html';
+import type { PrivateInfo } from 'src/lib/personalInfo';
 import resumeConfig from '../../../edit-me/config/resumeConfig';
 import { Theme } from '../../../edit-me/types/Config';
 import { contrastColor } from '../../helpers/colorContrast';
@@ -39,13 +40,10 @@ import {
   sortedTechSkills,
   sortedSkills,
 } from '../../helpers/utils';
-import { htmlRenderers } from './htmlRenderers';
 
 const theme = resumeConfig.pdfTheme;
-const domain = process.env.NEXT_PUBLIC_VERCEL_URL
-  ? process.env.NEXT_PUBLIC_VERCEL_URL
-  : 'http://localhost:3000';
-const fontPath = `${domain}/fonts`;
+// read straight from disk instead of fetching our own deployment over HTTP
+const fontPath = path.join(process.cwd(), 'public', 'fonts');
 
 Font.register({
   family: 'Albert Sans',
@@ -53,22 +51,22 @@ Font.register({
     {
       fontStyle: 'normal',
       fontWeight: 400,
-      src: `${fontPath}/AlbertSans-Regular.ttf`,
+      src: path.join(fontPath, 'AlbertSans-Regular.ttf'),
     },
     {
       fontStyle: 'italic',
       fontWeight: 400,
-      src: `${fontPath}/AlbertSans-Italic.ttf`,
+      src: path.join(fontPath, 'AlbertSans-Italic.ttf'),
     },
     {
       fontStyle: 'normal',
       fontWeight: 700,
-      src: `${fontPath}/AlbertSans-Bold.ttf`,
+      src: path.join(fontPath, 'AlbertSans-Bold.ttf'),
     },
     {
       fontStyle: 'italic',
       fontWeight: 700,
-      src: `${fontPath}/AlbertSans-BoldItalic.ttf`,
+      src: path.join(fontPath, 'AlbertSans-BoldItalic.ttf'),
     },
   ],
 });
@@ -79,7 +77,7 @@ Font.register({
     {
       fontStyle: 'normal',
       fontWeight: 500,
-      src: `${fontPath}/JetBrainsMono-Medium.ttf`,
+      src: path.join(fontPath, 'JetBrainsMono-Medium.ttf'),
     },
   ],
 });
@@ -126,7 +124,8 @@ const styles = StyleSheet.create({
     fontFamily: 'Albert Sans',
     fontSize: fontSizes.xxs,
     justifyContent: 'flex-start',
-    lineHeight: 1.3,
+    // no page-wide lineHeight: react-pdf v4 resolves it to absolute points here
+    // and every descendant would inherit 13pt regardless of its own font size
   },
   sidebar: {
     alignSelf: 'stretch',
@@ -235,9 +234,8 @@ const styles = StyleSheet.create({
   },
 });
 
-const htmlProps: Omit<HtmlProps, 'children'> = {
-  renderers: htmlRenderers,
-  style: { fontSize: fontSizes.xxxs },
+const htmlProps: Omit<React.ComponentProps<typeof Html>, 'children'> = {
+  style: { fontSize: fontSizes.xxxs, lineHeight: 1.3 },
   stylesheet: {
     a: styles.a,
     p: styles.sectionParagraph,
@@ -248,21 +246,16 @@ const htmlProps: Omit<HtmlProps, 'children'> = {
 };
 
 type PDFProps = {
-  privateInfo: {
-    email: 'string';
-    mobile: 'string';
-  };
+  privateInfo?: PrivateInfo;
 };
 
-const PDF: React.FC<PDFProps> = ({ privateInfo }) => {
+const PDF: React.FC<PDFProps> = ({ privateInfo = {} }) => {
   const year = new Date().getFullYear();
 
   const { email, mobile } = privateInfo;
 
   return (
-    // @ts-ignore
-    <Document author={fullName} title={`Résume for ${fullName}, ${year}`}>
-      {/* @ts-ignore */}
+    <Document author={fullName} title={`Résumé for ${fullName}, ${year}`}>
       <Page size="A4" style={styles.page}>
         <View style={styles.main}>
           <View
@@ -277,7 +270,7 @@ const PDF: React.FC<PDFProps> = ({ privateInfo }) => {
             <View>
               <Image
                 src="https://avatars.githubusercontent.com/u/620224?v=4"
-                style={{ width: 50, height: 50, borderRadius: '50%' }}
+                style={{ width: 50, height: 50, borderRadius: 25 }}
               />
             </View>
             <View
@@ -287,14 +280,10 @@ const PDF: React.FC<PDFProps> = ({ privateInfo }) => {
                 justifyContent: 'center',
               }}
             >
-              <View style={{ display: 'flex', flexDirection: 'row', gap: 4 }}>
-                <Text style={{ ...styles.headerTitle, color: '#5350a2' }}>
-                  {firstName}
-                </Text>
-                <Text style={{ ...styles.headerTitle, color: 'gray' }}>
-                  {lastName}
-                </Text>
-              </View>
+              <Text style={styles.headerTitle}>
+                <Text style={{ color: '#5350a2' }}>{firstName}</Text>{' '}
+                <Text style={{ color: 'gray' }}>{lastName}</Text>
+              </Text>
 
               <Text
                 style={{
@@ -315,11 +304,14 @@ const PDF: React.FC<PDFProps> = ({ privateInfo }) => {
               }}
             >
               <Text style={{ textAlign: 'right' }}>{personal.location}</Text>
-              <Text style={{ textTransform: 'lowercase' }}>{email}</Text>
-              <Text style={{ textAlign: 'right' }}>{mobile}</Text>
+              {email && (
+                <Text style={{ textTransform: 'lowercase' }}>{email}</Text>
+              )}
+              {mobile && <Text style={{ textAlign: 'right' }}>{mobile}</Text>}
             </View>
           </View>
-          <View style={{ ...styles.section }}>
+          {/* last block of the column: a trailing margin would spill onto a blank second page */}
+          <View style={{ ...styles.section, marginBottom: 0 }}>
             <View style={{ ...styles.sectionHeading, marginBottom: 8 }}>
               <Text style={{ color: '#5350a2' }}>WORK EXPERIENCE</Text>
             </View>
@@ -354,7 +346,7 @@ const PDF: React.FC<PDFProps> = ({ privateInfo }) => {
                         backgroundColor: '#c1c0ff',
                         width: 10,
                         height: 10,
-                        borderRadius: '50%',
+                        borderRadius: 5,
                         position: 'absolute',
                         top: 0,
                         left: -18,
@@ -367,7 +359,7 @@ const PDF: React.FC<PDFProps> = ({ privateInfo }) => {
                         style={{
                           width: 5,
                           height: 5,
-                          borderRadius: '50%',
+                          borderRadius: 2.5,
                           backgroundColor: '#5350a2',
                         }}
                       />
@@ -393,7 +385,10 @@ const PDF: React.FC<PDFProps> = ({ privateInfo }) => {
                       {professionalExperience.organization}
                     </Text>
                   </View>
-                  <Html {...htmlProps} style={{ fontSize: 7.25 }}>
+                  <Html
+                    {...htmlProps}
+                    style={{ fontSize: 7.25, lineHeight: 1.25 }}
+                  >
                     {professionalExperience.body.html}
                   </Html>
                 </View>
@@ -509,7 +504,7 @@ const PDF: React.FC<PDFProps> = ({ privateInfo }) => {
               </Text>
               <View
                 style={{
-                  marginBottom: 12,
+                  marginBottom: 0,
                 }}
               >
                 {sortedEducations.map((education: Education) => (
@@ -541,30 +536,41 @@ const PDF: React.FC<PDFProps> = ({ privateInfo }) => {
               </Text>
               <View
                 style={{
-                  marginBottom: 12,
+                  marginBottom: 0,
                 }}
               >
                 {sortedCertifications.map((certification: Certification) => (
                   <View key={certification._id} style={{ marginBottom: 8 }}>
                     <View
                       style={{
-                        alignItems: 'center',
+                        alignItems: 'flex-start',
                         display: 'flex',
                         flexDirection: 'row',
                       }}
                     >
-                      <Link
-                        src={certification.url ?? '#'}
+                      {/* Link ignores flex shrinking, so a View carries the width and wraps long titles */}
+                      <View
+                        style={{ flexGrow: 1, flexShrink: 1, flexBasis: 0 }}
+                      >
+                        <Link
+                          src={certification.url ?? '#'}
+                          style={{
+                            ...styles.bold,
+                            fontSize: 10,
+                            color: 'white',
+                          }}
+                        >
+                          {certification.certification}
+                        </Link>
+                      </View>
+                      <Text
                         style={{
-                          ...styles.bold,
-                          fontSize: 10,
-                          flexGrow: 1,
-                          color: 'white',
+                          fontSize: 6,
+                          marginLeft: 6,
+                          paddingTop: 2,
+                          flexShrink: 0,
                         }}
                       >
-                        {certification.certification}
-                      </Link>
-                      <Text style={{ fontSize: 6 }}>
                         {certification.completionYear}
                       </Text>
                     </View>
@@ -606,7 +612,7 @@ const PDF: React.FC<PDFProps> = ({ privateInfo }) => {
                                     width: 10,
                                     height: 10,
                                     marginRight: 4,
-                                    borderRadius: '50%',
+                                    borderRadius: 5,
                                   }}
                                 />
                               ) : (
@@ -617,7 +623,7 @@ const PDF: React.FC<PDFProps> = ({ privateInfo }) => {
                                     width: 10,
                                     height: 10,
                                     marginRight: 4,
-                                    borderRadius: '50%',
+                                    borderRadius: 5,
                                   }}
                                 />
                               ),
@@ -646,7 +652,7 @@ const PDF: React.FC<PDFProps> = ({ privateInfo }) => {
                                     width: 10,
                                     height: 10,
                                     marginRight: 4,
-                                    borderRadius: '50%',
+                                    borderRadius: 5,
                                   }}
                                 />
                               ) : (
@@ -657,7 +663,7 @@ const PDF: React.FC<PDFProps> = ({ privateInfo }) => {
                                     width: 10,
                                     height: 10,
                                     marginRight: 4,
-                                    borderRadius: '50%',
+                                    borderRadius: 5,
                                   }}
                                 />
                               ),

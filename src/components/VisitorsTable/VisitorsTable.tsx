@@ -1,20 +1,12 @@
-// 'use client'
+import type { Visitor } from 'src/lib/supabase';
 
-export type Visitor = {
-  id: string;
-  user_id: string;
-  email: string;
-  count?: number;
-  created_at: string;
-};
-
-type VisitorsTablePropsType = {
+type VisitorsTableProps = {
   visitors: Visitor[];
 };
 
-const VisitorsTable: React.FC<VisitorsTablePropsType> = ({ visitors }) => {
+const VisitorsTable: React.FC<VisitorsTableProps> = ({ visitors }) => {
   return (
-    <div className="container mb-4 rounded bg-slate-800 px-8 pb-8 pt-6 shadow-md">
+    <div className="container mb-4 rounded-sm bg-slate-800 px-8 pt-6 pb-8 shadow-md">
       <h2 className="mb-4 text-lg">Usage</h2>
       <table className="min-w-full border border-gray-300">
         <thead className="bg-slate-950">
@@ -26,16 +18,16 @@ const VisitorsTable: React.FC<VisitorsTablePropsType> = ({ visitors }) => {
         <tbody>
           {!visitors.length ? (
             <tr>
-              <td />
-              <td className="p-16 px-4 text-center">No Visitors</td>
-              <td />
+              <td colSpan={2} className="p-16 px-4 text-center">
+                No Visitors
+              </td>
             </tr>
           ) : (
             visitors.map((visitor) => (
               <tr key={visitor.user_id}>
-                <td className="border px-4 py-2">{visitor?.email}</td>
+                <td className="border px-4 py-2">{visitor.email}</td>
                 <td className="border px-4 py-2 text-center">
-                  {visitor?.count}
+                  {visitor.count}
                 </td>
               </tr>
             ))

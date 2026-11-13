@@ -16,6 +16,7 @@ export default function ButtonLink({
   return (
     <Link
       target="_blank"
+      rel="noopener noreferrer"
       className={twMerge(buttonVariants({ size }), className)}
       {...linkProps}
     >

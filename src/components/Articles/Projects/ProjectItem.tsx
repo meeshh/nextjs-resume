@@ -12,27 +12,33 @@ const ProjectItem: React.FC<Project> = ({
   url = '#',
   tags = '',
 }) => {
+  const tagList = tags
+    .split(',')
+    .map((tag) => tag.trim())
+    .filter(Boolean);
+
   return (
-    <article className=" gap-4 border-t-2 border-neutral-6 py-6 first-of-type:border-none last-of-type:pb-0 sm:flex">
+    <article className="gap-4 border-t-2 border-neutral-6 py-6 first-of-type:border-none last-of-type:pb-0 sm:flex">
       <div className="mb-2 sm:w-1/3">
         <Image
-          className="rounded-lg border-4 border-yellow-500 w-full"
+          className="w-full rounded-lg border-4 border-yellow-500"
           src={`/images/${slugify(title).toLowerCase()}.jpg`}
           alt={title}
-          width={200}
-          height={200}
+          width={400}
+          height={400}
+          sizes="(min-width: 640px) 33vw, 100vw"
         />
       </div>
       <div className="sm:w-2/3">
         <Heading level={3}>
-          <Link target="_blank" href={url}>
+          <Link target="_blank" rel="noopener noreferrer" href={url}>
             {title}
           </Link>
         </Heading>
 
         <Prose html={body.html} />
 
-        {!!tags.length && <Tags tags={tags.split(',')} />}
+        <Tags tags={tagList} />
       </div>
     </article>
   );
