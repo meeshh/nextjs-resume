@@ -11,7 +11,7 @@ type CertificationsProps = {
 const Certifications: React.FC<CertificationsProps> = ({ id, secret }) => {
   return (
     <Section id={id} title="Certifications">
-      <div className="grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="flex flex-col gap-6">
         {sortedCertifications.map((certification) => (
           <CertificationItem
             key={certification._id}

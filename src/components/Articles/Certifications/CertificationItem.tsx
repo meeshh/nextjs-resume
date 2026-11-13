@@ -14,17 +14,18 @@ const CertificationItem: React.FC<Certification> = ({
 }) => {
   return (
     <article>
-      <Heading level={3} size={4}>
-        {secret && url ? (
-          <Link target="_blank" rel="noopener noreferrer" href={url}>
-            {certification}
-          </Link>
-        ) : (
-          certification
-        )}
-      </Heading>
-
-      <p className="mt-1 text-sm font-medium text-accent-11">{issuer}</p>
+      <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+        <Heading level={3} size={4}>
+          {secret && url ? (
+            <Link target="_blank" rel="noopener noreferrer" href={url}>
+              {certification}
+            </Link>
+          ) : (
+            certification
+          )}
+        </Heading>
+        <p className="shrink-0 text-sm font-medium text-accent-11">{issuer}</p>
+      </div>
       {secret && credentialId && (
         <p className="mt-2 text-xs text-neutral-11">
           Credential ID{' '}
