@@ -1,4 +1,4 @@
 ---
-language: Arabic
+language: 'Arabic'
 level: 5
 ---

@@ -1,9 +1,9 @@
 ---
+degree: 'BSc in Computer Science'
+organization: 'Lebanese American University'
 startYear: '2004'
 endYear: '2010'
-degree: BSc in Computer Science
 organizationUrl: https://lau.edu.lb
-organization: 'Lebanese American University'
 programUrl: https://soas.lau.edu.lb/academics/programs/bs-computer-science.php
 ---
 
