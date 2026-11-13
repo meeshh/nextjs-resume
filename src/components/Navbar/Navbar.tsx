@@ -37,11 +37,10 @@ const Navbar: React.FC<NavbarProps> = ({ secret }) => {
           <div className="flex shrink-0 items-center">
             <a
               href="#home"
-              className="flex items-center gap-2.5 rounded-md font-display text-lg font-semibold text-neutral-12 no-underline"
+              className="rounded-full text-neutral-12 no-underline"
             >
-              <Logo className="h-7 w-7 text-accent-11" strokeWidth={6.5} />
-              <span className="hidden sm:inline">{fullName}</span>
-              <span className="sr-only sm:hidden">{fullName}, back to top</span>
+              <Logo className="h-10 w-10" ringWidth={3} />
+              <span className="sr-only">{fullName}, back to top</span>
             </a>
           </div>
 

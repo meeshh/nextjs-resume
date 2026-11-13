@@ -1,6 +1,6 @@
 import resumeConfig from 'edit-me/config/resumeConfig';
 import { ImageResponse } from 'next/og';
-import { LOGO_PATH } from 'src/components/Logo/mark';
+import { LETTERS_PATH, RING } from 'src/components/Logo/mark';
 import { getAccentColor, getNeutralColor } from 'src/helpers/colors';
 import { fullName } from 'src/helpers/utils';
 
@@ -24,15 +24,17 @@ export default async function og() {
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 64 64"
-        fill="none"
-        stroke={getAccentColor(11, theme)}
-        strokeWidth={5}
-        strokeLinecap="round"
-        width={120}
-        height={120}
+        viewBox="0 0 100 100"
+        width={140}
+        height={140}
       >
-        <path d={LOGO_PATH} />
+        <circle
+          {...RING}
+          fill="none"
+          stroke={getAccentColor(9, theme)}
+          strokeWidth={1.5}
+        />
+        <path d={LETTERS_PATH} fill={getNeutralColor(12, theme)} />
       </svg>
       <div tw="mt-12 text-8xl" style={{ fontWeight: 700 }}>
         {fullName}
