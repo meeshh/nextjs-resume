@@ -13,7 +13,7 @@ const CertificationItem: React.FC<Certification> = ({
   secret,
 }) => {
   return (
-    <article className="py-6 first:pt-0 last:pb-0">
+    <article>
       <Heading level={3} size={4}>
         {secret && url ? (
           <Link target="_blank" rel="noopener noreferrer" href={url}>

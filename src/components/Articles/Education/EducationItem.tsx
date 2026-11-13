@@ -14,7 +14,7 @@ const EducationItem: React.FC<Education> = ({
   programUrl,
 }) => {
   return (
-    <article className="py-6 first:pt-0 last:pb-0">
+    <article>
       <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
         <Heading level={3} size={4}>
           {programUrl ? (

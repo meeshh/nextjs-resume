@@ -6,7 +6,7 @@ import SkillItem from './SkillItem';
 const Skills: React.FC = () => {
   return (
     <SkillGroup title="Also worked with">
-      <div className="divide-y divide-neutral-6">
+      <div className="flex flex-col gap-4">
         {sortedSkills.map((skill) => (
           <SkillItem key={skill._id} {...skill} />
         ))}
