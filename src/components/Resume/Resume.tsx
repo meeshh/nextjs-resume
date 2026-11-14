@@ -18,11 +18,11 @@ const Resume: React.FC<ResumeProps> = ({ secret }) => (
 
     <Section id="skills" title="Skills">
       <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-        <div className="flex flex-col gap-12">
-          <TechSkills />
+        <TechSkills />
+        <SoftSkills />
+        <div className="lg:col-span-2">
           <Skills />
         </div>
-        <SoftSkills />
       </div>
     </Section>
 
