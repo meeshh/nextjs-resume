@@ -6,9 +6,9 @@ endDate: '2016'
 location: 'Beirut'
 ---
 
-- Co-designed and implemented a business model for a crowdfunding platform with 4 different types of funding.
-- Designed and implemented an interactive HR platform that offers management solutions for corporate exchanges between different types of users.
-- Structured and implemented different business management tools (CRM, ERP) in a plugin-based cloud solution that reduced office paperwork by 70%
+- Co-designed and implemented a business model for a crowdfunding platform supporting four funding types.
+- Designed and implemented an interactive HR platform that manages corporate exchanges between different user types.
+- Designed and implemented business management tools (CRM, ERP) in a plugin-based cloud solution that reduced office paperwork by 70%.
 - Designed and implemented a wealth management solution that consolidates all financial and patrimonial asset classes.
 - Designed and implemented an error logger that decreased the time of reproducing reported bugs by 60%.
 - Worked closely with graphic designers to ensure designs complied with web standards.
