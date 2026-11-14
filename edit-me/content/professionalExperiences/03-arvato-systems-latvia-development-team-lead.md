@@ -12,6 +12,6 @@ connectBottom: true
 - Improving communication between associates, coordinators, and managers.
 - Assisting in recruitment by creating and reviewing assignments and interviewing candidates.
 - Standardizing the Frontend development cycle by creating code quality acceptance criteria.
-- Managing a team of software engineers with a focus on quality and customer-centricity
+- Managing the team with a focus on quality and customer-centricity.
 - Selecting training courses for frontend developers and developing an internship program for trainees.
 - Onboarding and mentoring new frontend joiners of all seniority levels.

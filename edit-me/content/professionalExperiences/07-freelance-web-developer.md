@@ -6,4 +6,4 @@ endDate: '2013'
 ---
 
 - Developed websites with customized content management systems based on WordPress.
-- Developed a solution for design studios that gives viewers an interface to interact with timelapse images.
+- Developed an interface for design studios that lets viewers interact with timelapse images.
