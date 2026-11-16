@@ -9,9 +9,9 @@ connectBottom: true
 
 - Architect and implement Azure DevOps Pipelines for React applications.
 - Integrate Mend.io analysis to detect dependency vulnerabilities and license risks.
-- Orchestrate Azure DevOps Pipeline Configuration, incorporating GitVersion for precise versioning in complex build structures.
-- Define an effective branching strategy for enhanced version control.
+- Configure Azure DevOps Pipelines, using GitVersion for precise versioning in complex build structures.
+- Define the branching strategy for version control.
 - Drive cross-functional collaboration for seamless software integration.
 - Enforce industry standards in the SDLC for high-quality software solutions.
-- Automate CI/CD processes with GitVersion for rapid and reliable releases.
+- Automate CI/CD processes for rapid, reliable releases.
 - Integrate SonarQube for continuous code quality assurance.
