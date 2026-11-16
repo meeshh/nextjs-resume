@@ -2,7 +2,12 @@ import { after } from 'next/server';
 import { MAX_OFFER_LENGTH, MIN_OFFER_LENGTH } from 'src/helpers/constants';
 import { errorMessage, FORBIDDEN_MESSAGE, readJson } from 'src/lib/api';
 import { extractSkillKeywords } from 'src/lib/openai';
-import { DAILY_LIMIT, redis } from 'src/lib/redis';
+import {
+  DAILY_LIMIT,
+  incrementDailyCount,
+  redis,
+  refundDailyCount,
+} from 'src/lib/redis';
 import { logVisit } from 'src/lib/supabase';
 
 export async function POST(request: Request) {
@@ -42,13 +47,13 @@ export async function POST(request: Request) {
     }
 
     // atomic increment so parallel requests can't slip past the limit
-    const count = await redis.hincrby(id, 'count', 1);
+    const count = await incrementDailyCount(id);
     if (count > DAILY_LIMIT) {
-      await redis.hincrby(id, 'count', -1);
+      await refundDailyCount(id);
       return Response.json(
         {
           error:
-            'You have exceeded your limit. Please wait for tomorrow to try again.',
+            'You have exceeded your daily limit. Please try again after midnight UTC.',
         },
         { status: 429 },
       );
@@ -59,7 +64,7 @@ export async function POST(request: Request) {
       keywords = await extractSkillKeywords(input);
     } catch (error) {
       // don't charge the user for our own upstream failure
-      await redis.hincrby(id, 'count', -1);
+      await refundDailyCount(id);
       throw error;
     }
 

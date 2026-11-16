@@ -48,12 +48,29 @@ export async function getUsers(): Promise<User[]> {
     }));
 }
 
-export async function resetAllLimits() {
-  const keys = await scanKeys();
-  if (!keys.length) return 0;
+/** Unix seconds of the next 00:00 UTC. */
+export function nextMidnightUTC(now = new Date()) {
+  return (
+    Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1) /
+    1000
+  );
+}
 
-  const pipeline = redis.pipeline();
-  keys.forEach((key) => pipeline.hset(key, { count: 0 }));
-  await pipeline.exec();
-  return keys.length;
+/**
+ * Atomically increments the user's daily count. Only the `count` field
+ * expires (at the next midnight UTC), so the access grant itself survives
+ * and the limit resets without a cron job.
+ */
+export async function incrementDailyCount(id: string) {
+  const [count] = await redis
+    .multi()
+    .hincrby(id, 'count', 1)
+    .hexpireat(id, 'count', nextMidnightUTC())
+    .exec<[number, number[]]>();
+  return count;
+}
+
+/** Gives back one use; HINCRBY keeps the field's expiry. */
+export async function refundDailyCount(id: string) {
+  await redis.hincrby(id, 'count', -1);
 }
