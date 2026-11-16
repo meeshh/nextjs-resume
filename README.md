@@ -31,7 +31,7 @@ Your project can be configured to provide a secret URL that will display more in
 
 ### OpenAI Integration
 
-The private route includes a unique OpenAI integration. Recruiters can post a job offer in a text box, and OpenAI will analyze the offer and dynamically highlight relevant keywords in the résumé page. To ensure fair usage, the OpenAI API has a rate limiter using Redis, allowing access to the feature three times per day for each user.
+The private route includes a unique OpenAI integration. Recruiters can post a job offer in a text box, and OpenAI will analyze the offer and dynamically highlight relevant keywords in the résumé page. To ensure fair usage, the OpenAI API has a rate limiter using Redis, allowing access to the feature three times per day for each user. The count resets on its own at midnight UTC (the Redis `count` field expires); the admin dashboard can also reset a single user's count.
 
 ### Supabase Integration
 
